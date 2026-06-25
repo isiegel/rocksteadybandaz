@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { rockslide } from './fonts';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
 import {
   FacebookIcon,
@@ -15,6 +16,27 @@ import {
 } from './shows';
 
 const upcoming = upcomingShows();
+const youtubeVideoId = 'TiDSYeBD4pw';
+const youtubeWatchUrl = `https://youtu.be/${youtubeVideoId}`;
+const youtubeEmbedUrl = `https://www.youtube-nocookie.com/embed/${youtubeVideoId}?rel=0`;
+const bookingEmailSubject = 'Booking inquiry for Rock Steady';
+const bookingEmailBody = [
+  'Hi Rock Steady,',
+  '',
+  'I would like to check availability for an event.',
+  '',
+  'Date:',
+  'Venue / city:',
+  'Event type:',
+  'Approximate set length:',
+  'Expected crowd size:',
+  'Contact name and phone:',
+  '',
+  'Notes:',
+].join('\n');
+const bookingEmailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
+  bookingEmailSubject,
+)}&body=${encodeURIComponent(bookingEmailBody)}`;
 
 const gallery = [
   {
@@ -48,6 +70,40 @@ const setStyles = [
   'Guitar hooks, big choruses, no dead air',
 ];
 
+const setlistSample = [
+  { song: "I Love Rock 'n' Roll", artist: 'Joan Jett' },
+  { song: 'Straight On', artist: 'Heart' },
+  { song: 'Sharp Dressed Man', artist: 'ZZ Top' },
+  { song: 'Highway to Hell', artist: 'AC/DC' },
+  { song: 'Sweet Emotion', artist: 'Aerosmith' },
+  { song: 'Gimme Shelter', artist: 'The Rolling Stones' },
+  { song: 'You Wreck Me', artist: 'Tom Petty' },
+  { song: 'We Got the Beat', artist: "The Go-Go's" },
+  { song: 'Brass in Pocket', artist: 'The Pretenders' },
+  { song: 'Surrender', artist: 'Cheap Trick' },
+  { song: 'Superstition', artist: 'Stevie Wonder' },
+  { song: 'Come Together', artist: 'The Beatles' },
+  { song: "Summer of '69", artist: 'Bryan Adams' },
+  { song: 'Are You Gonna Be My Girl', artist: 'Jet' },
+  { song: 'Seven Nation Army', artist: 'The White Stripes' },
+];
+
+const pressBio =
+  "Rock Steady is a female-fronted Phoenix Valley cover band built for packed, loud, crowd-first nights. The set spans classic rock, '80s and '90s sing-alongs, and dance-floor staples — Joan Jett, Heart, Tom Petty, ZZ Top, AC/DC and more — played with vocals up front and guitar hooks that cut through. Available for bars, private events, patios, and charity nights across the Phoenix Valley.";
+
+const pressFacts = [
+  { label: 'Based in', value: 'Phoenix Valley, AZ' },
+  { label: 'Style', value: "Classic rock · '80s/'90s · dance covers" },
+  { label: 'Format', value: 'Female-fronted full band' },
+  { label: 'Sets', value: 'Flexible — up to three sets' },
+];
+
+const pressPhotos = [
+  { src: '/images/show-07.jpg', label: 'Live photo 1' },
+  { src: '/images/show-10.jpg', label: 'Live photo 2' },
+  { src: '/images/show-04.jpg', label: 'Live photo 3' },
+];
+
 const valleySpots = [
   'Phoenix',
   'Scottsdale',
@@ -57,6 +113,21 @@ const valleySpots = [
   'Gilbert',
   'Glendale',
   'Peoria',
+];
+
+const regularVenues = [
+  'The Loft Again',
+  'The Dubliner Irish Pub',
+  'Azool Grill',
+  'El Dorado Bar & Grill',
+  'Kimmyz On Greenway',
+  "Jolie's Place",
+  'Tailgaters',
+  'Luckys Indoor Outdoor',
+  'Caesars Sportsbook DTPHX',
+  'Starz',
+  'J&T\'s Copper Penny',
+  'Sage & Sand',
 ];
 
 const structuredData = {
@@ -156,7 +227,14 @@ export default function Home() {
               <p className="mb-4 inline-flex rounded-full border border-[#ffcf33]/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-[#ffcf33] shadow-[0_0_22px_rgba(255,207,51,0.18)]">
                 Phoenix Valley cover band
               </p>
-              <h1 className="text-5xl font-black leading-none text-white sm:text-6xl md:text-7xl">
+              <h1
+                className={`${rockslide.className} text-5xl leading-none text-white sm:text-6xl md:text-7xl`}
+                style={{
+                  WebkitTextStroke: '1.5px #ff2b1f',
+                  textShadow:
+                    '2px 2px 0 #ff2b1f, -1px -1px 0 #ff2b1f, 0 3px 0 rgba(0, 0, 0, 0.5), 0 14px 28px rgba(0, 0, 0, 0.45)',
+                }}
+              >
                 Rock Steady
               </h1>
               <p className="mt-6 max-w-2xl text-lg font-bold leading-8 text-white/88 sm:text-xl">
@@ -173,10 +251,10 @@ export default function Home() {
                   Book a rock party
                 </a>
                 <a
-                  href="#photos"
+                  href="#video"
                   className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-black uppercase text-white backdrop-blur transition hover:border-[#37d67a] hover:bg-[#37d67a] hover:text-[#06140b] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
                 >
-                  See the photos
+                  Watch the band
                 </a>
               </div>
             </div>
@@ -272,6 +350,26 @@ export default function Home() {
                 )}
               </div>
 
+              <div className="border border-white/12 bg-white/[0.045] p-6 shadow-[0_18px_45px_rgba(0,0,0,0.2)]">
+                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                  Regular stops include
+                </p>
+                <p className="mt-2 text-sm font-bold leading-6 text-white/68">
+                  Valley rooms that bring Rock Steady back for loud, familiar,
+                  crowd-first nights.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {regularVenues.map((venue) => (
+                    <span
+                      key={venue}
+                      className="rounded-full border border-[#ffcf33]/22 bg-black/32 px-3 py-2 text-xs font-black uppercase text-white/88"
+                    >
+                      {venue}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
               <div className="border border-white/12 bg-[#101010] p-6">
                 <p className="text-sm font-black uppercase text-[#ff2b1f]">
                   Phoenix Valley range
@@ -287,6 +385,46 @@ export default function Home() {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="video"
+          className="bg-[#070707] px-4 py-20 sm:px-6 lg:px-8"
+        >
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+            <div>
+              <p className="text-sm font-black uppercase text-[#ff2b1f]">
+                Live video
+              </p>
+              <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
+                See the room before you book it.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-white/72">
+                Watch Rock Steady in motion: big choruses, loud guitars, and a
+                set built to keep a local crowd close to the stage.
+              </p>
+              <a
+                href={youtubeWatchUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-7 inline-flex rounded-full border border-[#ffcf33]/45 bg-black/35 px-5 py-3 text-sm font-black uppercase text-[#ffcf33] transition hover:border-[#ffcf33] hover:bg-[#ffcf33] hover:text-[#111] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+              >
+                Open on YouTube
+              </a>
+            </div>
+
+            <div className="overflow-hidden border border-white/12 bg-black shadow-[0_24px_70px_rgba(0,0,0,0.38)]">
+              <iframe
+                title="Rock Steady live performance video"
+                src={youtubeEmbedUrl}
+                className="aspect-video w-full"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
             </div>
           </div>
         </section>
@@ -319,6 +457,31 @@ export default function Home() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-12">
+              <p className="text-sm font-black uppercase text-[#ffcf33]">
+                A few from the set
+              </p>
+              <p className="mt-2 max-w-3xl text-sm font-bold leading-6 text-white/68">
+                A sample of what the night sounds like &mdash; the full set runs
+                deeper and bends to the room.
+              </p>
+              <ul className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                {setlistSample.map(({ song, artist }) => (
+                  <li
+                    key={`${song}-${artist}`}
+                    className="flex items-baseline gap-2 border border-white/12 bg-black/32 px-4 py-3"
+                  >
+                    <span className="text-base font-black leading-6 text-white">
+                      {song}
+                    </span>
+                    <span className="text-sm font-bold text-white/60">
+                      {artist}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
@@ -424,18 +587,39 @@ export default function Home() {
             </div>
 
             <div className="border border-white/12 bg-[#101010] p-6">
-              <p className="text-2xl font-black text-white">Message the band</p>
-              <p className="mt-3 leading-7 text-white/70">
-                Find us on Facebook and Instagram for booking questions, show
-                updates, and photo swaps. Prefer email? Reach us at{' '}
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="font-black text-[#ffcf33] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
-                >
-                  {siteConfig.email}
-                </a>
-                .
+              <p className="text-2xl font-black text-white">
+                Check availability
               </p>
+              <p className="mt-3 leading-7 text-white/70">
+                Send one quick inquiry with the details venues usually need:
+                date, city, event type, set length, crowd size, and the best
+                contact.
+              </p>
+              <a
+                href={bookingEmailHref}
+                aria-label="Check Rock Steady availability by email"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-[#ff2b1f] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+              >
+                <MailIcon className="h-5 w-5 fill-current" />
+                Check availability
+              </a>
+              <div className="mt-6 grid gap-2 text-sm font-bold text-white/72 sm:grid-cols-2">
+                {[
+                  'Date',
+                  'Venue / city',
+                  'Event type',
+                  'Set length',
+                  'Crowd size',
+                  'Best contact',
+                ].map((item) => (
+                  <span
+                    key={item}
+                    className="border border-white/10 bg-black/28 px-3 py-2"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <a
                   href={siteConfig.facebookUrl}
@@ -458,7 +642,7 @@ export default function Home() {
                   Instagram
                 </a>
                 <a
-                  href={`mailto:${siteConfig.email}`}
+                  href={bookingEmailHref}
                   aria-label="Email Rock Steady"
                   className="inline-flex items-center gap-2 rounded-full bg-[#37d67a] px-5 py-3 text-sm font-black uppercase text-[#06140b] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
                 >
@@ -469,59 +653,224 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <section id="press" className="px-4 pb-20 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="text-sm font-black uppercase text-[#37d67a]">
+                For venues
+              </p>
+              <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
+                Press kit &amp; booking assets.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-white/72">
+                Everything you need to promote the night in one place &mdash;
+                grab the logo, pull a few photos, copy the bio, and reach us
+                direct.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-4 lg:grid-cols-3">
+              <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
+                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                  Logo
+                </p>
+                <div className="relative mt-4 h-24 w-full bg-black/30">
+                  <Image
+                    src={siteConfig.horizontalLogoPath}
+                    alt="Rock Steady logo"
+                    fill
+                    sizes="(min-width: 1024px) 24vw, 100vw"
+                    className="object-contain p-3"
+                  />
+                </div>
+                <div className="mt-auto flex flex-wrap gap-2 pt-5">
+                  <a
+                    href={siteConfig.horizontalLogoPath}
+                    download
+                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
+                  >
+                    Horizontal PNG
+                  </a>
+                  <a
+                    href={siteConfig.logoPath}
+                    download
+                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
+                  >
+                    Stacked PNG
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
+                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                  Press photos
+                </p>
+                <div className="mt-4 grid grid-cols-3 gap-2">
+                  {pressPhotos.map((photo) => (
+                    <a
+                      key={photo.src}
+                      href={photo.src}
+                      download
+                      aria-label={`Download ${photo.label}`}
+                      className="relative block aspect-square overflow-hidden border border-white/12 transition hover:border-[#ffcf33]"
+                    >
+                      <Image
+                        src={photo.src}
+                        alt={photo.label}
+                        fill
+                        sizes="120px"
+                        className="object-cover"
+                      />
+                    </a>
+                  ))}
+                </div>
+                <p className="mt-auto pt-5 text-xs font-bold leading-5 text-white/55">
+                  Click any photo to download. Credit &ldquo;Rock Steady&rdquo;
+                  when you post.
+                </p>
+              </div>
+
+              <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
+                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                  Contact
+                </p>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="mt-4 block text-lg font-black text-white transition hover:text-[#ffcf33]"
+                >
+                  {siteConfig.email}
+                </a>
+                <div className="mt-auto flex flex-wrap gap-2 pt-5">
+                  <a
+                    href={siteConfig.facebookUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
+                  >
+                    Facebook
+                  </a>
+                  <a
+                    href={siteConfig.instagramUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
+                  >
+                    Instagram
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
+              <div className="border border-white/12 bg-white/[0.045] p-6">
+                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                  Short bio
+                </p>
+                <p className="mt-3 leading-7 text-white/78">{pressBio}</p>
+              </div>
+              <div className="border border-white/12 bg-[#101010] p-6">
+                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                  Quick facts
+                </p>
+                <dl className="mt-4 space-y-3">
+                  {pressFacts.map((fact) => (
+                    <div key={fact.label}>
+                      <dt className="text-xs font-black uppercase text-white/45">
+                        {fact.label}
+                      </dt>
+                      <dd className="text-sm font-bold text-white/85">
+                        {fact.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </div>
+
+            <p className="mt-4 text-sm font-bold text-white/60">
+              Need a stage plot or input list for your room?{' '}
+              <a
+                href={bookingEmailHref}
+                className="text-[#ffcf33] underline-offset-4 hover:underline"
+              >
+                Email us
+              </a>{' '}
+              and we&apos;ll send specifics.
+            </p>
+          </div>
+        </section>
       </main>
 
-      <footer className="border-t border-white/10 bg-black px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 text-center">
-          <div className="relative h-9 w-44">
-            <Image
-              src="/images/rock-steady-horizontal.png"
-              alt="Rock Steady"
-              fill
-              sizes="176px"
-              className="object-contain object-center"
-            />
+      <footer className="border-t border-white/10 bg-black px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
+            <div className="flex flex-col items-center gap-3 md:items-start">
+              <span
+                className={`${rockslide.className} text-3xl leading-none text-[#FD0A04]`}
+              >
+                Rock Steady
+              </span>
+              <p className="text-sm font-bold text-white/55">
+                Phoenix Valley cover band
+                <span className="ml-2 font-black uppercase text-[#ffcf33]">
+                  It&apos;s a Rock Party!
+                </span>
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center gap-4 md:items-end">
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="text-sm font-bold text-white/70 transition hover:text-[#ffcf33]"
+              >
+                {siteConfig.email}
+              </a>
+              <div className="flex items-center gap-4">
+                <a
+                  href={siteConfig.facebookUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Rock Steady on Facebook"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                >
+                  <FacebookIcon className="h-5 w-5 fill-current" />
+                </a>
+                <a
+                  href={siteConfig.instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Rock Steady on Instagram"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                >
+                  <InstagramIcon className="h-5 w-5 fill-current" />
+                </a>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  aria-label="Email Rock Steady"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                >
+                  <MailIcon className="h-5 w-5 fill-current" />
+                </a>
+              </div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <a
-              href={siteConfig.facebookUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Rock Steady on Facebook"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
-            >
-              <FacebookIcon className="h-5 w-5 fill-current" />
-            </a>
-            <a
-              href={siteConfig.instagramUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Rock Steady on Instagram"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
-            >
-              <InstagramIcon className="h-5 w-5 fill-current" />
-            </a>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              aria-label="Email Rock Steady"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
-            >
-              <MailIcon className="h-5 w-5 fill-current" />
-            </a>
-          </div>
-
-          <a
-            href={`mailto:${siteConfig.email}`}
-            className="text-sm font-bold text-white/70 transition hover:text-[#ffcf33]"
-          >
-            {siteConfig.email}
-          </a>
-
-          <div className="text-sm font-bold text-white/55">
-            <p>Rock Steady - Phoenix Valley cover band</p>
-            <p className="mt-1 font-black uppercase text-[#ffcf33]">
-              It&apos;s a Rock Party!
+          <div className="mt-8 flex flex-col items-center gap-1 border-t border-white/10 pt-6 text-xs font-bold text-white/45 sm:flex-row sm:justify-between sm:gap-0">
+            <p>
+              &copy; {new Date().getFullYear()} Rock Steady. All rights
+              reserved.
+            </p>
+            <p>
+              Developed by{" "}
+              <a
+                href="https://siegelcraft.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-white/70 transition hover:text-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+              >
+                Siegelcraft
+              </a>
             </p>
           </div>
         </div>

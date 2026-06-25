@@ -2,13 +2,16 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { rockslide } from "../fonts";
 
 const navLinks = [
   { href: "#shows", id: "shows", label: "Shows" },
+  { href: "#video", id: "video", label: "Video" },
   { href: "#music", id: "music", label: "Music" },
   { href: "#photos", id: "photos", label: "Photos" },
-  { href: "#booking", id: "booking", label: "Booking" },
 ];
+
+const bookingLink = { href: "#booking", id: "booking", label: "Book" };
 
 export function ShrinkingHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,17 +30,29 @@ export function ShrinkingHeader() {
   }, []);
 
   useEffect(() => {
-    const sections = navLinks
-      .map((link) => document.getElementById(link.id))
+    const orderedIds = [...navLinks, bookingLink].map((link) => link.id);
+    const sections = orderedIds
+      .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
+
+    const visibleIds = new Set<string>();
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
+            visibleIds.add(entry.target.id);
+          } else {
+            visibleIds.delete(entry.target.id);
           }
         });
+
+        // Pick the topmost section currently within the band so overlapping
+        // entries in a single callback resolve deterministically.
+        const nextActive = orderedIds.find((id) => visibleIds.has(id));
+        if (nextActive) {
+          setActiveId(nextActive);
+        }
       },
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
     );
@@ -93,17 +108,14 @@ export function ShrinkingHeader() {
               isScrolled ? "opacity-0" : "opacity-100"
             }`}
           />
-          <Image
-            src="/images/rock-steady-horizontal.png"
-            alt=""
+          <span
             aria-hidden="true"
-            fill
-            priority
-            sizes="(min-width: 768px) 224px, 160px"
-            className={`object-contain object-left drop-shadow-[0_0_28px_rgba(255,0,0,0.36)] transition-opacity duration-500 ease-in-out ${
+            className={`${rockslide.className} absolute inset-0 flex items-center whitespace-nowrap text-3xl leading-none text-[#FD0A04] drop-shadow-[0_0_28px_rgba(255,0,0,0.36)] transition-opacity duration-500 ease-in-out md:text-4xl ${
               isScrolled ? "opacity-100" : "opacity-0"
             }`}
-          />
+          >
+            Rock Steady
+          </span>
         </a>
 
         <nav
@@ -129,32 +141,54 @@ export function ShrinkingHeader() {
               </a>
             );
           })}
+
+          <a
+            href={bookingLink.href}
+            aria-current={activeId === bookingLink.id ? "true" : undefined}
+            className={`rounded-full border px-4 py-2 transition focus:outline-none focus:ring-2 focus:ring-[#ffcf33] ${
+              activeId === bookingLink.id
+                ? "border-[#ff2b1f] bg-[#ff2b1f] text-white"
+                : "border-[#ffcf33] bg-[#ffcf33] text-black hover:border-[#ff2b1f] hover:bg-[#ff2b1f] hover:text-white"
+            }`}
+          >
+            {bookingLink.label}
+          </a>
         </nav>
 
-        <button
-          type="button"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          onClick={() => setMenuOpen((open) => !open)}
-          className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-[#ff2b1f] hover:bg-[#ff2b1f] focus:outline-none focus:ring-2 focus:ring-[#ffcf33] sm:right-6 md:hidden"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            className="h-5 w-5"
+        <div className="absolute right-4 top-4 flex items-center gap-2 sm:right-6 md:hidden">
+          <a
+            href={bookingLink.href}
+            onClick={() => setMenuOpen(false)}
+            className="inline-flex h-10 items-center rounded-full bg-[#ffcf33] px-4 text-xs font-black uppercase text-black transition hover:bg-[#ff2b1f] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
           >
-            {menuOpen ? (
-              <path d="M6 6l12 12M18 6L6 18" />
-            ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            )}
-          </svg>
-        </button>
+            {bookingLink.label}
+          </a>
+
+          <button
+            type="button"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-[#ff2b1f] hover:bg-[#ff2b1f] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              className="h-5 w-5"
+            >
+              {menuOpen ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       <nav
