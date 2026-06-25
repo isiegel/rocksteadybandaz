@@ -57,9 +57,11 @@ const valleySpots = [
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'MusicGroup',
+  '@id': `${siteConfig.url}/#band`,
   name: siteConfig.name,
   alternateName: 'Rock Steady Band AZ',
   url: siteConfig.url,
+  email: siteConfig.email,
   logo: absoluteUrl(siteConfig.logoPath),
   image: [
     absoluteUrl(siteConfig.heroImagePath),
@@ -73,6 +75,12 @@ const structuredData = {
   foundingLocation: {
     '@type': 'Place',
     name: 'Phoenix, Arizona',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Phoenix',
+    addressRegion: 'AZ',
+    addressCountry: 'US',
   },
   areaServed: siteConfig.areaServed.map((city) => ({
     '@type': 'City',

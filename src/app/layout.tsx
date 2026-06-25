@@ -1,10 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { absoluteUrl, siteConfig } from "./seo";
 
 const title = {
   default: siteConfig.title,
   template: `%s | ${siteConfig.name}`,
+};
+
+export const viewport: Viewport = {
+  themeColor: "#050505",
+  colorScheme: "dark",
 };
 
 export const metadata: Metadata = {

@@ -1,5 +1,8 @@
+// Default to the production domain so canonical URLs, og:url, the sitemap,
+// and JSON-LD @id never fall back to localhost when NEXT_PUBLIC_SITE_URL is
+// unset on the server. Override the env var only for non-production hosts.
 const configuredSiteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://rocksteadybandaz.com";
 
 const siteUrl = /^https?:\/\//.test(configuredSiteUrl)
   ? configuredSiteUrl
