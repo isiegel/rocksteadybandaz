@@ -6,6 +6,9 @@ import {
   MailIcon,
 } from './components/SocialIcons';
 import { absoluteUrl, siteConfig } from './seo';
+import { formatShowDate, upcomingShows } from './shows';
+
+const upcoming = upcomingShows();
 
 const gallery = [
   {
@@ -94,6 +97,31 @@ const structuredData = {
     url: siteConfig.facebookUrl,
     areaServed: 'US-AZ',
   },
+  ...(upcoming.length > 0 && {
+    event: upcoming.map((show) => ({
+      '@type': 'MusicEvent',
+      name: `${siteConfig.name} at ${show.venue}`,
+      startDate: show.date,
+      eventStatus: 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+      ...(show.url && { url: show.url }),
+      location: {
+        '@type': 'Place',
+        name: show.venue,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: show.city,
+          addressRegion: 'AZ',
+          addressCountry: 'US',
+        },
+      },
+      performer: {
+        '@type': 'MusicGroup',
+        '@id': `${siteConfig.url}/#band`,
+        name: siteConfig.name,
+      },
+    })),
+  }),
 };
 
 export default function Home() {
@@ -184,14 +212,58 @@ export default function Home() {
                 <p className="text-sm font-black uppercase text-[#ffcf33]">
                   Upcoming public dates
                 </p>
-                <h3 className="mt-2 text-2xl font-black text-white">
-                  More show announcements coming soon
-                </h3>
-                <p className="mt-3 leading-7 text-white/70">
-                  Have a room, patio, neighborhood event, or private party that
-                  needs a cover band with some bite? Send the date and location
-                  and we will talk details.
-                </p>
+
+                {upcoming.length > 0 ? (
+                  <ul className="mt-4 divide-y divide-white/10">
+                    {upcoming.map((show) => (
+                      <li
+                        key={`${show.date}-${show.venue}`}
+                        className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3 first:pt-0 last:pb-0"
+                      >
+                        <div>
+                          <p className="text-lg font-black text-white">
+                            {show.venue}
+                          </p>
+                          <p className="text-sm font-bold text-white/64">
+                            {show.city}, AZ
+                            {show.note ? ` - ${show.note}` : ''}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm font-black uppercase text-[#37d67a]">
+                            {formatShowDate(show.date)}
+                          </p>
+                          {show.time ? (
+                            <p className="text-sm font-bold text-white/64">
+                              {show.time}
+                            </p>
+                          ) : null}
+                          {show.url ? (
+                            <a
+                              href={show.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-sm font-black text-[#ffcf33] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                            >
+                              Details
+                            </a>
+                          ) : null}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <>
+                    <h3 className="mt-2 text-2xl font-black text-white">
+                      More show announcements coming soon
+                    </h3>
+                    <p className="mt-3 leading-7 text-white/70">
+                      Have a room, patio, neighborhood event, or private party
+                      that needs a cover band with some bite? Send the date and
+                      location and we will talk details.
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="border border-white/12 bg-[#101010] p-6">
