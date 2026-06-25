@@ -225,21 +225,21 @@ export default function Home() {
                     {upcoming.map((show) => (
                       <li
                         key={`${show.date}-${show.venue}`}
-                        className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3 first:pt-0 last:pb-0"
+                        className="flex flex-col gap-1.5 py-4 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4"
                       >
                         <div>
-                          <p className="text-lg font-black text-white">
+                          <p className="text-lg font-black leading-tight text-white">
                             {show.venue}
                           </p>
                           {show.city || show.note ? (
-                            <p className="text-sm font-bold text-white/64">
+                            <p className="mt-0.5 text-sm font-bold text-white/64">
                               {show.city ? `${show.city}, AZ` : ''}
                               {show.city && show.note ? ' · ' : ''}
                               {show.note ?? ''}
                             </p>
                           ) : null}
                         </div>
-                        <div className="text-right">
+                        <div className="shrink-0 text-left sm:text-right">
                           <p className="text-sm font-black uppercase text-[#37d67a]">
                             {formatShowDate(show.date)}
                           </p>
@@ -518,9 +518,12 @@ export default function Home() {
             {siteConfig.email}
           </a>
 
-          <p className="text-sm font-bold text-white/55">
-            Rock Steady - Phoenix Valley cover band - It&apos;s a Rock Party!
-          </p>
+          <div className="text-sm font-bold text-white/55">
+            <p>Rock Steady - Phoenix Valley cover band</p>
+            <p className="mt-1 font-black uppercase text-[#ffcf33]">
+              It&apos;s a Rock Party!
+            </p>
+          </div>
         </div>
       </footer>
     </>
