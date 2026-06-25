@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ShrinkingHeader } from "./components/ShrinkingHeader";
+import { absoluteUrl, siteConfig } from "./seo";
 
 const gallery = [
   {
@@ -48,9 +49,54 @@ const valleySpots = [
   "Peoria",
 ];
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  name: siteConfig.name,
+  alternateName: "Rock Steady Band AZ",
+  url: siteConfig.url,
+  logo: absoluteUrl(siteConfig.logoPath),
+  image: [
+    absoluteUrl(siteConfig.heroImagePath),
+    absoluteUrl("/images/show-04.jpg"),
+    absoluteUrl("/images/show-10.jpg"),
+  ],
+  description: siteConfig.description,
+  slogan: "It's a rock party.",
+  genre: [
+    "Classic rock",
+    "Cover band",
+    "Dance rock",
+    "80s music",
+    "90s music",
+  ],
+  sameAs: [siteConfig.facebookUrl],
+  foundingLocation: {
+    "@type": "Place",
+    name: "Phoenix, Arizona",
+  },
+  areaServed: siteConfig.areaServed.map((city) => ({
+    "@type": "City",
+    name: `${city}, Arizona`,
+  })),
+  keywords: siteConfig.keywords.join(", "),
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "booking",
+    url: siteConfig.facebookUrl,
+    areaServed: "US-AZ",
+  },
+};
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+      />
       <ShrinkingHeader />
       <main id="top" className="overflow-hidden bg-[#050505] text-white">
         <section className="relative min-h-[88vh] px-4 pb-16 pt-56 sm:px-6 md:pt-72 lg:px-8">
