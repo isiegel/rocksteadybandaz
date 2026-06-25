@@ -1,0 +1,89 @@
+import type { Metadata } from "next";
+import "./globals.css";
+import { absoluteUrl, siteConfig } from "./seo";
+
+const title = {
+  default: siteConfig.title,
+  template: `%s | ${siteConfig.name}`,
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title,
+  applicationName: siteConfig.name,
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: "music",
+  alternates: {
+    canonical: "/",
+  },
+  icons: {
+    icon: siteConfig.logoPath,
+    apple: siteConfig.logoPath,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: "/",
+    siteName: siteConfig.name,
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: siteConfig.heroImagePath,
+        width: 1286,
+        height: 965,
+        alt: "Rock Steady performing live in the Phoenix Valley",
+      },
+      {
+        url: siteConfig.logoPath,
+        width: 1024,
+        height: 842,
+        alt: "Rock Steady band logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [
+      {
+        url: absoluteUrl(siteConfig.heroImagePath),
+        alt: "Rock Steady performing live in the Phoenix Valley",
+      },
+    ],
+  },
+  other: {
+    "geo.region": "US-AZ",
+    "geo.placename": "Phoenix",
+    "geo.position": "33.4484;-112.0740",
+    ICBM: "33.4484, -112.0740",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
