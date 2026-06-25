@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { rockslide } from './fonts';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
+import { VideoEmbed } from './components/VideoEmbed';
 import {
   FacebookIcon,
   InstagramIcon,
@@ -18,7 +19,6 @@ import {
 const upcoming = upcomingShows();
 const youtubeVideoId = 'TiDSYeBD4pw';
 const youtubeWatchUrl = `https://youtu.be/${youtubeVideoId}`;
-const youtubeEmbedUrl = `https://www.youtube-nocookie.com/embed/${youtubeVideoId}?rel=0`;
 const bookingEmailSubject = 'Booking inquiry for Rock Steady';
 const bookingEmailBody = [
   'Hi Rock Steady,',
@@ -198,6 +198,34 @@ const structuredData = {
   }),
 };
 
+// ISO 8601 upload date of the YouTube performance video (e.g. "2024-06-15").
+// Google requires `uploadDate` for VideoObject rich results — fill this in with
+// the video's real publish date to make the embed eligible. Left blank, the
+// VideoObject is still valid and helps the video get discovered.
+const videoUploadDate = '';
+
+// VideoObject keeps the live performance discoverable now that it loads behind a
+// click-to-play facade (the iframe is no longer in the initial HTML for crawlers).
+const videoStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: `${siteConfig.name} — Live Performance`,
+  description:
+    'Rock Steady playing live in the Phoenix Valley — classic rock, 80s and 90s favorites, and dance-floor covers from a female-fronted cover band.',
+  thumbnailUrl: [
+    `https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`,
+    `https://i.ytimg.com/vi/${youtubeVideoId}/maxresdefault.jpg`,
+  ],
+  embedUrl: `https://www.youtube-nocookie.com/embed/${youtubeVideoId}`,
+  contentUrl: youtubeWatchUrl,
+  ...(videoUploadDate && { uploadDate: videoUploadDate }),
+  publisher: {
+    '@type': 'MusicGroup',
+    '@id': `${siteConfig.url}/#band`,
+    name: siteConfig.name,
+  },
+};
+
 export default function Home() {
   return (
     <>
@@ -207,6 +235,12 @@ export default function Home() {
           __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(videoStructuredData).replace(/</g, '\\u003c'),
+        }}
+      />
       <ShrinkingHeader />
       <main id="top" className="overflow-hidden bg-[#050505] text-white">
         <section className="relative min-h-[88vh] px-4 pb-16 pt-56 sm:px-6 md:pt-72 lg:px-8">
@@ -214,8 +248,8 @@ export default function Home() {
             src="/images/show-07.jpg"
             alt="Rock Steady performing live on a Phoenix Valley stage"
             fill
-            priority
             loading="eager"
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover object-center"
           />
@@ -416,14 +450,10 @@ export default function Home() {
             </div>
 
             <div className="overflow-hidden border border-white/12 bg-black shadow-[0_24px_70px_rgba(0,0,0,0.38)]">
-              <iframe
+              <VideoEmbed
+                videoId={youtubeVideoId}
                 title="Rock Steady live performance video"
-                src={youtubeEmbedUrl}
-                className="aspect-video w-full"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
+                logoSrc={siteConfig.logoPath}
               />
             </div>
           </div>

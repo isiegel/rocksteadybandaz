@@ -102,7 +102,7 @@ export function ShrinkingHeader() {
             src="/images/rock-steady-logo.png"
             alt="Rock Steady - It's a Rock Party!"
             fill
-            priority
+            loading="eager"
             sizes="(min-width: 768px) 320px, 192px"
             className={`object-contain drop-shadow-[0_0_28px_rgba(255,0,0,0.36)] transition-opacity duration-500 ease-in-out ${
               isScrolled ? "opacity-0" : "opacity-100"

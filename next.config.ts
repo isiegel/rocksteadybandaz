@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    // Serve modern formats — AVIF first (smallest), WebP as fallback — so the
+    // optimizer ships far smaller photos than the source JPEGs/PNGs.
+    formats: ["image/avif", "image/webp"],
+    // Band photos and the logo rarely change, so let the CDN keep optimized
+    // variants for ~31 days instead of re-optimizing on short intervals.
+    minimumCacheTTL: 2678400,
+  },
 };
 
 export default nextConfig;
