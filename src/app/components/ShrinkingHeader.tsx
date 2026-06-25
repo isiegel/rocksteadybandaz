@@ -4,14 +4,16 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const navLinks = [
-  { href: "#shows", label: "Shows" },
-  { href: "#music", label: "Music" },
-  { href: "#photos", label: "Photos" },
-  { href: "#booking", label: "Booking" },
+  { href: "#shows", id: "shows", label: "Shows" },
+  { href: "#music", id: "music", label: "Music" },
+  { href: "#photos", id: "photos", label: "Photos" },
+  { href: "#booking", id: "booking", label: "Booking" },
 ];
 
 export function ShrinkingHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeId, setActiveId] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const updateHeader = () => {
@@ -23,6 +25,39 @@ export function ShrinkingHeader() {
 
     return () => window.removeEventListener("scroll", updateHeader);
   }, []);
+
+  useEffect(() => {
+    const sections = navLinks
+      .map((link) => document.getElementById(link.id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Close the mobile menu once the viewport grows to the desktop nav.
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const closeOnDesktop = () => {
+      if (window.innerWidth >= 768) setMenuOpen(false);
+    };
+
+    window.addEventListener("resize", closeOnDesktop);
+    return () => window.removeEventListener("resize", closeOnDesktop);
+  }, [menuOpen]);
 
   return (
     <header
@@ -73,21 +108,85 @@ export function ShrinkingHeader() {
 
         <nav
           aria-label="Main navigation"
-          className={`flex flex-wrap items-center justify-center gap-1 text-[0.7rem] font-black uppercase sm:gap-2 sm:text-xs ${
+          className={`hidden items-center justify-center gap-1 text-[0.7rem] font-black uppercase sm:gap-2 sm:text-xs md:flex ${
             isScrolled ? "max-w-[70vw]" : "max-w-full"
           }`}
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="rounded-full border border-white/15 bg-black/35 px-3 py-2 text-white transition hover:border-[#ff2b1f] hover:bg-[#ff2b1f] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeId === link.id;
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                aria-current={isActive ? "true" : undefined}
+                className={`rounded-full border px-3 py-2 transition focus:outline-none focus:ring-2 focus:ring-[#ffcf33] ${
+                  isActive
+                    ? "border-[#ff2b1f] bg-[#ff2b1f] text-white"
+                    : "border-white/15 bg-black/35 text-white hover:border-[#ff2b1f] hover:bg-[#ff2b1f]"
+                }`}
+              >
+                {link.label}
+              </a>
+            );
+          })}
         </nav>
+
+        <button
+          type="button"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          onClick={() => setMenuOpen((open) => !open)}
+          className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-[#ff2b1f] hover:bg-[#ff2b1f] focus:outline-none focus:ring-2 focus:ring-[#ffcf33] sm:right-6 md:hidden"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            className="h-5 w-5"
+          >
+            {menuOpen ? (
+              <path d="M6 6l12 12M18 6L6 18" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            )}
+          </svg>
+        </button>
       </div>
+
+      <nav
+        id="mobile-menu"
+        aria-label="Mobile navigation"
+        className={`absolute left-0 top-full w-full origin-top border-b border-white/10 bg-[#060606]/97 backdrop-blur-md transition-all duration-300 md:hidden ${
+          menuOpen
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-2 opacity-0"
+        }`}
+      >
+        <div className="flex flex-col gap-2 px-4 py-4 text-sm font-black uppercase sm:px-6">
+          {navLinks.map((link) => {
+            const isActive = activeId === link.id;
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                aria-current={isActive ? "true" : undefined}
+                onClick={() => setMenuOpen(false)}
+                className={`rounded-2xl border px-4 py-3 transition focus:outline-none focus:ring-2 focus:ring-[#ffcf33] ${
+                  isActive
+                    ? "border-[#ff2b1f] bg-[#ff2b1f] text-white"
+                    : "border-white/12 bg-black/35 text-white hover:border-[#ff2b1f] hover:bg-[#ff2b1f]"
+                }`}
+              >
+                {link.label}
+              </a>
+            );
+          })}
+        </div>
+      </nav>
     </header>
   );
 }
