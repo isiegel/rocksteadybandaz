@@ -356,7 +356,7 @@ export default function Home() {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="border border-white/12 bg-white/[0.045] px-4 py-5 text-sm font-black uppercase text-white"
+                    className="border border-white/12 bg-white/[0.045] px-4 py-5 text-center text-sm font-black uppercase text-white"
                   >
                     {item}
                   </div>
