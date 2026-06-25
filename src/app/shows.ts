@@ -16,21 +16,21 @@ export type Show = {
 
 // Add upcoming shows here. Past dates drop off automatically on each deploy.
 export const shows: Show[] = [
-  { date: '2026-06-27', venue: 'The Dubliner Irish Pub', start: '20:00', end: '23:00' },
-  { date: '2026-07-17', venue: 'The Loft Again', start: '20:00', end: '23:00' },
-  { date: '2026-07-24', venue: 'Azool Grill', start: '20:00', end: '23:00' },
-  { date: '2026-07-25', venue: 'El Dorado Bar & Grill', start: '20:00', end: '23:00' },
-  { date: '2026-08-07', venue: 'The Dubliner Irish Pub', start: '20:00', end: '23:00' },
-  { date: '2026-08-21', venue: 'The Loft Again', start: '20:00', end: '23:00' },
-  { date: '2026-09-05', venue: 'Azool Grill', start: '20:00', end: '23:00' },
-  { date: '2026-09-11', venue: 'The Loft Again', start: '20:00', end: '23:00' },
-  { date: '2026-09-25', venue: 'Kimmyz On Greenway Rock & Roll Bar & Grill', start: '20:00', end: '23:00' },
-  { date: '2026-10-09', venue: 'The Loft Again', start: '20:00', end: '23:00' },
-  { date: '2026-10-31', venue: 'Azool Grill', start: '20:00', end: '23:00' },
-  { date: '2026-11-06', venue: 'American Legion Post 35 - Mathew B Juan', start: '19:00', end: '22:00' },
-  { date: '2026-11-20', venue: 'The Loft Again', start: '20:00', end: '23:00' },
-  { date: '2026-12-04', venue: 'The Gym Grill and Bar', start: '20:00', end: '23:00' },
-  { date: '2026-12-11', venue: 'The Loft Again', start: '20:00', end: '23:00' },
+  { date: '2026-06-27', venue: 'The Dubliner Irish Pub', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2026-07-17', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2026-07-24', venue: 'Azool Grill', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2026-07-25', venue: 'El Dorado Bar & Grill', city: 'Scottsdale', start: '20:00', end: '23:00' },
+  { date: '2026-08-07', venue: 'The Dubliner Irish Pub', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2026-08-21', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2026-09-05', venue: 'Azool Grill', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2026-09-11', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2026-09-25', venue: 'Kimmyz On Greenway Rock & Roll Bar & Grill', city: 'Glendale', start: '20:00', end: '23:00' },
+  { date: '2026-10-09', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2026-10-31', venue: 'Azool Grill', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2026-11-06', venue: 'American Legion Post 35 - Mathew B Juan', city: 'Chandler', start: '19:00', end: '22:00' },
+  { date: '2026-11-20', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2026-12-04', venue: 'The Gym Grill and Bar', city: 'San Tan Valley', start: '20:00', end: '23:00' },
+  { date: '2026-12-11', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
 ];
 
 // Arizona does not observe daylight saving, so the offset is always -07:00.
