@@ -457,6 +457,14 @@ export default function Home() {
                   <InstagramIcon className="h-5 w-5 fill-current" />
                   Instagram
                 </a>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  aria-label="Email Rock Steady"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#37d67a] px-5 py-3 text-sm font-black uppercase text-[#06140b] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                >
+                  <MailIcon className="h-5 w-5 fill-current" />
+                  Email
+                </a>
               </div>
             </div>
           </div>
