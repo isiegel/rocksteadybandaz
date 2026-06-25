@@ -10,9 +10,9 @@ const siteUrl = /^https?:\/\//.test(configuredSiteUrl)
 
 export const siteConfig = {
   name: "Rock Steady",
-  title: "Rock Steady | Phoenix Valley Cover Band",
+  title: "Rock Steady | Phoenix Cover Band",
   description:
-    "Rock Steady is a Phoenix Valley cover band playing classic rock, 80s and 90s favorites, dance-floor staples, and local rock party sets across Arizona.",
+    "Rock Steady is a Phoenix cover band playing classic rock, 80s and 90s favorites, dance-floor staples, and local rock party sets across Arizona.",
   url: siteUrl.replace(/\/$/, ""),
   facebookUrl: "https://www.facebook.com/rocksteadybandaz",
   instagramUrl: "https://www.instagram.com/rock.steady.band.az",
@@ -26,7 +26,7 @@ export const siteConfig = {
     "Rock Steady",
     "Rock Steady Band AZ",
     "Phoenix cover band",
-    "Phoenix Valley cover band",
+    "Phoenix cover band",
     "Arizona cover band",
     "Scottsdale live music",
     "Tempe cover band",

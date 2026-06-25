@@ -1,6 +1,6 @@
 # Rock Steady
 
-A simple Next.js site for Rock Steady, a Phoenix Valley cover band.
+A simple Next.js site for Rock Steady, a Phoenix cover band.
 
 ## Development
 

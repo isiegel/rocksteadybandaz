@@ -89,10 +89,10 @@ const setlistSample = [
 ];
 
 const pressBio =
-  "Rock Steady is a female-fronted Phoenix Valley cover band built for packed, loud, crowd-first nights. The set spans classic rock, '80s and '90s sing-alongs, and dance-floor staples — Joan Jett, Heart, Tom Petty, ZZ Top, AC/DC and more — played with vocals up front and guitar hooks that cut through. Available for bars, private events, patios, and charity nights across the Phoenix Valley.";
+  "Rock Steady is a female-fronted Phoenix cover band built for packed, loud, crowd-first nights. The set spans classic rock, '80s and '90s sing-alongs, and dance-floor staples — Joan Jett, Heart, Tom Petty, ZZ Top, AC/DC and more — played with vocals up front and guitar hooks that cut through. Available for bars, private events, patios, and charity nights across the Phoenix.";
 
 const pressFacts = [
-  { label: 'Based in', value: 'Phoenix Valley, AZ' },
+  { label: 'Based in', value: 'Phoenix, AZ' },
   { label: 'Style', value: "Classic rock · '80s/'90s · dance covers" },
   { label: 'Format', value: 'Female-fronted full band' },
   { label: 'Sets', value: 'Flexible — up to three sets' },
@@ -211,7 +211,7 @@ const videoStructuredData = {
   '@type': 'VideoObject',
   name: `${siteConfig.name} — Live Performance`,
   description:
-    'Rock Steady playing live in the Phoenix Valley — classic rock, 80s and 90s favorites, and dance-floor covers from a female-fronted cover band.',
+    'Rock Steady playing live in Phoenix — classic rock, 80s and 90s favorites, and dance-floor covers from a female-fronted cover band.',
   thumbnailUrl: [
     `https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`,
     `https://i.ytimg.com/vi/${youtubeVideoId}/maxresdefault.jpg`,
@@ -246,7 +246,7 @@ export default function Home() {
         <section className="relative min-h-[88vh] px-4 pb-16 pt-56 sm:px-6 md:pt-72 lg:px-8">
           <Image
             src="/images/show-07.jpg"
-            alt="Rock Steady performing live on a Phoenix Valley stage"
+            alt="Rock Steady performing live on a Phoenix stage"
             fill
             loading="eager"
             fetchPriority="high"
@@ -259,7 +259,7 @@ export default function Home() {
           <div className="relative mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <p className="mb-4 inline-flex rounded-full border border-[#ffcf33]/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-[#ffcf33] shadow-[0_0_22px_rgba(255,207,51,0.18)]">
-                Phoenix Valley cover band
+                Phoenix cover band
               </p>
               <h1
                 className={`${rockslide.className} text-5xl leading-none text-white sm:text-6xl md:text-7xl`}
@@ -406,7 +406,7 @@ export default function Home() {
 
               <div className="border border-white/12 bg-[#101010] p-6">
                 <p className="text-sm font-black uppercase text-[#ff2b1f]">
-                  Phoenix Valley range
+                  Phoenix range
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {valleySpots.map((spot) => (
@@ -536,7 +536,7 @@ export default function Home() {
                 Local, loose, and ready to turn the room up.
               </h2>
               <p className="mt-5 text-lg leading-8 text-white/72">
-                Rock Steady is a Phoenix Valley cover band with a bar-stage
+                Rock Steady is a Phoenix cover band with a bar-stage
                 heartbeat: vocals up front, guitar hooks that cut through, and a
                 rhythm section that keeps the night moving. The point is simple:
                 make the room feel like it joined the band for a few hours.
@@ -842,7 +842,7 @@ export default function Home() {
                 Rock Steady
               </span>
               <p className="text-sm font-bold text-white/55">
-                Phoenix Valley cover band
+                Phoenix cover band
                 <span className="ml-2 font-black uppercase text-[#ffcf33]">
                   It&apos;s a Rock Party!
                 </span>
