@@ -6,7 +6,13 @@ import {
   MailIcon,
 } from './components/SocialIcons';
 import { absoluteUrl, siteConfig } from './seo';
-import { formatShowDate, upcomingShows } from './shows';
+import {
+  formatShowDate,
+  formatShowTime,
+  showEndISO,
+  showStartISO,
+  upcomingShows,
+} from './shows';
 
 const upcoming = upcomingShows();
 
@@ -101,7 +107,8 @@ const structuredData = {
     event: upcoming.map((show) => ({
       '@type': 'MusicEvent',
       name: `${siteConfig.name} at ${show.venue}`,
-      startDate: show.date,
+      startDate: showStartISO(show),
+      ...(showEndISO(show) && { endDate: showEndISO(show) }),
       eventStatus: 'https://schema.org/EventScheduled',
       eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
       ...(show.url && { url: show.url }),
@@ -110,7 +117,7 @@ const structuredData = {
         name: show.venue,
         address: {
           '@type': 'PostalAddress',
-          addressLocality: show.city,
+          ...(show.city && { addressLocality: show.city }),
           addressRegion: 'AZ',
           addressCountry: 'US',
         },
@@ -224,18 +231,21 @@ export default function Home() {
                           <p className="text-lg font-black text-white">
                             {show.venue}
                           </p>
-                          <p className="text-sm font-bold text-white/64">
-                            {show.city}, AZ
-                            {show.note ? ` - ${show.note}` : ''}
-                          </p>
+                          {show.city || show.note ? (
+                            <p className="text-sm font-bold text-white/64">
+                              {show.city ? `${show.city}, AZ` : ''}
+                              {show.city && show.note ? ' · ' : ''}
+                              {show.note ?? ''}
+                            </p>
+                          ) : null}
                         </div>
                         <div className="text-right">
                           <p className="text-sm font-black uppercase text-[#37d67a]">
                             {formatShowDate(show.date)}
                           </p>
-                          {show.time ? (
+                          {formatShowTime(show) ? (
                             <p className="text-sm font-bold text-white/64">
-                              {show.time}
+                              {formatShowTime(show)}
                             </p>
                           ) : null}
                           {show.url ? (
@@ -344,7 +354,7 @@ export default function Home() {
               </p>
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
                 {[
-                  'No stiff set breaks',
+                  'High-energy sets',
                   'Crowd-first songs',
                   'Real band energy',
                 ].map((item) => (
