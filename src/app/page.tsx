@@ -218,7 +218,7 @@ const videoStructuredData = {
   ],
   embedUrl: `https://www.youtube-nocookie.com/embed/${youtubeVideoId}`,
   contentUrl: youtubeWatchUrl,
-  ...(videoUploadDate && { uploadDate: videoUploadDate }),
+  ...(videoUploadDate ? { uploadDate: videoUploadDate } : {}),
   publisher: {
     '@type': 'MusicGroup',
     '@id': `${siteConfig.url}/#band`,
