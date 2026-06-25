@@ -5,7 +5,6 @@ const indexedImages = [
   siteConfig.logoPath,
   siteConfig.heroImagePath,
   "/images/show-04.jpg",
-  "/images/show-05.jpg",
   "/images/show-09.jpg",
   "/images/show-10.jpg",
 ];

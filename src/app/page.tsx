@@ -23,10 +23,6 @@ const gallery = [
     feature: true,
   },
   {
-    src: '/images/show-05.jpg',
-    alt: 'Rock Steady performing at Kimmyz with the crowd close to the stage',
-  },
-  {
     src: '/images/show-10.jpg',
     alt: 'Black and white photo of Rock Steady playing live',
   },
@@ -384,10 +380,6 @@ export default function Home() {
                   A few nights from the stage.
                 </h2>
               </div>
-              <p className="max-w-md text-base leading-7 text-white/68">
-                These shots can be swapped anytime, but they already have the
-                right feel: close crowd, club lights, and the band in motion.
-              </p>
             </div>
 
             <div className="mt-10 grid auto-rows-[15rem] gap-4 md:grid-cols-3 md:auto-rows-[18rem]">
