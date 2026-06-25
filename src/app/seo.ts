@@ -12,7 +12,12 @@ export const siteConfig = {
     "Rock Steady is a Phoenix Valley cover band playing classic rock, 80s and 90s favorites, dance-floor staples, and local rock party sets across Arizona.",
   url: siteUrl.replace(/\/$/, ""),
   facebookUrl: "https://www.facebook.com/rocksteadybandaz",
+  instagramUrl: "https://www.instagram.com/rock.steady.band.az",
+  instagramHandle: "rock.steady.band.az",
+  email: "info@rocksteadybandaz.com",
   logoPath: "/images/rock-steady-logo.png",
+  horizontalLogoPath: "/images/rock-steady-horizontal.png",
+  iconPath: "/images/rock-steady-rs.png",
   heroImagePath: "/images/show-07.jpg",
   keywords: [
     "Rock Steady",

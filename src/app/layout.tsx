@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: siteConfig.logoPath,
-    apple: siteConfig.logoPath,
+    icon: siteConfig.iconPath,
+    apple: siteConfig.iconPath,
   },
   robots: {
     index: true,

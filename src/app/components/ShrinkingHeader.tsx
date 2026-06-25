@@ -42,9 +42,9 @@ export function ShrinkingHeader() {
         <a
           href="#top"
           aria-label="Rock Steady home"
-          className={`relative block shrink-0 transition-all duration-500 ${
+          className={`relative block shrink-0 transition-all duration-500 ease-in-out ${
             isScrolled
-              ? "h-14 w-24 md:h-16 md:w-32"
+              ? "h-10 w-40 md:h-12 md:w-56"
               : "h-28 w-48 md:h-40 md:w-80"
           }`}
         >
@@ -53,8 +53,21 @@ export function ShrinkingHeader() {
             alt="Rock Steady - It's a Rock Party!"
             fill
             priority
-            sizes={isScrolled ? "128px" : "(min-width: 768px) 320px, 192px"}
-            className="object-contain drop-shadow-[0_0_28px_rgba(255,0,0,0.36)]"
+            sizes="(min-width: 768px) 320px, 192px"
+            className={`object-contain drop-shadow-[0_0_28px_rgba(255,0,0,0.36)] transition-opacity duration-500 ease-in-out ${
+              isScrolled ? "opacity-0" : "opacity-100"
+            }`}
+          />
+          <Image
+            src="/images/rock-steady-horizontal.png"
+            alt=""
+            aria-hidden="true"
+            fill
+            priority
+            sizes="(min-width: 768px) 224px, 160px"
+            className={`object-contain object-left drop-shadow-[0_0_28px_rgba(255,0,0,0.36)] transition-opacity duration-500 ease-in-out ${
+              isScrolled ? "opacity-100" : "opacity-0"
+            }`}
           />
         </a>
 
