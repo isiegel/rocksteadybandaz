@@ -1,96 +1,90 @@
-import Image from "next/image";
-import { ShrinkingHeader } from "./components/ShrinkingHeader";
+import Image from 'next/image';
+import { ShrinkingHeader } from './components/ShrinkingHeader';
 import {
   FacebookIcon,
   InstagramIcon,
   MailIcon,
-} from "./components/SocialIcons";
-import { absoluteUrl, siteConfig } from "./seo";
+} from './components/SocialIcons';
+import { absoluteUrl, siteConfig } from './seo';
 
 const gallery = [
   {
-    src: "/images/show-04.jpg",
-    alt: "Rock Steady vocalist singing under colorful stage lights",
+    src: '/images/show-04.jpg',
+    alt: 'Rock Steady vocalist singing under colorful stage lights',
     feature: true,
   },
   {
-    src: "/images/show-05.jpg",
-    alt: "Rock Steady performing at Kimmyz with the crowd close to the stage",
+    src: '/images/show-05.jpg',
+    alt: 'Rock Steady performing at Kimmyz with the crowd close to the stage',
   },
   {
-    src: "/images/show-10.jpg",
-    alt: "Black and white photo of Rock Steady playing live",
+    src: '/images/show-10.jpg',
+    alt: 'Black and white photo of Rock Steady playing live',
   },
   {
-    src: "/images/show-07.jpg",
-    alt: "Rock Steady singer and guitarist playing on the Silver Bullet Stage",
+    src: '/images/show-07.jpg',
+    alt: 'Rock Steady singer and guitarist playing on the Silver Bullet Stage',
   },
   {
-    src: "/images/show-09.jpg",
-    alt: "Rock Steady full band with bright club lights",
+    src: '/images/show-09.jpg',
+    alt: 'Rock Steady full band with bright club lights',
     feature: true,
   },
   {
-    src: "/images/show-03.jpg",
-    alt: "Wide black and white photo of Rock Steady onstage",
+    src: '/images/show-03.jpg',
+    alt: 'Wide black and white photo of Rock Steady onstage',
   },
 ];
 
 const setStyles = [
-  "Classic rock that starts conversations",
-  "80s and 90s sing-alongs",
-  "Dance-floor bar favorites",
-  "Guitar hooks, big choruses, no dead air",
+  'Classic rock that starts conversations',
+  '80s and 90s sing-alongs',
+  'Dance-floor bar favorites',
+  'Guitar hooks, big choruses, no dead air',
 ];
 
 const valleySpots = [
-  "Phoenix",
-  "Scottsdale",
-  "Tempe",
-  "Mesa",
-  "Chandler",
-  "Gilbert",
-  "Glendale",
-  "Peoria",
+  'Phoenix',
+  'Scottsdale',
+  'Tempe',
+  'Mesa',
+  'Chandler',
+  'Gilbert',
+  'Glendale',
+  'Peoria',
 ];
 
 const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "MusicGroup",
+  '@context': 'https://schema.org',
+  '@type': 'MusicGroup',
   name: siteConfig.name,
-  alternateName: "Rock Steady Band AZ",
+  alternateName: 'Rock Steady Band AZ',
   url: siteConfig.url,
   logo: absoluteUrl(siteConfig.logoPath),
   image: [
     absoluteUrl(siteConfig.heroImagePath),
-    absoluteUrl("/images/show-04.jpg"),
-    absoluteUrl("/images/show-10.jpg"),
+    absoluteUrl('/images/show-04.jpg'),
+    absoluteUrl('/images/show-10.jpg'),
   ],
   description: siteConfig.description,
   slogan: "It's a rock party.",
-  genre: [
-    "Classic rock",
-    "Cover band",
-    "Dance rock",
-    "80s music",
-    "90s music",
-  ],
+  genre: ['Classic rock', 'Cover band', 'Dance rock', '80s music', '90s music'],
   sameAs: [siteConfig.facebookUrl, siteConfig.instagramUrl],
   foundingLocation: {
-    "@type": "Place",
-    name: "Phoenix, Arizona",
+    '@type': 'Place',
+    name: 'Phoenix, Arizona',
   },
   areaServed: siteConfig.areaServed.map((city) => ({
-    "@type": "City",
+    '@type': 'City',
     name: `${city}, Arizona`,
   })),
-  keywords: siteConfig.keywords.join(", "),
+  keywords: siteConfig.keywords.join(', '),
   contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "booking",
+    '@type': 'ContactPoint',
+    contactType: 'booking',
     email: siteConfig.email,
     url: siteConfig.facebookUrl,
-    areaServed: "US-AZ",
+    areaServed: 'US-AZ',
   },
 };
 
@@ -100,7 +94,7 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
         }}
       />
       <ShrinkingHeader />
@@ -149,7 +143,7 @@ export default function Home() {
             </div>
 
             <div className="grid max-w-xl grid-cols-2 gap-3 text-sm font-black uppercase text-white sm:grid-cols-4 lg:max-w-md">
-              {["Bars", "Patios", "Parties", "Events"].map((label) => (
+              {['Bars', 'Patios', 'Parties', 'Events'].map((label) => (
                 <div
                   key={label}
                   className="border border-white/14 bg-black/42 px-4 py-4 text-center shadow-[0_12px_30px_rgba(0,0,0,0.25)] backdrop-blur"
@@ -269,22 +263,27 @@ export default function Home() {
                 make the room feel like it joined the band for a few hours.
               </p>
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                {["No stiff set breaks", "Crowd-first songs", "Real band energy"].map(
-                  (item) => (
-                    <div
-                      key={item}
-                      className="border border-white/12 bg-white/[0.045] px-4 py-5 text-sm font-black uppercase text-white"
-                    >
-                      {item}
-                    </div>
-                  ),
-                )}
+                {[
+                  'No stiff set breaks',
+                  'Crowd-first songs',
+                  'Real band energy',
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="border border-white/12 bg-white/[0.045] px-4 py-5 text-sm font-black uppercase text-white"
+                  >
+                    {item}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section id="photos" className="bg-[#070707] px-4 py-20 sm:px-6 lg:px-8">
+        <section
+          id="photos"
+          className="bg-[#070707] px-4 py-20 sm:px-6 lg:px-8"
+        >
           <div className="mx-auto max-w-7xl">
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div className="max-w-3xl">
@@ -306,7 +305,7 @@ export default function Home() {
                 <div
                   key={photo.src}
                   className={`relative overflow-hidden border border-white/10 bg-[#181818] ${
-                    photo.feature ? "md:col-span-2" : ""
+                    photo.feature ? 'md:col-span-2' : ''
                   }`}
                 >
                   <Image
@@ -315,8 +314,8 @@ export default function Home() {
                     fill
                     sizes={
                       photo.feature
-                        ? "(min-width: 768px) 66vw, 100vw"
-                        : "(min-width: 768px) 33vw, 100vw"
+                        ? '(min-width: 768px) 66vw, 100vw'
+                        : '(min-width: 768px) 33vw, 100vw'
                     }
                     className="object-cover transition duration-500 hover:scale-[1.03]"
                   />
@@ -343,12 +342,10 @@ export default function Home() {
             </div>
 
             <div className="border border-white/12 bg-[#101010] p-6">
-              <p className="text-2xl font-black text-white">
-                Message the band
-              </p>
+              <p className="text-2xl font-black text-white">Message the band</p>
               <p className="mt-3 leading-7 text-white/70">
                 Find us on Facebook and Instagram for booking questions, show
-                updates, and photo swaps. Prefer email? Reach us at{" "}
+                updates, and photo swaps. Prefer email? Reach us at{' '}
                 <a
                   href={`mailto:${siteConfig.email}`}
                   className="font-black text-[#ffcf33] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
@@ -432,7 +429,7 @@ export default function Home() {
           </a>
 
           <p className="text-sm font-bold text-white/55">
-            Rock Steady - Phoenix Valley cover band - It&apos;s a rock party.
+            Rock Steady - Phoenix Valley cover band - It&apos;s a Rock Party!
           </p>
         </div>
       </footer>
