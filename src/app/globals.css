@@ -30,6 +30,14 @@ a {
   text-decoration: none;
 }
 
+a[href^="mailto:"] {
+  transition: opacity 200ms ease;
+}
+
+a[href^="mailto:"]:hover {
+  opacity: 0.85;
+}
+
 section {
   scroll-margin-top: 7rem;
 }
