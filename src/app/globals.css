@@ -25,17 +25,22 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+/* Keep these in @layer base so Tailwind's `text-*` utilities (utilities layer)
+   override them. Unlayered, `color: inherit` would beat every text-color class
+   on every <a>, forcing links to the cream --foreground regardless of class. */
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-a[href^="mailto:"] {
-  transition: opacity 200ms ease;
-}
+  a[href^="mailto:"] {
+    transition: opacity 200ms ease;
+  }
 
-a[href^="mailto:"]:hover {
-  opacity: 0.85;
+  a[href^="mailto:"]:hover {
+    opacity: 0.85;
+  }
 }
 
 section {
