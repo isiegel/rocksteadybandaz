@@ -65,7 +65,7 @@ const gallery = [
 
 const setStyles = [
   'Classic rock that starts conversations',
-  '80s and 90s sing-alongs',
+  '70s, 80s and 90s sing-alongs',
   'Dance-floor bar favorites',
   'Guitar hooks, big choruses, no dead air',
 ];
