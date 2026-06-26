@@ -67,12 +67,12 @@ section {
     drop-shadow(0 24px 40px rgba(0, 0, 0, 0.4));
 }
 
-/* On mobile the outline reads as fuzzy at small sizes, so drop it and match the
-   plain footer wordmark treatment. */
+/* On mobile the outline reads as fuzzy at small sizes, so drop it and keep the
+   header wordmark red with a sharp white shadow underneath. */
 @media (max-width: 767px) {
   .hero-wordmark {
     -webkit-text-stroke: 0;
-    text-shadow: none;
+    text-shadow: 1px 2px 0 #ffffff;
     filter: none;
   }
 }
