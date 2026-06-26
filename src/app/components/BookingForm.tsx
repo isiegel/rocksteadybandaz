@@ -96,7 +96,7 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
   const submitting = status === 'submitting';
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-4" noValidate>
+    <form onSubmit={handleSubmit} className="grid gap-4">
       <input
         type="hidden"
         name="_subject"
