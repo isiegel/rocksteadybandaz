@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 // Formspree form ID, set via NEXT_PUBLIC_FORMSPREE_FORM_ID (the ID is part of a
 // public POST URL, so exposing it to the browser is expected and safe). When it
@@ -9,7 +9,7 @@ import { useState } from "react";
 const FORM_ID = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
 const ENDPOINT = FORM_ID ? `https://formspree.io/f/${FORM_ID}` : null;
 
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = 'idle' | 'submitting' | 'success' | 'error';
 
 type BookingFormProps = {
   /** mailto: link used as a fallback when the form endpoint isn't configured. */
@@ -17,11 +17,11 @@ type BookingFormProps = {
 };
 
 const fieldClass =
-  "w-full border border-white/15 bg-black/40 px-4 py-3 text-sm font-bold text-white placeholder:font-medium placeholder:text-white/40 transition focus:border-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]";
-const labelClass = "mb-1.5 block text-xs font-black uppercase text-white/55";
+  'w-full border border-white/15 bg-black/40 px-4 py-3 text-sm font-bold text-white placeholder:font-medium placeholder:text-white/40 transition focus:border-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]';
+const labelClass = 'mb-1.5 block text-xs font-black uppercase text-white/55';
 
 export function BookingForm({ mailtoHref }: BookingFormProps) {
-  const [status, setStatus] = useState<Status>("idle");
+  const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
 
   // No endpoint configured: render the mailto fallback so the section is never
@@ -38,7 +38,7 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
     );
   }
 
-  if (status === "success") {
+  if (status === 'success') {
     return (
       <div
         role="status"
@@ -46,7 +46,7 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
       >
         <p className="text-xl font-black text-white">Inquiry sent — thanks!</p>
         <p className="mt-2 text-sm font-bold leading-6 text-white/72">
-          We&apos;ll get back to you soon about your date. Want to add anything?{" "}
+          We&apos;ll get back to you soon about your date. Want to add anything?{' '}
           <a
             href={mailtoHref}
             className="text-[#ffcf33] underline-offset-4 hover:underline"
@@ -62,42 +62,46 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
-    setStatus("submitting");
+    setStatus('submitting');
     setError(null);
 
     try {
       const response = await fetch(ENDPOINT!, {
-        method: "POST",
+        method: 'POST',
         body: new FormData(form),
-        headers: { Accept: "application/json" },
+        headers: { Accept: 'application/json' },
       });
 
       if (response.ok) {
-        setStatus("success");
+        setStatus('success');
         form.reset();
         return;
       }
 
       // Formspree returns a JSON body with field-level errors on 4xx.
-      const data = (await response.json().catch(() => null)) as
-        | { errors?: { message: string }[] }
-        | null;
+      const data = (await response.json().catch(() => null)) as {
+        errors?: { message: string }[];
+      } | null;
       setError(
-        data?.errors?.map((e) => e.message).join(", ") ||
-          "Something went wrong. Please try again.",
+        data?.errors?.map((e) => e.message).join(', ') ||
+          'Something went wrong. Please try again.',
       );
-      setStatus("error");
+      setStatus('error');
     } catch {
-      setError("Network error. Please try again or email us directly.");
-      setStatus("error");
+      setError('Network error. Please try again or email us directly.');
+      setStatus('error');
     }
   }
 
-  const submitting = status === "submitting";
+  const submitting = status === 'submitting';
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-4" noValidate>
-      <input type="hidden" name="_subject" value="New booking inquiry — Rock Steady" />
+      <input
+        type="hidden"
+        name="_subject"
+        value="New booking inquiry — Rock Steady"
+      />
       {/* Honeypot: bots fill hidden fields; Formspree silently drops anything
           that arrives with _gotcha set. Hidden from users and assistive tech. */}
       <div className="absolute left-[-9999px]" aria-hidden="true">
@@ -241,12 +245,12 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
         />
       </div>
 
-      {status === "error" && error ? (
+      {status === 'error' && error ? (
         <p
           role="alert"
           className="border border-[#ff2b1f]/40 bg-[#ff2b1f]/10 px-4 py-3 text-sm font-bold text-white"
         >
-          {error}{" "}
+          {error}{' '}
           <a
             href={mailtoHref}
             className="text-[#ffcf33] underline-offset-4 hover:underline"
@@ -260,13 +264,16 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-1 inline-flex items-center justify-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-[#ff2b1f] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ffcf33] disabled:cursor-not-allowed disabled:opacity-60"
+        className="cursor-pointer mt-1 inline-flex items-center justify-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-[#ff2b1f] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ffcf33] disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {submitting ? "Sending…" : "Send booking inquiry"}
+        {submitting ? 'Sending…' : 'Send booking inquiry'}
       </button>
 
-      <p className="text-xs font-bold leading-5 text-white/50" aria-live="polite">
-        Prefer email? Reach us at{" "}
+      <p
+        className="text-xs font-bold leading-5 text-white/50"
+        aria-live="polite"
+      >
+        Prefer email? Reach us at{' '}
         <a
           href={mailtoHref}
           className="text-[#ffcf33] underline-offset-4 hover:underline"
