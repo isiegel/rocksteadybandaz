@@ -117,6 +117,7 @@ const valleySpots = [
   'Apache Junction',
   'San Tan Valley',
   'Surprise',
+  'Sun City',
 ];
 
 const regularVenues = [
