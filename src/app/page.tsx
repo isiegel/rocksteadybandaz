@@ -884,6 +884,58 @@ export default function Home() {
             </div>
           </div>
 
+          <div
+            className="mx-auto mt-8 w-fit border-y border-white/10 py-3 text-center md:mx-0 md:text-left"
+            aria-label="Rock Steady uses Gibson guitars and Ludwig drums because they want the best."
+          >
+            <p className="text-[0.65rem] font-black uppercase leading-tight tracking-[0.12em] text-white">
+              <span
+                className={`${rockslide.className} normal-case tracking-normal text-white`}
+              >
+                Rock Steady
+              </span>{' '}
+              uses Gibson
+              <br />
+              guitars and Ludwig drums
+              <br />
+              because they want the best.
+            </p>
+            <div className="relative mt-2 h-7">
+              <a
+                href="https://www.gibson.com/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Gibson guitars"
+                className="absolute left-0 top-0 block transition hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+              >
+                <Image
+                  src="/images/gibson-logo.svg"
+                  alt="Gibson"
+                  width={63}
+                  height={40}
+                  unoptimized
+                  className="h-7 w-auto"
+                />
+              </a>
+              <a
+                href="https://www.ludwig-drums.com/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Ludwig drums"
+                className="absolute right-0 top-0 block transition hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+              >
+                <Image
+                  src="/images/ludwig-logo.svg"
+                  alt="Ludwig"
+                  width={269}
+                  height={87}
+                  unoptimized
+                  className="h-6 w-16 origin-top-right -rotate-[15deg] object-contain object-right"
+                />
+              </a>
+            </div>
+          </div>
+
           <div className="mt-8 flex flex-col items-center gap-1 border-t border-white/10 pt-6 text-xs font-bold text-white/45 sm:flex-row sm:justify-between sm:gap-0">
             <p>
               &copy; {new Date().getFullYear()} Rock Steady. All rights
