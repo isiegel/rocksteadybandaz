@@ -88,7 +88,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      {/* suppressHydrationWarning ignores attribute mismatches on <body> caused
+          by browser extensions (password managers, Grammarly, etc.) that inject
+          attributes before React hydrates. It only suppresses the body element
+          itself, not its children, so real hydration bugs still surface. */}
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

@@ -110,7 +110,7 @@ export function ShrinkingHeader() {
           className={`hero-wordmark ${rockslide.className} block shrink-0 whitespace-nowrap leading-none text-[#ff2b1f] transition-all duration-500 ease-in-out ${
             isScrolled
               ? "text-3xl md:text-4xl"
-              : "text-3xl md:text-5xl lg:text-6xl"
+              : "text-4xl md:text-6xl lg:text-7xl"
           }`}
         >
           Rock Steady
