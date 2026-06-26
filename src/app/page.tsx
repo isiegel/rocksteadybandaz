@@ -458,7 +458,6 @@ export default function Home() {
               <VideoEmbed
                 videoId={youtubeVideoId}
                 title="Rock Steady live performance video"
-                logoSrc={siteConfig.logoPath}
               />
             </div>
           </div>
