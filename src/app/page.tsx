@@ -93,7 +93,7 @@ const pressBio =
 
 const pressFacts = [
   { label: 'Based in', value: 'Phoenix, AZ' },
-  { label: 'Style', value: "Classic rock · '80s/'90s · dance covers" },
+  { label: 'Style', value: "Classic rock · '70s/'80s/'90s · dance covers" },
   { label: 'Format', value: 'Female-fronted full band' },
   { label: 'Sets', value: 'Flexible — up to three sets' },
 ];
