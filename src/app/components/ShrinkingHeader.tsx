@@ -104,7 +104,7 @@ export function ShrinkingHeader() {
             fill
             loading="eager"
             sizes="(min-width: 768px) 320px, 192px"
-            className={`object-contain drop-shadow-[0_0_28px_rgba(255,0,0,0.36)] transition-opacity duration-500 ease-in-out ${
+            className={`object-contain drop-shadow-[0_0_28px_rgba(255,0,0,0.36)] drop-shadow-[0_10px_14px_rgba(0,0,0,0.45)] drop-shadow-[0_24px_40px_rgba(0,0,0,0.35)] transition-opacity duration-500 ease-in-out ${
               isScrolled ? "opacity-0" : "opacity-100"
             }`}
           />

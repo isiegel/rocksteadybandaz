@@ -132,6 +132,8 @@ const regularVenues = [
   'Starz',
   "J&T's Copper Penny",
   'Sage & Sand',
+  'Anthem Country Club',
+  'Encantarra Country Club',
 ];
 
 const structuredData = {
@@ -266,11 +268,13 @@ export default function Home() {
                 Phoenix cover band
               </p>
               <h1
-                className={`${rockslide.className} text-5xl leading-none text-white sm:text-6xl md:text-7xl`}
+                className={`${rockslide.className} text-5xl leading-none text-[#ff2b1f] sm:text-6xl md:text-7xl`}
                 style={{
-                  WebkitTextStroke: '1.5px #ff2b1f',
+                  WebkitTextStroke: '1.5px #ffffff',
                   textShadow:
-                    '2px 2px 0 #ff2b1f, -1px -1px 0 #ff2b1f, 0 3px 0 rgba(0, 0, 0, 0.5), 0 14px 28px rgba(0, 0, 0, 0.45)',
+                    '2px 2px 0 #ffffff, -1px -1px 0 #ffffff, 0 3px 0 rgba(0, 0, 0, 0.5), 0 14px 28px rgba(0, 0, 0, 0.45)',
+                  filter:
+                    'drop-shadow(0 10px 14px rgba(0, 0, 0, 0.45)) drop-shadow(0 24px 40px rgba(0, 0, 0, 0.35))',
                 }}
               >
                 Rock Steady
