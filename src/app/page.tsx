@@ -136,6 +136,7 @@ const regularVenues = [
   'Anthem Country Club',
   'Encantarra Country Club',
   '4Fridays Music Series',
+  'Lucky Strikes',
 ];
 
 const structuredData = {
