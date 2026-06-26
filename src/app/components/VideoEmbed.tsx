@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type VideoEmbedProps = {
   videoId: string;
@@ -12,10 +12,18 @@ type VideoEmbedProps = {
 // button, which keeps the initial page load light.
 export function VideoEmbed({ videoId, title }: VideoEmbedProps) {
   const [playing, setPlaying] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  // The play button unmounts when the iframe mounts, so move keyboard focus to
+  // the player to keep the tab order sensible.
+  useEffect(() => {
+    if (playing) iframeRef.current?.focus();
+  }, [playing]);
 
   if (playing) {
     return (
       <iframe
+        ref={iframeRef}
         title={title}
         src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&autoplay=1`}
         className="aspect-video w-full"
@@ -36,10 +44,17 @@ export function VideoEmbed({ videoId, title }: VideoEmbedProps) {
     >
       {/* YouTube thumbnail. A plain <img> is intentional: it's a single remote
           image that YouTube already serves pre-sized, so routing it through the
-          next/image optimizer adds cost for no gain. */}
+          next/image optimizer adds cost for no gain. maxresdefault isn't
+          generated for every upload, so fall back to the always-present
+          hqdefault if it 404s. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
+        onError={(event) => {
+          const img = event.currentTarget;
+          img.onerror = null;
+          img.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+        }}
         alt=""
         aria-hidden="true"
         loading="lazy"

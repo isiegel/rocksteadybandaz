@@ -249,7 +249,7 @@ export default function Home() {
       />
       <ShrinkingHeader />
       <main id="top" className="overflow-hidden bg-[#050505] text-white">
-        <section className="relative min-h-[88vh] px-4 pb-16 pt-56 sm:px-6 md:pt-72 lg:px-8">
+        <section className="relative min-h-[88vh] px-4 pb-16 pt-32 sm:px-6 md:pt-40 lg:px-8">
           <Image
             src="/images/show-07.jpg"
             alt="Rock Steady performing live on a Phoenix stage"
@@ -267,18 +267,9 @@ export default function Home() {
               <p className="mb-4 inline-flex rounded-full border border-[#ffcf33]/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-[#ffcf33] shadow-[0_0_22px_rgba(255,207,51,0.18)]">
                 Phoenix cover band
               </p>
-              <h1
-                className={`${rockslide.className} text-5xl leading-none text-[#ff2b1f] sm:text-6xl md:text-7xl`}
-                style={{
-                  WebkitTextStroke: '0.75px #ffffff',
-                  textShadow:
-                    '2px 2px 0 #ffffff, -1px -1px 0 #ffffff, 0 3px 0 rgba(0, 0, 0, 0.5), 0 14px 28px rgba(0, 0, 0, 0.45)',
-                  filter:
-                    'drop-shadow(0 10px 14px rgba(0, 0, 0, 0.45)) drop-shadow(0 24px 40px rgba(0, 0, 0, 0.35))',
-                }}
-              >
-                Rock Steady
-              </h1>
+              {/* The visible wordmark now lives in the header; this keeps a
+                  single descriptive h1 on the page for SEO and screen readers. */}
+              <h1 className="sr-only">Rock Steady — Phoenix cover band</h1>
               <p className="mt-6 max-w-2xl text-lg font-bold leading-8 text-white/88 sm:text-xl">
                 Loud guitars, big vocals, and the songs people shout back from
                 the first round to last call. It is a local rock party for bars,
