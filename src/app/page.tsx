@@ -270,7 +270,7 @@ export default function Home() {
               <h1
                 className={`${rockslide.className} text-5xl leading-none text-[#ff2b1f] sm:text-6xl md:text-7xl`}
                 style={{
-                  WebkitTextStroke: '1.5px #ffffff',
+                  WebkitTextStroke: '0.75px #ffffff',
                   textShadow:
                     '2px 2px 0 #ffffff, -1px -1px 0 #ffffff, 0 3px 0 rgba(0, 0, 0, 0.5), 0 14px 28px rgba(0, 0, 0, 0.45)',
                   filter:
