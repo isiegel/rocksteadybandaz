@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { BackToTop } from './components/BackToTop';
+import { BookingForm } from './components/BookingForm';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
 import {
   FacebookIcon,
@@ -50,8 +51,8 @@ const gallery = [
     alt: 'Black and white photo of Rock Steady playing live',
   },
   {
-    src: '/images/show-07.jpg',
-    alt: 'Rock Steady singer and guitarist playing on the Silver Bullet Stage',
+    src: '/images/show-05.jpg',
+    alt: 'Rock Steady vocalist reaching out to a packed crowd at Kimmyz',
   },
   {
     src: '/images/show-09.jpg',
@@ -100,7 +101,7 @@ const pressFacts = [
 ];
 
 const pressPhotos = [
-  { src: '/images/show-07.jpg', label: 'Live photo 1' },
+  { src: '/images/show-08.jpg', label: 'Live photo 1' },
   { src: '/images/show-10.jpg', label: 'Live photo 2' },
   { src: '/images/show-04.jpg', label: 'Live photo 3' },
 ];
@@ -600,7 +601,7 @@ export default function Home() {
         </section>
 
         <section id="booking" className="px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl gap-8 border-y border-white/12 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div className="mx-auto grid max-w-7xl gap-8 border-y border-white/12 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>
               <p className="text-sm font-black uppercase text-[#ffcf33]">
                 Booking
@@ -624,30 +625,8 @@ export default function Home() {
                 date, city, event type, set length, crowd size, and the best
                 contact.
               </p>
-              <a
-                href={bookingEmailHref}
-                aria-label="Check Rock Steady availability by email"
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-[#ff2b1f] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
-              >
-                <MailIcon className="h-5 w-5 fill-current" />
-                Check availability
-              </a>
-              <div className="mt-6 grid gap-2 text-sm font-bold text-white/72 sm:grid-cols-2">
-                {[
-                  'Date',
-                  'Venue / city',
-                  'Event type',
-                  'Set length',
-                  'Crowd size',
-                  'Best contact',
-                ].map((item) => (
-                  <span
-                    key={item}
-                    className="border border-white/10 bg-black/28 px-3 py-2"
-                  >
-                    {item}
-                  </span>
-                ))}
+              <div className="mt-6">
+                <BookingForm mailtoHref={bookingEmailHref} />
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <a
