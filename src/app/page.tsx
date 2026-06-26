@@ -51,8 +51,8 @@ const gallery = [
     alt: 'Black and white photo of Rock Steady playing live',
   },
   {
-    src: '/images/show-07.jpg',
-    alt: 'Rock Steady singer and guitarist playing on the Silver Bullet Stage',
+    src: '/images/show-05.jpg',
+    alt: 'Rock Steady vocalist reaching out to a packed crowd at Kimmyz',
   },
   {
     src: '/images/show-09.jpg',
@@ -101,7 +101,7 @@ const pressFacts = [
 ];
 
 const pressPhotos = [
-  { src: '/images/show-07.jpg', label: 'Live photo 1' },
+  { src: '/images/show-08.jpg', label: 'Live photo 1' },
   { src: '/images/show-10.jpg', label: 'Live photo 2' },
   { src: '/images/show-04.jpg', label: 'Live photo 3' },
 ];
