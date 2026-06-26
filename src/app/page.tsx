@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { BackToTop } from './components/BackToTop';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
 import {
   FacebookIcon,
@@ -953,6 +954,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      <BackToTop />
     </>
   );
 }
