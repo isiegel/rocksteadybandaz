@@ -52,6 +52,31 @@ section {
   color: #111;
 }
 
+/* Hero/header "Rock Steady" wordmark: red fill, thin white outline, and a
+   layered drop-shadow lift. */
+.hero-wordmark {
+  -webkit-text-stroke: 0.5px #ffffff;
+  text-shadow:
+    2px 2px 0 #ffffff,
+    -1px -1px 0 #ffffff,
+    0 3px 0 rgba(0, 0, 0, 0.5),
+    0 14px 28px rgba(0, 0, 0, 0.45);
+  filter:
+    drop-shadow(0 3px 4px rgba(0, 0, 0, 0.6))
+    drop-shadow(0 10px 14px rgba(0, 0, 0, 0.5))
+    drop-shadow(0 24px 40px rgba(0, 0, 0, 0.4));
+}
+
+/* On mobile the outline reads as fuzzy at small sizes, so drop it and match the
+   plain footer wordmark treatment. */
+@media (max-width: 767px) {
+  .hero-wordmark {
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+    filter: none;
+  }
+}
+
 /* Respect users who ask for reduced motion: drop the smooth scroll and collapse
    transitions/animations (e.g. the header shrink and nav hovers). */
 @media (prefers-reduced-motion: reduce) {

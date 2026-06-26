@@ -3,16 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { rockslide } from "../fonts";
 
-// Shared wordmark treatment, matching the hero "Rock Steady" heading: red fill,
-// thin white outline, and a layered drop-shadow lift.
-const wordmarkStyle = {
-  WebkitTextStroke: "0.5px #ffffff",
-  textShadow:
-    "2px 2px 0 #ffffff, -1px -1px 0 #ffffff, 0 3px 0 rgba(0, 0, 0, 0.5), 0 14px 28px rgba(0, 0, 0, 0.45)",
-  filter:
-    "drop-shadow(0 3px 4px rgba(0, 0, 0, 0.6)) drop-shadow(0 10px 14px rgba(0, 0, 0, 0.5)) drop-shadow(0 24px 40px rgba(0, 0, 0, 0.4))",
-} as const;
-
 const navLinks = [
   { href: "#shows", id: "shows", label: "Shows" },
   { href: "#video", id: "video", label: "Video" },
@@ -117,12 +107,11 @@ export function ShrinkingHeader() {
         <a
           href="#top"
           aria-label="Rock Steady home"
-          className={`${rockslide.className} block shrink-0 whitespace-nowrap leading-none text-[#ff2b1f] transition-all duration-500 ease-in-out ${
+          className={`hero-wordmark ${rockslide.className} block shrink-0 whitespace-nowrap leading-none text-[#ff2b1f] transition-all duration-500 ease-in-out ${
             isScrolled
               ? "text-2xl md:text-3xl"
               : "text-3xl md:text-5xl lg:text-6xl"
           }`}
-          style={wordmarkStyle}
         >
           Rock Steady
         </a>
