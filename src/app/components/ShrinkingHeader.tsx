@@ -210,7 +210,7 @@ export function ShrinkingHeader() {
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
                 onClick={() => setMenuOpen(false)}
-                className={`rounded-2xl border px-4 py-3 transition outline-none focus-visible:ring-2 focus-visible:ring-[#ffcf33] ${
+                className={`rounded-2xl border px-4 py-3 text-center transition outline-none ${
                   isActive
                     ? "border-[#ff2b1f] bg-[#ff2b1f] text-white"
                     : "border-white/12 bg-black/35 text-white hover:border-[#ff2b1f] hover:bg-[#ff2b1f]"
