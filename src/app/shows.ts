@@ -58,8 +58,11 @@ export function formatShowDate(date: string): string {
 
 function to12Hour(time: string): string {
   const [hours, minutes] = time.split(':').map(Number);
-  const period = hours >= 12 ? 'PM' : 'AM';
-  const hour = hours % 12 || 12;
+  // Times can run past midnight (e.g. '24:00' = 12 AM, '28:00' = 4 AM), so
+  // wrap into a 0–23 clock before formatting.
+  const clockHour = hours % 24;
+  const period = clockHour >= 12 ? 'PM' : 'AM';
+  const hour = clockHour % 12 || 12;
   return `${hour}:${String(minutes).padStart(2, '0')} ${period}`;
 }
 
@@ -69,10 +72,26 @@ export function formatShowTime(show: Show): string | null {
   return show.end ? `${start} – ${to12Hour(show.end)}` : start;
 }
 
+// Builds a valid ISO 8601 timestamp from a 'YYYY-MM-DD' date and an 'HH:mm'
+// time that may exceed 24:00. Hours ≥ 24 roll the calendar date forward so the
+// timestamp stays valid (e.g. an end of '24:00' on the 16th becomes the 17th at
+// 00:00) — required for Google to accept the MusicEvent start/end dates.
+function toISO(date: string, time: string): string {
+  const [hours, minutes] = time.split(':').map(Number);
+  const dayOffset = Math.floor(hours / 24);
+  const clockHour = hours % 24;
+  const [year, month, day] = date.split('-').map(Number);
+  const d = new Date(Date.UTC(year, month - 1, day + dayOffset));
+  const isoDate = d.toISOString().slice(0, 10);
+  const hh = String(clockHour).padStart(2, '0');
+  const mm = String(minutes).padStart(2, '0');
+  return `${isoDate}T${hh}:${mm}:00${AZ_OFFSET}`;
+}
+
 export function showStartISO(show: Show): string {
-  return show.start ? `${show.date}T${show.start}:00${AZ_OFFSET}` : show.date;
+  return show.start ? toISO(show.date, show.start) : show.date;
 }
 
 export function showEndISO(show: Show): string | null {
-  return show.end ? `${show.date}T${show.end}:00${AZ_OFFSET}` : null;
+  return show.end ? toISO(show.date, show.end) : null;
 }

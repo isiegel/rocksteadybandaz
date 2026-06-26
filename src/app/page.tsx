@@ -212,7 +212,7 @@ const structuredData = {
 // Google requires `uploadDate` for VideoObject rich results — fill this in with
 // the video's real publish date to make the embed eligible. Left blank, the
 // VideoObject is still valid and helps the video get discovered.
-const videoUploadDate = '';
+const videoUploadDate = '2025-10-25';
 
 // VideoObject keeps the live performance discoverable now that it loads behind a
 // click-to-play facade (the iframe is no longer in the initial HTML for crawlers).
