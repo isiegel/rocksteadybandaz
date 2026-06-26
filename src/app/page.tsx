@@ -601,7 +601,7 @@ export default function Home() {
         </section>
 
         <section id="booking" className="px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl gap-8 border-y border-white/12 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div className="mx-auto grid max-w-7xl gap-8 border-y border-white/12 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>
               <p className="text-sm font-black uppercase text-[#ffcf33]">
                 Booking
