@@ -135,6 +135,7 @@ const regularVenues = [
   'Sage & Sand',
   'Anthem Country Club',
   'Encantarra Country Club',
+  '4Fridays Music Series',
 ];
 
 const structuredData = {
