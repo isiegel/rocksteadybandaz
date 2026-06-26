@@ -885,20 +885,18 @@ export default function Home() {
           </div>
 
           <div
-            className="mx-auto mt-8 w-fit border-y border-white/10 py-3 text-center md:mx-0 md:text-left"
+            className="mx-auto mt-8 w-fit py-3 text-center md:mx-0 md:text-left"
             aria-label="Rock Steady uses Gibson guitars and Ludwig drums because they want the best."
           >
             <p className="text-[0.65rem] font-black uppercase leading-tight tracking-[0.12em] text-white">
               <span
-                className={`${rockslide.className} normal-case tracking-normal text-white`}
+                className={`${rockslide.className} normal-case tracking-normal inline-block mr-2 text-white`}
               >
                 Rock Steady
-              </span>{' '}
-              uses Gibson
-              <br />
-              guitars and Ludwig drums
-              <br />
-              because they want the best.
+              </span>
+              uses Gibson guitars
+              <br /> and Ludwig drums because
+              <br /> they want the best.
             </p>
             <div className="relative mt-2 h-7">
               <a
