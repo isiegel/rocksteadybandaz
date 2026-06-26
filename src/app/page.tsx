@@ -1,12 +1,12 @@
 import Image from 'next/image';
-import { rockslide } from './fonts';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
-import { VideoEmbed } from './components/VideoEmbed';
 import {
   FacebookIcon,
   InstagramIcon,
   MailIcon,
 } from './components/SocialIcons';
+import { VideoEmbed } from './components/VideoEmbed';
+import { rockslide } from './fonts';
 import { absoluteUrl, siteConfig } from './seo';
 import {
   formatShowDate,
@@ -89,7 +89,7 @@ const setlistSample = [
 ];
 
 const pressBio =
-  "Rock Steady is a female-fronted Phoenix cover band built for packed, loud, crowd-first nights. The set spans classic rock, '80s and '90s sing-alongs, and dance-floor staples — Joan Jett, Heart, Tom Petty, ZZ Top, AC/DC and more — played with vocals up front and guitar hooks that cut through. Available for bars, private events, patios, and charity nights across the Phoenix.";
+  "Rock Steady is a female-fronted Phoenix cover band built for packed, loud, crowd-first nights. The set spans classic rock, '80s and '90s sing-alongs, and dance-floor staples — Joan Jett, Heart, Tom Petty, ZZ Top, AC/DC and more — played with vocals up front and guitar hooks that cut through. Available for bars, private events, patios, and charity nights across the Phoenix area.";
 
 const pressFacts = [
   { label: 'Based in', value: 'Phoenix, AZ' },
@@ -113,6 +113,10 @@ const valleySpots = [
   'Gilbert',
   'Glendale',
   'Peoria',
+  'Queen Creek',
+  'Apache Junction',
+  'San Tan Valley',
+  'Surprise',
 ];
 
 const regularVenues = [
@@ -126,7 +130,7 @@ const regularVenues = [
   'Luckys Indoor Outdoor',
   'Caesars Sportsbook DTPHX',
   'Starz',
-  'J&T\'s Copper Penny',
+  "J&T's Copper Penny",
   'Sage & Sand',
 ];
 
@@ -323,7 +327,7 @@ export default function Home() {
             </div>
 
             <div className="grid gap-4">
-              <div className="border border-white/12 bg-white/[0.045] p-6 shadow-[0_18px_45px_rgba(0,0,0,0.24)]">
+              <div className="border border-white/12 bg-white/4.5 p-6 shadow-[0_18px_45px_rgba(0,0,0,0.24)]">
                 <p className="text-sm font-black uppercase text-[#ffcf33]">
                   Upcoming public dates
                 </p>
@@ -423,10 +427,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section
-          id="video"
-          className="bg-[#070707] px-4 py-20 sm:px-6 lg:px-8"
-        >
+        <section id="video" className="bg-[#070707] px-4 py-20 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
             <div>
               <p className="text-sm font-black uppercase text-[#ff2b1f]">
@@ -536,10 +537,10 @@ export default function Home() {
                 Local, loose, and ready to turn the room up.
               </h2>
               <p className="mt-5 text-lg leading-8 text-white/72">
-                Rock Steady is a Phoenix cover band with a bar-stage
-                heartbeat: vocals up front, guitar hooks that cut through, and a
-                rhythm section that keeps the night moving. The point is simple:
-                make the room feel like it joined the band for a few hours.
+                Rock Steady is a Phoenix cover band with a bar-stage heartbeat:
+                vocals up front, guitar hooks that cut through, and a rhythm
+                section that keeps the night moving. The point is simple: make
+                the room feel like it joined the band for a few hours.
               </p>
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
                 {[
@@ -892,7 +893,7 @@ export default function Home() {
               reserved.
             </p>
             <p>
-              Developed by{" "}
+              Developed by{' '}
               <a
                 href="https://siegelcraft.com"
                 target="_blank"
