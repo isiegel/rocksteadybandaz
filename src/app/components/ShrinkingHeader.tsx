@@ -1,8 +1,17 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { rockslide } from "../fonts";
+
+// Shared wordmark treatment, matching the hero "Rock Steady" heading: red fill,
+// thin white outline, and a layered drop-shadow lift.
+const wordmarkStyle = {
+  WebkitTextStroke: "0.5px #ffffff",
+  textShadow:
+    "2px 2px 0 #ffffff, -1px -1px 0 #ffffff, 0 3px 0 rgba(0, 0, 0, 0.5), 0 14px 28px rgba(0, 0, 0, 0.45)",
+  filter:
+    "drop-shadow(0 3px 4px rgba(0, 0, 0, 0.6)) drop-shadow(0 10px 14px rgba(0, 0, 0, 0.5)) drop-shadow(0 24px 40px rgba(0, 0, 0, 0.4))",
+} as const;
 
 const navLinks = [
   { href: "#shows", id: "shows", label: "Shows" },
@@ -17,6 +26,8 @@ export function ShrinkingHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeId, setActiveId] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const updateHeader = () => {
@@ -62,7 +73,9 @@ export function ShrinkingHeader() {
     return () => observer.disconnect();
   }, []);
 
-  // Close the mobile menu once the viewport grows to the desktop nav.
+  // While the mobile menu is open: close it on desktop resize or Escape, lock
+  // body scroll, and move focus into the menu (returning it to the toggle on
+  // close) so keyboard users aren't stranded behind the overlay.
   useEffect(() => {
     if (!menuOpen) return;
 
@@ -70,52 +83,48 @@ export function ShrinkingHeader() {
       if (window.innerWidth >= 768) setMenuOpen(false);
     };
 
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
     window.addEventListener("resize", closeOnDesktop);
-    return () => window.removeEventListener("resize", closeOnDesktop);
+    document.addEventListener("keydown", closeOnEscape);
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    menuRef.current?.querySelector<HTMLAnchorElement>("a")?.focus();
+
+    return () => {
+      window.removeEventListener("resize", closeOnDesktop);
+      document.removeEventListener("keydown", closeOnEscape);
+      document.body.style.overflow = previousOverflow;
+    };
   }, [menuOpen]);
 
   return (
     <header
       className={`fixed left-0 top-0 z-50 w-full transition-all duration-500 ${
         isScrolled
-          ? "h-20 border-b border-white/10 bg-[#060606]/92 shadow-[0_16px_40px_rgba(0,0,0,0.42)] backdrop-blur-md"
-          : "h-44 bg-[#060606]/20 backdrop-blur-[2px] md:h-56"
+          ? "h-20 border-b border-white/10 bg-[#060606]/80 shadow-[0_16px_40px_rgba(0,0,0,0.42)] backdrop-blur-md"
+          : "h-24 bg-[#060606]/20 backdrop-blur-[2px] md:h-28"
       }`}
     >
-      <div
-        className={`mx-auto flex h-full max-w-7xl px-4 transition-all duration-500 sm:px-6 lg:px-8 ${
-          isScrolled
-            ? "items-center justify-between gap-3"
-            : "flex-col items-center justify-center gap-3 pt-3"
-        }`}
-      >
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         <a
           href="#top"
           aria-label="Rock Steady home"
-          className={`relative block shrink-0 transition-all duration-500 ease-in-out ${
+          className={`${rockslide.className} block shrink-0 whitespace-nowrap leading-none text-[#ff2b1f] transition-all duration-500 ease-in-out ${
             isScrolled
-              ? "h-10 w-40 md:h-12 md:w-56"
-              : "h-28 w-48 md:h-40 md:w-80"
+              ? "text-2xl md:text-3xl"
+              : "text-3xl md:text-5xl lg:text-6xl"
           }`}
+          style={wordmarkStyle}
         >
-          <Image
-            src="/images/rock-steady-logo.png"
-            alt="Rock Steady - It's a Rock Party!"
-            fill
-            loading="eager"
-            sizes="(min-width: 768px) 320px, 192px"
-            className={`object-contain drop-shadow-[0_0_28px_rgba(255,0,0,0.36)] drop-shadow-[0_10px_14px_rgba(0,0,0,0.45)] drop-shadow-[0_24px_40px_rgba(0,0,0,0.35)] transition-opacity duration-500 ease-in-out ${
-              isScrolled ? "opacity-0" : "opacity-100"
-            }`}
-          />
-          <span
-            aria-hidden="true"
-            className={`${rockslide.className} absolute inset-0 flex items-center whitespace-nowrap text-3xl leading-none text-[#FD0A04] drop-shadow-[0_0_28px_rgba(255,0,0,0.36)] transition-opacity duration-500 ease-in-out md:text-4xl ${
-              isScrolled ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            Rock Steady
-          </span>
+          Rock Steady
         </a>
 
         <nav
@@ -155,7 +164,7 @@ export function ShrinkingHeader() {
           </a>
         </nav>
 
-        <div className="absolute right-4 top-4 flex items-center gap-2 sm:right-6 md:hidden">
+        <div className="flex shrink-0 items-center gap-2 md:hidden">
           <a
             href={bookingLink.href}
             onClick={() => setMenuOpen(false)}
@@ -165,6 +174,7 @@ export function ShrinkingHeader() {
           </a>
 
           <button
+            ref={menuButtonRef}
             type="button"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
@@ -192,8 +202,10 @@ export function ShrinkingHeader() {
       </div>
 
       <nav
+        ref={menuRef}
         id="mobile-menu"
         aria-label="Mobile navigation"
+        inert={!menuOpen}
         className={`absolute left-0 top-full w-full origin-top border-b border-white/10 bg-[#060606]/97 backdrop-blur-md transition-all duration-300 md:hidden ${
           menuOpen
             ? "pointer-events-auto translate-y-0 opacity-100"

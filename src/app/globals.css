@@ -51,3 +51,19 @@ section {
   background: #ffcf33;
   color: #111;
 }
+
+/* Respect users who ask for reduced motion: drop the smooth scroll and collapse
+   transitions/animations (e.g. the header shrink and nav hovers). */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
