@@ -922,7 +922,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Ludwig drums"
-                className="absolute right-0 top-0 block transition hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                className="absolute right-2 -top-2 block transition hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
               >
                 <Image
                   src="/images/ludwig-logo.svg"
@@ -930,7 +930,7 @@ export default function Home() {
                   width={269}
                   height={87}
                   unoptimized
-                  className="h-6 w-16 origin-top-right -rotate-[15deg] object-contain object-right"
+                  className="h-6 w-16 origin-top-right rotate-[-15deg] object-contain object-right"
                 />
               </a>
             </div>
