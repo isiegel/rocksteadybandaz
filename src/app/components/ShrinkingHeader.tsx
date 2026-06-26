@@ -109,7 +109,7 @@ export function ShrinkingHeader() {
           aria-label="Rock Steady home"
           className={`hero-wordmark ${rockslide.className} block shrink-0 whitespace-nowrap leading-none text-[#ff2b1f] transition-all duration-500 ease-in-out ${
             isScrolled
-              ? "text-2xl md:text-3xl"
+              ? "text-3xl md:text-4xl"
               : "text-3xl md:text-5xl lg:text-6xl"
           }`}
         >
