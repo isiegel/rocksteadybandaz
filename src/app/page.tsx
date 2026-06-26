@@ -565,7 +565,7 @@ export default function Home() {
                   Photos
                 </p>
                 <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                  A few nights from the stage.
+                  Straight from the stage.
                 </h2>
               </div>
             </div>
