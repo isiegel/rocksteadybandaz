@@ -699,7 +699,10 @@ export default function Home() {
                 contact.
               </p>
               <div className="mt-6">
-                <BookingForm mailtoHref={bookingEmailHref} cities={valleySpots} />
+                <BookingForm
+                  mailtoHref={bookingEmailHref}
+                  cities={valleySpots}
+                />
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <a
@@ -893,8 +896,7 @@ export default function Home() {
                 Rock Steady
               </span>
               <p className="text-sm font-bold text-white/55">
-                Phoenix cover band
-                <span className="ml-2 font-black uppercase text-[#ffcf33]">
+                <span className="font-black uppercase text-[#ffcf33]">
                   It&apos;s a Rock Party!
                 </span>
               </p>
