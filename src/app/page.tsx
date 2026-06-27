@@ -94,7 +94,7 @@ const soundGear = [
 
 const setStyles = [
   'Classic rock that starts conversations',
-  '70s, 80s and 90s sing-alongs',
+  'Your favorite sing-alongs from the ’70s to today',
   'Dance-floor bar favorites',
   'Guitar hooks, big choruses, no dead air',
 ];
@@ -498,7 +498,9 @@ export default function Home() {
               <p className="mt-5 text-lg leading-8 text-white/72">
                 The set leans into the songs that work in a packed local room:
                 classic rock, throwback favorites, dance-floor staples, and
-                closing-time choruses.
+                closing-time choruses&mdash;all performed with faithful
+                arrangements that capture the sound and energy of the original
+                recordings.
               </p>
             </div>
 
@@ -563,10 +565,9 @@ export default function Home() {
                 Local, loose, and ready to turn the room up.
               </h2>
               <p className="mt-5 text-lg leading-8 text-white/72">
-                Rock Steady is a Phoenix cover band with a bar-stage heartbeat:
-                vocals up front, guitar hooks that cut through, and a rhythm
-                section that keeps the night moving. The point is simple: make
-                the room feel like it joined the band for a few hours.
+                Rock Steady delivers high-energy performances with faithful
+                arrangements that sound instantly familiar and keep audiences
+                singing along.
               </p>
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
                 {[
