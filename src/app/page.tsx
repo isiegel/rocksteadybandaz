@@ -65,6 +65,33 @@ const gallery = [
   },
 ];
 
+const soundGear = [
+  {
+    name: 'QSC',
+    src: '/images/qsc-logo.png',
+    role: 'Powered PA & speakers',
+    url: 'https://www.qsc.com/',
+    width: 934,
+    height: 185,
+  },
+  {
+    name: 'Mackie',
+    src: '/images/mackie-logo.svg',
+    role: 'Subwoofers',
+    url: 'https://mackie.com/',
+    width: 193,
+    height: 26,
+  },
+  {
+    name: 'Zoom',
+    src: '/images/zoom-logo.svg',
+    role: 'Digital mixing & recording',
+    url: 'https://zoomcorp.com/',
+    width: 144,
+    height: 21,
+  },
+];
+
 const setStyles = [
   'Classic rock that starts conversations',
   '70s, 80s and 90s sing-alongs',
@@ -559,6 +586,52 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="sound" className="bg-[#0b0b0b] px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="text-sm font-black uppercase text-[#37d67a]">
+                Our sound
+              </p>
+              <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
+                Pro sound, dialed in for the room.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-white/72">
+                We bring our own professional PA and run it right &mdash; full,
+                clear, and loud without turning to mud. We play on some of the
+                best gear in the business so the vocals cut, the kick hits, and
+                every seat in the room hears the party.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              {soundGear.map((gear) => (
+                <a
+                  key={gear.name}
+                  href={gear.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${gear.name} — ${gear.role}`}
+                  className="group flex flex-col items-center justify-center gap-5 border border-white/12 bg-black/30 p-8 text-center shadow-[0_16px_38px_rgba(0,0,0,0.2)] transition hover:border-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                >
+                  <div className="flex h-14 items-center justify-center">
+                    <Image
+                      src={gear.src}
+                      alt={gear.name}
+                      width={gear.width}
+                      height={gear.height}
+                      unoptimized
+                      className="h-9 w-auto opacity-85 transition group-hover:opacity-100"
+                    />
+                  </div>
+                  <p className="text-sm font-black uppercase tracking-wide text-white/64">
+                    {gear.role}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section
           id="photos"
           className="bg-[#070707] px-4 py-20 sm:px-6 lg:px-8"
@@ -911,6 +984,33 @@ export default function Home() {
                   className="h-6 w-16 origin-top-right rotate-[-15deg] object-contain object-right"
                 />
               </a>
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-col items-center gap-4 border-t border-white/10 pt-6 sm:flex-row sm:justify-center">
+            <span className="text-[0.65rem] font-black uppercase tracking-[0.12em] text-white/45">
+              Pro sound by
+            </span>
+            <div className="flex items-center gap-7">
+              {soundGear.map((gear) => (
+                <a
+                  key={gear.name}
+                  href={gear.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={gear.name}
+                  className="block opacity-60 transition hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                >
+                  <Image
+                    src={gear.src}
+                    alt={gear.name}
+                    width={gear.width}
+                    height={gear.height}
+                    unoptimized
+                    className="h-5 w-auto"
+                  />
+                </a>
+              ))}
             </div>
           </div>
 
