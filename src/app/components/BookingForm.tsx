@@ -84,13 +84,16 @@ function CustomSelect({
 
   useEffect(() => {
     if (!open) return;
-    function onDocClick(e: MouseEvent) {
+    function onDocClick(e: PointerEvent) {
       if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     }
-    document.addEventListener('mousedown', onDocClick);
-    return () => document.removeEventListener('mousedown', onDocClick);
+    // pointerdown (not mousedown) so taps outside also close on touch devices —
+    // iOS Safari doesn't fire mousedown on the document for taps on plain
+    // (non-interactive) elements.
+    document.addEventListener('pointerdown', onDocClick);
+    return () => document.removeEventListener('pointerdown', onDocClick);
   }, [open]);
 
   function openMenu() {
@@ -161,8 +164,9 @@ function CustomSelect({
                 role="option"
                 aria-selected={selected}
                 onMouseEnter={() => setActive(i)}
-                onMouseDown={(e) => {
-                  // Prevent the button blur from closing before the click lands.
+                onPointerDown={(e) => {
+                  // pointerdown fires for both mouse and touch; preventDefault
+                  // keeps focus on the trigger so the tap/click lands cleanly.
                   e.preventDefault();
                   choose(option);
                 }}
