@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 
 // Formspree form ID, set via NEXT_PUBLIC_FORMSPREE_FORM_ID (the ID is part of a
 // public POST URL, so exposing it to the browser is expected and safe). When it
@@ -14,15 +14,205 @@ type Status = 'idle' | 'submitting' | 'success' | 'error';
 type BookingFormProps = {
   /** mailto: link used as a fallback when the form endpoint isn't configured. */
   mailtoHref: string;
+  /** Cities offered in the venue/city dropdown (the site's Phoenix range). */
+  cities: string[];
 };
 
+const EVENT_TYPES = [
+  'Bar / restaurant',
+  'Private party',
+  'Patio / outdoor',
+  'Charity / fundraiser',
+  'Corporate / company event',
+  'Other',
+];
+
+const OTHER = 'Other';
+
+// text-base (16px) on phones, text-sm (14px) at >=640px: 16px is the threshold
+// below which iOS Safari auto-zooms a focused input, so this avoids that zoom on
+// mobile while keeping the original sizing on larger screens.
 const fieldClass =
-  'w-full border border-white/15 bg-black/40 px-4 py-3 text-sm font-bold text-white placeholder:font-medium placeholder:text-white/40 transition focus:border-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]';
+  'w-full border border-white/15 bg-black/40 px-4 py-3 text-base font-bold text-white placeholder:font-medium placeholder:text-white/40 transition focus:border-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33] sm:text-sm';
 const labelClass = 'mb-1.5 block text-xs font-black uppercase text-white/55';
 
-export function BookingForm({ mailtoHref }: BookingFormProps) {
+// Formats raw input into (xxx) xxx-xxxx as the user types, tolerating deletes.
+function formatPhone(input: string): string {
+  const digits = input.replace(/\D/g, '').slice(0, 10);
+  if (digits.length === 0) return '';
+  if (digits.length < 4) return `(${digits}`;
+  if (digits.length < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
+
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      aria-hidden="true"
+      className={`h-4 w-4 shrink-0 fill-current text-[#ffcf33] transition-transform ${
+        open ? 'rotate-180' : ''
+      }`}
+    >
+      <path d="M5.5 7.5 10 12l4.5-4.5z" />
+    </svg>
+  );
+}
+
+type CustomSelectProps = {
+  id: string;
+  /** Hidden field name to submit. Omit to manage the value in the parent. */
+  name?: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: string[];
+  placeholder: string;
+};
+
+// Accessible custom dropdown (listbox) — keyboard navigable, click-outside to
+// close, and styled to match the dark form. The chosen value is submitted via a
+// hidden input so it still flows through FormData.
+function CustomSelect({
+  id,
+  name,
+  value,
+  onChange,
+  options,
+  placeholder,
+}: CustomSelectProps) {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(-1);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const listId = `${id}-listbox`;
+
+  useEffect(() => {
+    if (!open) return;
+    function onDocClick(e: PointerEvent) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    // pointerdown (not mousedown) so taps outside also close on touch devices —
+    // iOS Safari doesn't fire mousedown on the document for taps on plain
+    // (non-interactive) elements.
+    document.addEventListener('pointerdown', onDocClick);
+    return () => document.removeEventListener('pointerdown', onDocClick);
+  }, [open]);
+
+  function openMenu() {
+    setActive(Math.max(0, options.indexOf(value)));
+    setOpen(true);
+  }
+
+  function choose(option: string) {
+    onChange(option);
+    setOpen(false);
+  }
+
+  function onKeyDown(e: React.KeyboardEvent) {
+    if (!open) {
+      if (['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(e.key)) {
+        e.preventDefault();
+        openMenu();
+      }
+      return;
+    }
+    if (e.key === 'Escape' || e.key === 'Tab') {
+      setOpen(false);
+      return;
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActive((i) => (i + 1) % options.length);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActive((i) => (i - 1 + options.length) % options.length);
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (active >= 0) choose(options[active]);
+    }
+  }
+
+  return (
+    <div ref={wrapRef} className="relative">
+      {name ? <input type="hidden" name={name} value={value} /> : null}
+      <button
+        type="button"
+        id={id}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls={open ? listId : undefined}
+        onClick={() => (open ? setOpen(false) : openMenu())}
+        onKeyDown={onKeyDown}
+        className={`${fieldClass} flex items-center justify-between gap-2 text-left`}
+      >
+        <span className={value ? 'text-white' : 'font-medium text-white/40'}>
+          {value || placeholder}
+        </span>
+        <ChevronIcon open={open} />
+      </button>
+
+      {open ? (
+        <ul
+          id={listId}
+          role="listbox"
+          className="absolute z-20 mt-1 max-h-60 w-full overflow-auto border border-white/15 bg-[#0d0d0d] py-1 shadow-[0_18px_45px_rgba(0,0,0,0.5)]"
+        >
+          {options.map((option, i) => {
+            const selected = option === value;
+            const highlighted = i === active;
+            return (
+              <li
+                key={option}
+                role="option"
+                aria-selected={selected}
+                onMouseEnter={() => setActive(i)}
+                onPointerDown={(e) => {
+                  // pointerdown fires for both mouse and touch; preventDefault
+                  // keeps focus on the trigger so the tap/click lands cleanly.
+                  e.preventDefault();
+                  choose(option);
+                }}
+                className={`cursor-pointer px-4 py-2.5 text-base font-bold sm:text-sm ${
+                  highlighted
+                    ? 'bg-[#ffcf33] text-[#111]'
+                    : selected
+                      ? 'bg-white/10 text-white'
+                      : 'text-white/85'
+                }`}
+              >
+                {option}
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
+
+export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
+
+  // Controlled fields (the custom dropdowns and the formatted phone). Kept in
+  // state so they can be cleared on "send another".
+  const [phone, setPhone] = useState('');
+  const [eventType, setEventType] = useState('');
+  const [city, setCity] = useState('');
+  const [otherCity, setOtherCity] = useState('');
+
+  const baseId = useId();
+  const cityOptions = [...cities, OTHER];
+  // When "Other" is chosen the submitted value is the typed city, not "Other".
+  const cityValue = city === OTHER ? otherCity : city;
+
+  function resetFields() {
+    setPhone('');
+    setEventType('');
+    setCity('');
+    setOtherCity('');
+  }
 
   // No endpoint configured: render the mailto fallback so the section is never
   // a dead end.
@@ -46,15 +236,18 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
       >
         <p className="text-xl font-black text-white">Inquiry sent — thanks!</p>
         <p className="mt-2 text-sm font-bold leading-6 text-white/72">
-          We&apos;ll get back to you soon about your date. Want to add anything?{' '}
-          <a
-            href={mailtoHref}
-            className="text-[#ffcf33] underline-offset-4 hover:underline"
-          >
-            Email us directly
-          </a>
-          .
+          We&apos;ll get back to you soon about your date.
         </p>
+        <button
+          type="button"
+          onClick={() => {
+            resetFields();
+            setStatus('idle');
+          }}
+          className="cursor-pointer mt-5 inline-flex items-center justify-center rounded-full border border-[#ffcf33]/45 bg-black/35 px-5 py-2.5 text-sm font-black uppercase text-[#ffcf33] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+        >
+          Send another inquiry
+        </button>
       </div>
     );
   }
@@ -73,8 +266,9 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
       });
 
       if (response.ok) {
-        setStatus('success');
         form.reset();
+        resetFields();
+        setStatus('success');
         return;
       }
 
@@ -151,8 +345,14 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
             id="phone"
             name="phone"
             type="tel"
+            inputMode="tel"
             autoComplete="tel"
-            placeholder="Best number to reach you"
+            placeholder="(555) 123-4567"
+            value={phone}
+            onChange={(e) => setPhone(formatPhone(e.target.value))}
+            pattern="\(\d{3}\) \d{3}-\d{4}"
+            title="Enter a 10-digit phone number, e.g. (555) 123-4567"
+            maxLength={14}
             className={fieldClass}
           />
         </div>
@@ -171,37 +371,44 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="venue" className={labelClass}>
+          <label htmlFor={`${baseId}-city`} className={labelClass}>
             Venue / city
           </label>
-          <input
-            id="venue"
-            name="venue / city"
-            type="text"
-            placeholder="Where's the night?"
-            className={fieldClass}
+          <CustomSelect
+            id={`${baseId}-city`}
+            value={city}
+            onChange={(v) => {
+              setCity(v);
+              if (v !== OTHER) setOtherCity('');
+            }}
+            options={cityOptions}
+            placeholder="Choose a city"
           />
+          {/* Submit the resolved value (typed city when "Other"). */}
+          <input type="hidden" name="venue / city" value={cityValue} />
+          {city === OTHER ? (
+            <input
+              type="text"
+              aria-label="Enter your city"
+              placeholder="Enter your city"
+              value={otherCity}
+              onChange={(e) => setOtherCity(e.target.value)}
+              className={`${fieldClass} mt-2`}
+            />
+          ) : null}
         </div>
         <div>
-          <label htmlFor="event-type" className={labelClass}>
+          <label htmlFor={`${baseId}-event-type`} className={labelClass}>
             Event type
           </label>
-          <select
-            id="event-type"
+          <CustomSelect
+            id={`${baseId}-event-type`}
             name="event type"
-            defaultValue=""
-            className={`${fieldClass} [color-scheme:dark]`}
-          >
-            <option value="" disabled>
-              Choose one
-            </option>
-            <option>Bar / restaurant</option>
-            <option>Private party</option>
-            <option>Patio / outdoor</option>
-            <option>Charity / fundraiser</option>
-            <option>Corporate / company event</option>
-            <option>Other</option>
-          </select>
+            value={eventType}
+            onChange={setEventType}
+            options={EVENT_TYPES}
+            placeholder="Choose one"
+          />
         </div>
       </div>
 
@@ -225,8 +432,11 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
           <input
             id="crowd-size"
             name="crowd size"
-            type="text"
-            placeholder="Approx. how many people"
+            type="number"
+            inputMode="numeric"
+            min={1}
+            step={1}
+            placeholder="e.g. 120"
             className={fieldClass}
           />
         </div>
@@ -269,10 +479,7 @@ export function BookingForm({ mailtoHref }: BookingFormProps) {
         {submitting ? 'Sending…' : 'Send booking inquiry'}
       </button>
 
-      <p
-        className="text-xs font-bold leading-5 text-white/50"
-        aria-live="polite"
-      >
+      <p className="text-xs font-bold leading-5 text-white/50">
         Prefer email? Reach us at{' '}
         <a
           href={mailtoHref}
