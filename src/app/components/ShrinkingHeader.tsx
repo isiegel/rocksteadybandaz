@@ -71,7 +71,7 @@ export function ShrinkingHeader() {
     if (!menuOpen) return;
 
     const closeOnDesktop = () => {
-      if (window.innerWidth >= 768) setMenuOpen(false);
+      if (window.innerWidth >= 1024) setMenuOpen(false);
     };
 
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -119,7 +119,7 @@ export function ShrinkingHeader() {
 
         <nav
           aria-label="Main navigation"
-          className={`hidden items-center justify-center gap-1 text-[0.7rem] font-black uppercase sm:gap-2 sm:text-xs md:flex ${
+          className={`hidden items-center justify-center gap-1 text-[0.7rem] font-black uppercase sm:gap-2 sm:text-xs lg:flex ${
             isScrolled ? "max-w-[70vw]" : "max-w-full"
           }`}
         >
@@ -154,7 +154,7 @@ export function ShrinkingHeader() {
           </a>
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2 md:hidden">
+        <div className="flex shrink-0 items-center gap-2 lg:hidden">
           <a
             href={bookingLink.href}
             onClick={() => setMenuOpen(false)}
@@ -196,7 +196,7 @@ export function ShrinkingHeader() {
         id="mobile-menu"
         aria-label="Mobile navigation"
         inert={!menuOpen}
-        className={`absolute left-0 top-full w-full origin-top border-b border-white/10 bg-[#060606]/97 backdrop-blur-md transition-all duration-300 md:hidden ${
+        className={`absolute left-0 top-full w-full origin-top border-b border-white/10 bg-[#060606]/97 backdrop-blur-md transition-all duration-300 lg:hidden ${
           menuOpen
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-2 opacity-0"
