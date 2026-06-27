@@ -29,8 +29,11 @@ const EVENT_TYPES = [
 
 const OTHER = 'Other';
 
+// text-base (16px) on phones, text-sm (14px) at >=640px: 16px is the threshold
+// below which iOS Safari auto-zooms a focused input, so this avoids that zoom on
+// mobile while keeping the original sizing on larger screens.
 const fieldClass =
-  'w-full border border-white/15 bg-black/40 px-4 py-3 text-sm font-bold text-white placeholder:font-medium placeholder:text-white/40 transition focus:border-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]';
+  'w-full border border-white/15 bg-black/40 px-4 py-3 text-base font-bold text-white placeholder:font-medium placeholder:text-white/40 transition focus:border-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33] sm:text-sm';
 const labelClass = 'mb-1.5 block text-xs font-black uppercase text-white/55';
 
 // Formats raw input into (xxx) xxx-xxxx as the user types, tolerating deletes.
@@ -170,7 +173,7 @@ function CustomSelect({
                   e.preventDefault();
                   choose(option);
                 }}
-                className={`cursor-pointer px-4 py-2.5 text-sm font-bold ${
+                className={`cursor-pointer px-4 py-2.5 text-base font-bold sm:text-sm ${
                   highlighted
                     ? 'bg-[#ffcf33] text-[#111]'
                     : selected
