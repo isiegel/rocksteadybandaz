@@ -207,6 +207,18 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
   const [otherCity, setOtherCity] = useState('');
 
   const baseId = useId();
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // On success the tall form is swapped for the short confirmation card, which
+  // collapses the page height — leaving the browser's scroll position parked on
+  // the section below (the press kit). Pull the confirmation back into view so
+  // the user stays on the form and sees that the inquiry went through.
+  useEffect(() => {
+    if (status === 'success') {
+      successRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [status]);
+
   const cityOptions = [...cities, OTHER];
   // When "Other" is chosen the submitted value is the typed city, not "Other".
   const cityValue = city === OTHER ? otherCity : city;
@@ -235,6 +247,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
   if (status === 'success') {
     return (
       <div
+        ref={successRef}
         role="status"
         className="border border-[#37d67a]/40 bg-[#37d67a]/10 p-6 text-center"
       >
@@ -368,7 +381,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
             id="event-date"
             name="event date"
             type="date"
-            className={`${fieldClass} [color-scheme:dark]`}
+            className={`${fieldClass} min-w-0 [color-scheme:dark]`}
           />
         </div>
       </div>
