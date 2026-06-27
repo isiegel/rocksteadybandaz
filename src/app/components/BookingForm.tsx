@@ -168,11 +168,15 @@ function CustomSelect({
                 aria-selected={selected}
                 onMouseEnter={() => setActive(i)}
                 onPointerDown={(e) => {
-                  // pointerdown fires for both mouse and touch; preventDefault
-                  // keeps focus on the trigger so the tap/click lands cleanly.
+                  // Keep focus on the trigger, but don't select yet. Selecting
+                  // on pointerdown closes the menu and unmounts this <ul> before
+                  // the synthesized click fires, so on touch the click falls
+                  // through to whatever is beneath — on mobile, the next
+                  // CustomSelect — and opens it. Selecting on click (below)
+                  // lands cleanly on this still-mounted option.
                   e.preventDefault();
-                  choose(option);
                 }}
+                onClick={() => choose(option)}
                 className={`cursor-pointer px-4 py-2.5 text-base font-bold sm:text-sm ${
                   highlighted
                     ? 'bg-[#ffcf33] text-[#111]'
