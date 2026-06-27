@@ -307,7 +307,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
   const submitting = status === 'submitting';
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-4">
+    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
       <input
         type="hidden"
         name="_subject"
@@ -322,7 +322,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
         </label>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelClass}>
             Name <span className="text-[#ff2b1f]">*</span>
@@ -353,7 +353,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="phone" className={labelClass}>
             Phone
@@ -373,28 +373,26 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
             className={fieldClass}
           />
         </div>
-        {/* iOS Safari's native date control reports an intrinsic min-width that an
-            auto-sized grid track grows to, pushing the field past the screen edge.
-            The min-w-0 cell + overflow-hidden box cap the column and clip a control
-            that still won't shrink. The visible border/background/focus ring live
-            on the box (which fits), not the input — so the clipped edge trims empty
-            space instead of the input's own right border. */}
+        {/* iOS Safari's native date control reports an intrinsic min-width. With an
+            auto-sized grid track that width pushes the field off-screen, so the form
+            grids use grid-cols-1 (minmax(0,1fr)) tracks and this cell uses min-w-0 to
+            cap the width instead. We deliberately don't clip with overflow-hidden: on
+            iOS an overflow-hidden ancestor makes the native date picker open and then
+            immediately dismiss. */}
         <div className="min-w-0">
           <label htmlFor="event-date" className={labelClass}>
             Event date
           </label>
-          <div className="overflow-hidden border border-white/15 bg-black/40 transition focus-within:border-[#ffcf33] focus-within:ring-2 focus-within:ring-[#ffcf33]">
-            <input
-              id="event-date"
-              name="event date"
-              type="date"
-              className="w-full min-w-0 border-0 bg-transparent px-4 py-3 text-base font-bold text-white focus:outline-none sm:text-sm [color-scheme:dark]"
-            />
-          </div>
+          <input
+            id="event-date"
+            name="event date"
+            type="date"
+            className={`${fieldClass} min-w-0 [color-scheme:dark]`}
+          />
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor={`${baseId}-city`} className={labelClass}>
             Venue / city
@@ -437,7 +435,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="set-length" className={labelClass}>
             Set length
