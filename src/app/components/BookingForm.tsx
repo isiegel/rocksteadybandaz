@@ -373,7 +373,12 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
             className={fieldClass}
           />
         </div>
-        <div>
+        {/* min-w-0 + overflow-hidden keeps iOS Safari's native date control from
+            forcing this grid column wider than the viewport: the control reports
+            an intrinsic min-width that an auto-sized track grows to, pushing the
+            field past the screen edge. Collapsing this cell's intrinsic width
+            caps the column and clips any control that still refuses to shrink. */}
+        <div className="min-w-0 overflow-hidden">
           <label htmlFor="event-date" className={labelClass}>
             Event date
           </label>
