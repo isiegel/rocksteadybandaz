@@ -77,7 +77,7 @@ const soundGear = [
   {
     name: 'Mackie',
     src: '/images/mackie-logo.svg',
-    role: 'Mixers & stage monitors',
+    role: 'Subwoofers',
     url: 'https://mackie.com/',
     width: 193,
     height: 26,
