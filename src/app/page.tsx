@@ -626,7 +626,7 @@ export default function Home() {
                 contact.
               </p>
               <div className="mt-6">
-                <BookingForm mailtoHref={bookingEmailHref} />
+                <BookingForm mailtoHref={bookingEmailHref} cities={valleySpots} />
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <a
