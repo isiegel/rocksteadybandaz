@@ -390,7 +390,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
               id="event-date"
               name="event date"
               type="date"
-              className="w-full min-w-0 border-0 bg-transparent px-4 py-3 text-base font-bold text-white focus:outline-none sm:text-sm [color-scheme:dark]"
+              className="w-full min-w-0 border-0 bg-transparent px-4 py-3 text-base font-medium text-white focus:outline-none sm:text-sm [color-scheme:dark]"
             />
           </div>
         </div>
