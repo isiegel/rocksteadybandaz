@@ -373,22 +373,26 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
             className={fieldClass}
           />
         </div>
-        {/* iOS Safari's native date control reports an intrinsic min-width. With an
-            auto-sized grid track that width pushes the field off-screen, so the form
-            grids use grid-cols-1 (minmax(0,1fr)) tracks and this cell uses min-w-0 to
-            cap the width instead. We deliberately don't clip with overflow-hidden: on
-            iOS an overflow-hidden ancestor makes the native date picker open and then
-            immediately dismiss. */}
+        {/* The native iOS date control enforces a min-width wider than this column
+            and ignores width:100%/min-width:0, so it overflows. The two things that DO
+            cap it — -webkit-appearance:none and an overflow:hidden ancestor — each
+            break the iOS picker (it opens then immediately dismisses). overflow-clip
+            caps the width WITHOUT creating a scroll container, so the picker survives.
+            The border/background/focus ring live on the box (which fits the column)
+            and the input is borderless, so the clipped edge trims empty space rather
+            than the field's own right border. */}
         <div className="min-w-0">
           <label htmlFor="event-date" className={labelClass}>
             Event date
           </label>
-          <input
-            id="event-date"
-            name="event date"
-            type="date"
-            className={`${fieldClass} min-w-0 [color-scheme:dark]`}
-          />
+          <div className="overflow-clip border border-white/15 bg-black/40 transition focus-within:border-[#ffcf33] focus-within:ring-2 focus-within:ring-[#ffcf33]">
+            <input
+              id="event-date"
+              name="event date"
+              type="date"
+              className="w-full min-w-0 border-0 bg-transparent px-4 py-3 text-base font-bold text-white focus:outline-none sm:text-sm [color-scheme:dark]"
+            />
+          </div>
         </div>
       </div>
 
