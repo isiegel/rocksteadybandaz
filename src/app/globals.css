@@ -47,12 +47,12 @@ section {
   scroll-margin-top: 7rem;
 }
 
-/* iOS Safari gives input[type=date] an intrinsic width that ignores width:100%
-   once a value is selected, so the field overflows its narrow column. Resetting
-   the native appearance lets it respect the container width again. */
+/* iOS Safari gives input[type=date] a UA intrinsic min-width, so width:100% is
+   ignored and the field overflows its narrow column once a value is shown.
+   min-width: 0 lets it shrink back to the container. Note: resetting
+   -webkit-appearance also fixes the overflow but breaks the native iOS picker
+   (it auto-fills today's date and dismisses on the first tap), so we don't. */
 input[type="date"] {
-  -webkit-appearance: none;
-  appearance: none;
   min-width: 0;
 }
 
