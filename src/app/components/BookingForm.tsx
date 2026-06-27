@@ -202,6 +202,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
   // Controlled fields (the custom dropdowns and the formatted phone). Kept in
   // state so they can be cleared on "send another".
   const [phone, setPhone] = useState('');
+  const [eventDate, setEventDate] = useState('');
   const [eventType, setEventType] = useState('');
   const [city, setCity] = useState('');
   const [otherCity, setOtherCity] = useState('');
@@ -225,6 +226,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
 
   function resetFields() {
     setPhone('');
+    setEventDate('');
     setEventType('');
     setCity('');
     setOtherCity('');
@@ -390,7 +392,11 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
               id="event-date"
               name="event date"
               type="date"
-              className="w-full min-w-0 border-0 bg-transparent px-4 py-3 text-base font-medium text-white focus:outline-none sm:text-sm [color-scheme:dark]"
+              value={eventDate}
+              onChange={(e) => setEventDate(e.target.value)}
+              className={`w-full min-w-0 border-0 bg-transparent px-4 py-3 text-base font-medium focus:outline-none sm:text-sm [color-scheme:dark] ${
+                eventDate ? 'text-white' : 'text-white/40'
+              }`}
             />
           </div>
         </div>
