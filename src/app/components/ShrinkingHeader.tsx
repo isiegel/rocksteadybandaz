@@ -108,7 +108,7 @@ export function ShrinkingHeader() {
         <a
           href="#top"
           aria-label="Rock Steady home"
-          className={`hero-wordmark ${rockslide.className} block shrink-0 whitespace-nowrap leading-none text-[#ff2b1f] transition-all duration-500 ease-in-out ${
+          className={`hero-wordmark ${rockslide.className} block shrink-0 whitespace-nowrap leading-none transition-all duration-500 ease-in-out ${
             isScrolled
               ? "text-3xl md:text-4xl"
               : "text-4xl md:text-6xl lg:text-7xl"
@@ -132,8 +132,8 @@ export function ShrinkingHeader() {
                 aria-current={isActive ? "true" : undefined}
                 className={`rounded-full border px-3 py-2 transition outline-none focus-visible:ring-2 focus-visible:ring-[#ffcf33] ${
                   isActive
-                    ? "border-[#ff2b1f] bg-[#ff2b1f] text-white"
-                    : "border-white/15 bg-black/35 text-white hover:border-[#ff2b1f] hover:bg-[#ff2b1f]"
+                    ? "border-[var(--rock-steady-red)] bg-[var(--rock-steady-red)] text-white"
+                    : "border-white/15 bg-black/35 text-white hover:border-[var(--rock-steady-red)] hover:bg-[var(--rock-steady-red)]"
                 }`}
               >
                 {link.label}
@@ -146,8 +146,8 @@ export function ShrinkingHeader() {
             aria-current={activeId === bookingLink.id ? "true" : undefined}
             className={`rounded-full border px-4 py-2 transition outline-none focus-visible:ring-2 focus-visible:ring-[#ffcf33] ${
               activeId === bookingLink.id
-                ? "border-[#ff2b1f] bg-[#ff2b1f] text-white"
-                : "border-[#ffcf33] bg-[#ffcf33] text-black hover:border-[#ff2b1f] hover:bg-[#ff2b1f] hover:text-white"
+                ? "border-[var(--rock-steady-red)] bg-[var(--rock-steady-red)] text-white"
+                : "border-[#ffcf33] bg-[#ffcf33] text-black hover:border-[var(--rock-steady-red)] hover:bg-[var(--rock-steady-red)] hover:text-white"
             }`}
           >
             {bookingLink.label}
@@ -158,7 +158,7 @@ export function ShrinkingHeader() {
           <a
             href={bookingLink.href}
             onClick={() => setMenuOpen(false)}
-            className="inline-flex h-10 items-center rounded-full bg-[#ffcf33] px-4 text-xs font-black uppercase text-black transition hover:bg-[#ff2b1f] hover:text-white outline-none focus-visible:ring-2 focus-visible:ring-[#ffcf33]"
+            className="inline-flex h-10 items-center rounded-full bg-[#ffcf33] px-4 text-xs font-black uppercase text-black transition hover:bg-[var(--rock-steady-red)] hover:text-white outline-none focus-visible:ring-2 focus-visible:ring-[#ffcf33]"
           >
             {bookingLink.label}
           </a>
@@ -170,7 +170,7 @@ export function ShrinkingHeader() {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-[#ff2b1f] hover:bg-[#ff2b1f] outline-none focus-visible:ring-2 focus-visible:ring-[#ffcf33]"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-[var(--rock-steady-red)] hover:bg-[var(--rock-steady-red)] outline-none focus-visible:ring-2 focus-visible:ring-[#ffcf33]"
           >
             <svg
               viewBox="0 0 24 24"
@@ -213,8 +213,8 @@ export function ShrinkingHeader() {
                 onClick={() => setMenuOpen(false)}
                 className={`rounded-2xl border px-4 py-3 text-center transition outline-none ${
                   isActive
-                    ? "border-[#ff2b1f] bg-[#ff2b1f] text-white"
-                    : "border-white/12 bg-black/35 text-white hover:border-[#ff2b1f] hover:bg-[#ff2b1f]"
+                    ? "border-[var(--rock-steady-red)] bg-[var(--rock-steady-red)] text-white"
+                    : "border-white/12 bg-black/35 text-white hover:border-[var(--rock-steady-red)] hover:bg-[var(--rock-steady-red)]"
                 }`}
               >
                 {link.label}

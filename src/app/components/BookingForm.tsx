@@ -239,7 +239,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
       <a
         href={mailtoHref}
         aria-label="Check Rock Steady availability by email"
-        className="inline-flex items-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-[#ff2b1f] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+        className="inline-flex items-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-[var(--rock-steady-red)] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
       >
         Check availability by email
       </a>
@@ -327,7 +327,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelClass}>
-            Name <span className="text-[#ff2b1f]">*</span>
+            Name <span className="text-[var(--rock-steady-red)]">*</span>
           </label>
           <input
             id="name"
@@ -341,7 +341,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
         </div>
         <div>
           <label htmlFor="email" className={labelClass}>
-            Email <span className="text-[#ff2b1f]">*</span>
+            Email <span className="text-[var(--rock-steady-red)]">*</span>
           </label>
           <input
             id="email"
@@ -491,7 +491,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
       {status === 'error' && error ? (
         <p
           role="alert"
-          className="border border-[#ff2b1f]/40 bg-[#ff2b1f]/10 px-4 py-3 text-sm font-bold text-white"
+          className="border border-[color-mix(in_srgb,var(--rock-steady-red)_40%,transparent)] bg-[color-mix(in_srgb,var(--rock-steady-red)_10%,transparent)] px-4 py-3 text-sm font-bold text-white"
         >
           {error}{' '}
           <a
@@ -508,7 +508,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
         <button
           type="submit"
           disabled={submitting}
-          className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-[#ff2b1f] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ffcf33] disabled:cursor-not-allowed disabled:opacity-60"
+          className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-[var(--rock-steady-red)] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ffcf33] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {submitting ? 'Sending…' : 'Send booking inquiry'}
         </button>

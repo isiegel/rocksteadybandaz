@@ -40,6 +40,14 @@ const bookingEmailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponen
   bookingEmailSubject,
 )}&body=${encodeURIComponent(bookingEmailBody)}`;
 
+function RockSteadyFill({ className = '' }: { className?: string }) {
+  return (
+    <span className={['rock-steady-fill', className].filter(Boolean).join(' ')}>
+      {'Rock Steady'}
+    </span>
+  );
+}
+
 const gallery = [
   {
     src: '/images/show-04.jpg',
@@ -311,7 +319,7 @@ export default function Home() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href="#booking"
-                  className="rounded-full bg-[#ff2b1f] px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_rgba(255,43,31,0.34)] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="rounded-full bg-[var(--rock-steady-red)] px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   Book a rock party
                 </a>
@@ -436,7 +444,7 @@ export default function Home() {
               </div>
 
               <div className="border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-[#ff2b1f]">
+                <p className="text-sm font-black uppercase text-[var(--rock-steady-red)]">
                   Phoenix range
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -457,7 +465,7 @@ export default function Home() {
         <section id="video" className="bg-[#070707] px-4 py-20 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
             <div>
-              <p className="text-sm font-black uppercase text-[#ff2b1f]">
+              <p className="text-sm font-black uppercase text-[var(--rock-steady-red)]">
                 Live video
               </p>
               <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
@@ -510,7 +518,7 @@ export default function Home() {
                   key={style}
                   className="border border-white/12 bg-black/32 p-6 shadow-[0_16px_38px_rgba(0,0,0,0.2)]"
                 >
-                  <div className="mb-5 h-2 w-16 bg-[#ff2b1f]" />
+                  <div className="mb-5 h-2 w-16 bg-[var(--rock-steady-red)]" />
                   <p className="text-xl font-black leading-7 text-white">
                     {style}
                   </p>
@@ -640,7 +648,7 @@ export default function Home() {
           <div className="mx-auto max-w-7xl">
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div className="max-w-3xl">
-                <p className="text-sm font-black uppercase text-[#ff2b1f]">
+                <p className="text-sm font-black uppercase text-[var(--rock-steady-red)]">
                   Photos
                 </p>
                 <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
@@ -891,11 +899,9 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
             <div className="flex flex-col items-center gap-3 md:items-start">
-              <span
-                className={`${rockslide.className} text-3xl leading-none text-[#FD0A04]`}
-              >
-                Rock Steady
-              </span>
+              <RockSteadyFill
+                className={`${rockslide.className} text-3xl leading-none`}
+              />
               <p className="text-sm font-bold text-white/55">
                 <span className="font-black uppercase text-[#ffcf33]">
                   It&apos;s a Rock Party!
@@ -945,11 +951,9 @@ export default function Home() {
             aria-label="Rock Steady uses Gibson guitars and Ludwig drums because they want the best."
           >
             <p className="text-[0.65rem] font-black uppercase leading-tight tracking-[0.12em] text-white">
-              <span
-                className={`${rockslide.className} normal-case tracking-normal inline-block mr-2 text-white`}
-              >
-                Rock Steady
-              </span>
+              <RockSteadyFill
+                className={`${rockslide.className} normal-case tracking-normal inline-block mr-2`}
+              />
               uses Gibson guitars
               <br /> and Ludwig drums because
               <br /> they want the best.
