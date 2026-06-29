@@ -14,7 +14,7 @@ import { absoluteUrl, siteConfig } from './seo';
 import { showEndISO, showStartISO, upcomingShows, type Show } from './shows';
 
 const upcoming = upcomingShows();
-const youtubeVideoId = 'TiDSYeBD4pw';
+const youtubeVideoId = siteConfig.video.youtubeId;
 const youtubeWatchUrl = `https://youtu.be/${youtubeVideoId}`;
 const bookingEmailSubject = 'Booking inquiry for Rock Steady';
 const bookingEmailBody = [
@@ -188,8 +188,40 @@ const eventImages = [
   absoluteUrl('/images/show-10.jpg'),
 ];
 
+const areaServedStructuredData = siteConfig.areaServed.map((city) => ({
+  '@type': 'City',
+  name: `${city}, Arizona`,
+}));
+
+const websiteStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteConfig.url}/#website`,
+  url: siteConfig.url,
+  name: siteConfig.name,
+  alternateName: siteConfig.alternateNames,
+  description: siteConfig.description,
+  inLanguage: 'en-US',
+  publisher: bandStructuredDataRef,
+};
+
+const bookingServiceStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${siteConfig.url}/#booking-service`,
+  name: 'Phoenix classic rock cover band booking',
+  description:
+    'Live classic rock cover band booking for Phoenix-area bars, patios, private parties, corporate events, charity nights, and neighborhood events.',
+  serviceType: siteConfig.bookingServiceTypes,
+  provider: bandStructuredDataRef,
+  areaServed: areaServedStructuredData,
+  url: absoluteUrl('/#booking'),
+};
+
 function showEventUrl(show: Show): string {
-  return show.url ? new URL(show.url, siteConfig.url).toString() : absoluteUrl('/#shows');
+  return show.url
+    ? new URL(show.url, siteConfig.url).toString()
+    : absoluteUrl('/#shows');
 }
 
 function showEventDescription(show: Show): string {
@@ -244,7 +276,7 @@ const structuredData = {
   '@type': 'MusicGroup',
   '@id': `${siteConfig.url}/#band`,
   name: siteConfig.name,
-  alternateName: 'Rock Steady Band AZ',
+  alternateName: siteConfig.alternateNames,
   url: siteConfig.url,
   email: siteConfig.email,
   logo: absoluteUrl(siteConfig.logoPath),
@@ -256,6 +288,13 @@ const structuredData = {
   description: siteConfig.description,
   slogan: "It's a rock party.",
   genre: ['Classic rock', 'Cover band', 'Dance rock', '80s music', '90s music'],
+  knowsAbout: siteConfig.searchTopics,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `${siteConfig.url}/#webpage`,
+    url: siteConfig.url,
+    name: siteConfig.title,
+  },
   sameAs: [siteConfig.facebookUrl, siteConfig.instagramUrl],
   foundingLocation: {
     '@type': 'Place',
@@ -267,10 +306,7 @@ const structuredData = {
     addressRegion: 'AZ',
     addressCountry: 'US',
   },
-  areaServed: siteConfig.areaServed.map((city) => ({
-    '@type': 'City',
-    name: `${city}, Arizona`,
-  })),
+  areaServed: areaServedStructuredData,
   keywords: siteConfig.keywords.join(', '),
   contactPoint: {
     '@type': 'ContactPoint',
@@ -279,35 +315,36 @@ const structuredData = {
     url: siteConfig.facebookUrl,
     areaServed: 'US-AZ',
   },
+  makesOffer: {
+    '@type': 'Offer',
+    url: absoluteUrl('/#booking'),
+    itemOffered: {
+      '@type': 'Service',
+      '@id': `${siteConfig.url}/#booking-service`,
+      name: 'Phoenix classic rock cover band booking',
+    },
+  },
   ...(upcoming.length > 0 && {
     event: upcoming.map(showStructuredData),
   }),
 };
-
-// ISO 8601 upload datetime of the YouTube performance video with timezone
-// (e.g. "2024-06-15T12:00:00-07:00"). Google flags date-only values here.
-const videoUploadDate = '2025-10-25T00:00:00-07:00';
 
 // VideoObject keeps the live performance discoverable now that it loads behind a
 // click-to-play facade (the iframe is no longer in the initial HTML for crawlers).
 const videoStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
-  name: `${siteConfig.name} — Live Performance`,
-  description:
-    'Rock Steady playing live in Phoenix — classic rock, 80s and 90s favorites, and dance-floor covers from a female-fronted cover band.',
+  '@id': `${siteConfig.url}/#performance-video`,
+  name: siteConfig.video.title,
+  description: siteConfig.video.description,
   thumbnailUrl: [
     `https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`,
     `https://i.ytimg.com/vi/${youtubeVideoId}/maxresdefault.jpg`,
   ],
   embedUrl: `https://www.youtube-nocookie.com/embed/${youtubeVideoId}`,
   contentUrl: youtubeWatchUrl,
-  ...(videoUploadDate ? { uploadDate: videoUploadDate } : {}),
-  publisher: {
-    '@type': 'MusicGroup',
-    '@id': `${siteConfig.url}/#band`,
-    name: siteConfig.name,
-  },
+  uploadDate: siteConfig.video.uploadDate,
+  publisher: bandStructuredDataRef,
 };
 
 export default function Home() {
@@ -317,6 +354,21 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteStructuredData).replace(/</g, '\\u003c'),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(bookingServiceStructuredData).replace(
+            /</g,
+            '\\u003c',
+          ),
         }}
       />
       <script
@@ -343,16 +395,20 @@ export default function Home() {
           <div className="relative mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <p className="mb-4 inline-flex rounded-full border border-[#ffcf33]/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-[#ffcf33] shadow-[0_0_22px_rgba(255,207,51,0.18)]">
-                Phoenix cover band
+                Phoenix classic rock cover band
               </p>
               {/* The visible wordmark now lives in the header; this keeps a
                   single descriptive h1 on the page for SEO and screen readers. */}
-              <h1 className="sr-only">Rock Steady — Phoenix cover band</h1>
+              <h1 className="sr-only">
+                Rock Steady — Phoenix classic rock cover band for bars, parties,
+                and events
+              </h1>
               <p className="mt-6 max-w-2xl text-lg font-bold leading-8 text-white/88 sm:text-xl">
-                Loud guitars, big vocals, and the songs people shout back from
-                the first round to last call. It is a local rock party for bars,
-                patios, private events, and neighborhood nights across the
-                Valley.
+                Rock Steady is a female-fronted Phoenix cover band with loud
+                guitars, big vocals, and the songs people shout back from the
+                first round to last call. Book the local rock party for bars,
+                patios, private events, corporate nights, and neighborhood
+                events across the Valley.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
@@ -390,7 +446,7 @@ export default function Home() {
                 Around town
               </p>
               <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                Built for Valley rooms that like it loud.
+                Phoenix live music built for Valley rooms that like it loud.
               </h2>
               <p className="mt-5 text-lg leading-8 text-white/72">
                 Rock Steady plays the Phoenix area with a set that keeps people
@@ -687,7 +743,7 @@ export default function Home() {
                 Booking
               </p>
               <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                Bring Rock Steady to your place.
+                Book a Phoenix cover band for your place.
               </h2>
               <p className="mt-5 text-lg leading-8 text-white/72">
                 Bars, neighborhood parties, private events, charity nights, and

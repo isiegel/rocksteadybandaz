@@ -52,7 +52,7 @@ export const metadata: Metadata = {
         url: siteConfig.heroImagePath,
         width: 1286,
         height: 965,
-        alt: "Rock Steady performing live in Phoenix",
+        alt: "Rock Steady Phoenix classic rock cover band performing live",
       },
       {
         url: siteConfig.logoPath,
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: absoluteUrl(siteConfig.heroImagePath),
-        alt: "Rock Steady performing live in Phoenix",
+        alt: "Rock Steady Phoenix classic rock cover band performing live",
       },
     ],
   },
