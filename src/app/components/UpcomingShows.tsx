@@ -1,18 +1,35 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { formatShowDate, formatShowTime, type Show } from '../shows';
 
 const INITIAL_COUNT = 5;
 
 export function UpcomingShows({ shows }: { shows: Show[] }) {
   const [showAll, setShowAll] = useState(false);
+  const listRef = useRef<HTMLUListElement>(null);
+  const shouldScrollToList = useRef(false);
   const visible = showAll ? shows : shows.slice(0, INITIAL_COUNT);
   const hasMore = shows.length > INITIAL_COUNT;
 
+  useEffect(() => {
+    if (!showAll && shouldScrollToList.current) {
+      shouldScrollToList.current = false;
+      listRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [showAll]);
+
+  function handleToggleShows() {
+    if (showAll) {
+      shouldScrollToList.current = true;
+    }
+
+    setShowAll((prev) => !prev);
+  }
+
   return (
     <>
-      <ul className="mt-4 divide-y divide-white/10">
+      <ul ref={listRef} className="mt-4 scroll-mt-28 divide-y divide-white/10">
         {visible.map((show) => (
           <li
             key={`${show.date}-${show.venue}`}
@@ -57,7 +74,7 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
       {hasMore ? (
         <button
           type="button"
-          onClick={() => setShowAll((prev) => !prev)}
+          onClick={handleToggleShows}
           className="mt-4 text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
         >
           {showAll ? 'Show less' : `Show all ${shows.length} dates`}
