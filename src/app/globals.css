@@ -48,8 +48,12 @@ body {
   }
 }
 
+/* Anchor offset for the fixed header. Each section's own top padding (py-20 =
+   5rem) already matches the scrolled header height (h-20 = 5rem), so this only
+   needs to add the small gap below the header — landing the eyebrow/heading
+   just under it rather than pushing it a full header-height too low. */
 section {
-  scroll-margin-top: 7rem;
+  scroll-margin-top: 1.5rem;
 }
 
 /* iOS Safari gives input[type=date] a UA intrinsic min-width, so width:100% is

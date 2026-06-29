@@ -50,11 +50,12 @@ export function ShrinkingHeader() {
         });
 
         // Pick the topmost section currently within the band so overlapping
-        // entries in a single callback resolve deterministically.
+        // entries in a single callback resolve deterministically. When nothing
+        // is in the band (e.g. landing at the top in the hero), clear the
+        // active link so no nav item — including Shows — is highlighted until
+        // the user scrolls into a section.
         const nextActive = orderedIds.find((id) => visibleIds.has(id));
-        if (nextActive) {
-          setActiveId(nextActive);
-        }
+        setActiveId(nextActive ?? "");
       },
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
     );
