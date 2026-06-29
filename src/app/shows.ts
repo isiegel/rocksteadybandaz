@@ -34,6 +34,49 @@ export const shows: Show[] = [
   { date: '2026-12-11', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00' },
 ];
 
+export type Coords = { lat: number; lng: number };
+
+// City-center coordinates (decimal degrees) — the accurate fallback used when a
+// venue has no precise entry below. Every city that appears in `shows` must be
+// listed here so every show resolves to a location for "shows near me".
+const CITY_COORDS: Record<string, Coords> = {
+  Phoenix: { lat: 33.4484, lng: -112.074 },
+  Scottsdale: { lat: 33.4942, lng: -111.9261 },
+  Glendale: { lat: 33.5387, lng: -112.186 },
+  Chandler: { lat: 33.3062, lng: -111.8413 },
+  'San Tan Valley': { lat: 33.1936, lng: -111.5364 },
+};
+
+// Per-venue coordinates. These are APPROXIMATE and should be refined: open the
+// venue in Google Maps, right-click the pin → the first menu item is the exact
+// "lat, lng" — paste it here. Venues not listed fall back to CITY_COORDS, so
+// same-city venues tie in distance until a precise entry is added.
+const VENUE_COORDS: Record<string, Coords> = {
+  'The Dubliner Irish Pub': { lat: 33.6105, lng: -111.993 },
+  'El Dorado Bar & Grill': { lat: 33.4946, lng: -111.9217 },
+  'Kimmyz On Greenway Rock & Roll Bar & Grill': { lat: 33.628, lng: -112.185 },
+};
+
+/** Best-known coordinates for a show: precise venue if known, else city center. */
+export function showCoords(show: Show): Coords | null {
+  return VENUE_COORDS[show.venue] ?? (show.city ? CITY_COORDS[show.city] ?? null : null);
+}
+
+const EARTH_RADIUS_MILES = 3958.8;
+const toRad = (deg: number) => (deg * Math.PI) / 180;
+
+/** Great-circle distance in miles between two points (haversine). */
+export function distanceMiles(a: Coords, b: Coords): number {
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const lat1 = toRad(a.lat);
+  const lat2 = toRad(b.lat);
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+  return EARTH_RADIUS_MILES * 2 * Math.asin(Math.sqrt(h));
+}
+
 // Arizona does not observe daylight saving, so the offset is always -07:00.
 const AZ_OFFSET = '-07:00';
 
