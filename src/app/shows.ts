@@ -47,14 +47,27 @@ const CITY_COORDS: Record<string, Coords> = {
   'San Tan Valley': { lat: 33.1936, lng: -111.5364 },
 };
 
-// Per-venue coordinates. These are APPROXIMATE and should be refined: open the
-// venue in Google Maps, right-click the pin → the first menu item is the exact
-// "lat, lng" — paste it here. Venues not listed fall back to CITY_COORDS, so
-// same-city venues tie in distance until a precise entry is added.
+// Per-venue coordinates (geocoded from each venue's street address). Add new
+// venues here so "shows near me" sorts by the real location. Venues not listed
+// fall back to CITY_COORDS. To get a venue's lat/lng: open it in Google Maps,
+// right-click the pin → the first menu item is the exact "lat, lng".
 const VENUE_COORDS: Record<string, Coords> = {
-  'The Dubliner Irish Pub': { lat: 33.6105, lng: -111.993 },
-  'El Dorado Bar & Grill': { lat: 33.4946, lng: -111.9217 },
-  'Kimmyz On Greenway Rock & Roll Bar & Grill': { lat: 33.628, lng: -112.185 },
+  // 3841 E Thunderbird Rd, Phoenix
+  'The Dubliner Irish Pub': { lat: 33.6112, lng: -111.9986 },
+  // 15002 N Cave Creek Rd, Phoenix
+  'The Loft Again': { lat: 33.6241, lng: -112.0308 },
+  // 3134 W Carefree Hwy, Phoenix
+  'Azool Grill': { lat: 33.7999, lng: -112.1275 },
+  // 8708 E McDowell Rd, Scottsdale
+  'El Dorado Bar & Grill': { lat: 33.4663, lng: -111.8959 },
+  // 5930 W Greenway Rd, Glendale
+  'Kimmyz On Greenway Rock & Roll Bar & Grill': { lat: 33.6266, lng: -112.1862 },
+  // 20050 N 67th Ave (Village at Arrowhead), Glendale
+  '4Fridays Music Series': { lat: 33.6666, lng: -112.2056 },
+  // 2240 W Chandler Blvd, Chandler
+  'American Legion Post 35 - Mathew B Juan': { lat: 33.3069, lng: -111.8801 },
+  // 2510 E Hunt Hwy, San Tan Valley
+  'The Gym Grill and Bar': { lat: 33.1479, lng: -111.5513 },
 };
 
 /** Best-known coordinates for a show: precise venue if known, else city center. */
