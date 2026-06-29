@@ -71,6 +71,10 @@ const gallery = [
     src: '/images/show-03.jpg',
     alt: 'Wide black and white photo of Rock Steady onstage',
   },
+  {
+    src: '/images/show-11.jpg',
+    alt: 'Rock Steady performing on the stage at an Irish pub under blue lights',
+  },
 ];
 
 const soundGear = [
