@@ -209,6 +209,9 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
 
   const baseId = useId();
   const successRef = useRef<HTMLDivElement>(null);
+  // Set when the user clicks "Send another inquiry" so the re-shown form fades
+  // in on the way back from the confirmation — but not on the initial page load.
+  const [returningToForm, setReturningToForm] = useState(false);
 
   // On success the tall form is swapped for the short confirmation card, which
   // collapses the page height — leaving the browser's scroll position parked on
@@ -261,6 +264,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
           type="button"
           onClick={() => {
             resetFields();
+            setReturningToForm(true);
             setStatus('idle');
           }}
           className="cursor-pointer mt-5 inline-flex items-center justify-center rounded-full border border-[#ffcf33]/45 bg-black/35 px-5 py-2.5 text-sm font-black uppercase text-[#ffcf33] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
@@ -309,7 +313,12 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
   const submitting = status === 'submitting';
 
   return (
-    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
+    <form
+      onSubmit={handleSubmit}
+      className={`grid grid-cols-1 gap-4${
+        returningToForm ? ' animate-fade-in' : ''
+      }`}
+    >
       <input
         type="hidden"
         name="_subject"
