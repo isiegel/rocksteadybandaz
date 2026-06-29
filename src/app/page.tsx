@@ -244,11 +244,9 @@ const structuredData = {
   }),
 };
 
-// ISO 8601 upload date of the YouTube performance video (e.g. "2024-06-15").
-// Google requires `uploadDate` for VideoObject rich results — fill this in with
-// the video's real publish date to make the embed eligible. Left blank, the
-// VideoObject is still valid and helps the video get discovered.
-const videoUploadDate = '2025-10-25';
+// ISO 8601 upload datetime of the YouTube performance video with timezone
+// (e.g. "2024-06-15T12:00:00-07:00"). Google flags date-only values here.
+const videoUploadDate = '2025-10-25T00:00:00-07:00';
 
 // VideoObject keeps the live performance discoverable now that it loads behind a
 // click-to-play facade (the iframe is no longer in the initial HTML for crawlers).
