@@ -11,7 +11,9 @@ const navLinks = [
   { href: "#photos", id: "photos", label: "Photos" },
 ];
 
-const bookingLink = { href: "#booking", id: "booking", label: "Book" };
+// href targets the form card directly so the click lands on the inputs, while
+// id stays "booking" for IntersectionObserver active-section tracking.
+const bookingLink = { href: "#book-form", id: "booking", label: "Book" };
 
 export function ShrinkingHeader() {
   const [isScrolled, setIsScrolled] = useState(false);

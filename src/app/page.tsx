@@ -412,7 +412,7 @@ export default function Home() {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href="#booking"
+                  href="#book-form"
                   className="rounded-full bg-[var(--rock-steady-red)] px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   Book a rock party
@@ -752,7 +752,10 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="border border-white/12 bg-[#101010] p-6">
+            <div
+              id="book-form"
+              className="scroll-mt-28 border border-white/12 bg-[#101010] p-6"
+            >
               <p className="text-2xl font-black text-white">
                 Check availability
               </p>
