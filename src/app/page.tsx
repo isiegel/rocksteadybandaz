@@ -11,7 +11,7 @@ import {
 import { VideoEmbed } from './components/VideoEmbed';
 import { rockslide } from './fonts';
 import { absoluteUrl, siteConfig } from './seo';
-import { showEndISO, showStartISO, upcomingShows } from './shows';
+import { showEndISO, showStartISO, upcomingShows, type Show } from './shows';
 
 const upcoming = upcomingShows();
 const youtubeVideoId = 'TiDSYeBD4pw';
@@ -176,6 +176,69 @@ const regularVenues = [
   'Lucky Strikes',
 ];
 
+const bandStructuredDataRef = {
+  '@type': 'MusicGroup',
+  '@id': `${siteConfig.url}/#band`,
+  name: siteConfig.name,
+};
+
+const eventImages = [
+  absoluteUrl(siteConfig.heroImagePath),
+  absoluteUrl('/images/show-04.jpg'),
+  absoluteUrl('/images/show-10.jpg'),
+];
+
+function showEventUrl(show: Show): string {
+  return show.url ? new URL(show.url, siteConfig.url).toString() : absoluteUrl('/#shows');
+}
+
+function showEventDescription(show: Show): string {
+  const city = show.city ? `${show.city}-area` : 'Phoenix-area';
+  const note = show.note ? ` ${show.note}.` : '';
+
+  return `A live Rock Steady ${city} set with classic rock, '80s and '90s sing-alongs, dance-floor bar favorites, loud guitars, and female-fronted vocals.${note}`;
+}
+
+function showStructuredData(show: Show) {
+  const eventUrl = showEventUrl(show);
+  const endDate = showEndISO(show);
+
+  return {
+    '@type': 'MusicEvent',
+    name: `${siteConfig.name} at ${show.venue}`,
+    description: showEventDescription(show),
+    image: eventImages,
+    startDate: showStartISO(show),
+    ...(endDate && { endDate }),
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    url: eventUrl,
+    location: {
+      '@type': 'Place',
+      name: show.venue,
+      address: {
+        '@type': 'PostalAddress',
+        ...(show.city && { addressLocality: show.city }),
+        addressRegion: 'AZ',
+        addressCountry: 'US',
+      },
+    },
+    offers: {
+      '@type': 'Offer',
+      url: eventUrl,
+      price: 0,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: show.venue,
+      ...(show.url && { url: eventUrl }),
+    },
+    performer: bandStructuredDataRef,
+  };
+}
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'MusicGroup',
@@ -217,30 +280,7 @@ const structuredData = {
     areaServed: 'US-AZ',
   },
   ...(upcoming.length > 0 && {
-    event: upcoming.map((show) => ({
-      '@type': 'MusicEvent',
-      name: `${siteConfig.name} at ${show.venue}`,
-      startDate: showStartISO(show),
-      ...(showEndISO(show) && { endDate: showEndISO(show) }),
-      eventStatus: 'https://schema.org/EventScheduled',
-      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-      ...(show.url && { url: show.url }),
-      location: {
-        '@type': 'Place',
-        name: show.venue,
-        address: {
-          '@type': 'PostalAddress',
-          ...(show.city && { addressLocality: show.city }),
-          addressRegion: 'AZ',
-          addressCountry: 'US',
-        },
-      },
-      performer: {
-        '@type': 'MusicGroup',
-        '@id': `${siteConfig.url}/#band`,
-        name: siteConfig.name,
-      },
-    })),
+    event: upcoming.map(showStructuredData),
   }),
 };
 
