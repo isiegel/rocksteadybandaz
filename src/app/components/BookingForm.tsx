@@ -251,7 +251,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
       <div
         ref={successRef}
         role="status"
-        className="border border-[#37d67a]/40 bg-[#37d67a]/10 p-6 text-center"
+        className="animate-fade-in border border-[#37d67a]/40 bg-[#37d67a]/10 p-6 text-center"
       >
         <p className="text-xl font-black text-white">Inquiry sent — thanks!</p>
         <p className="mt-2 text-sm font-bold leading-6 text-white/72">
