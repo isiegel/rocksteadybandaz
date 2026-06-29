@@ -155,6 +155,7 @@ const valleySpots = [
   'San Tan Valley',
   'Surprise',
   'Sun City',
+  'Ahwatukee',
 ];
 
 const regularVenues = [
