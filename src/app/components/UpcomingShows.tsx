@@ -75,7 +75,7 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
         <button
           type="button"
           onClick={handleToggleShows}
-          className="mt-4 text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+          className="cursor-pointer mt-4 text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
         >
           {showAll ? 'Show less' : `Show all ${shows.length} dates`}
         </button>
