@@ -34,6 +34,62 @@ export const shows: Show[] = [
   { date: '2026-12-11', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00' },
 ];
 
+export type Coords = { lat: number; lng: number };
+
+// City-center coordinates (decimal degrees) — the accurate fallback used when a
+// venue has no precise entry below. Every city that appears in `shows` must be
+// listed here so every show resolves to a location for "shows near me".
+const CITY_COORDS: Record<string, Coords> = {
+  Phoenix: { lat: 33.4484, lng: -112.074 },
+  Scottsdale: { lat: 33.4942, lng: -111.9261 },
+  Glendale: { lat: 33.5387, lng: -112.186 },
+  Chandler: { lat: 33.3062, lng: -111.8413 },
+  'San Tan Valley': { lat: 33.1936, lng: -111.5364 },
+};
+
+// Per-venue coordinates (geocoded from each venue's street address). Add new
+// venues here so "shows near me" sorts by the real location. Venues not listed
+// fall back to CITY_COORDS. To get a venue's lat/lng: open it in Google Maps,
+// right-click the pin → the first menu item is the exact "lat, lng".
+const VENUE_COORDS: Record<string, Coords> = {
+  // 3841 E Thunderbird Rd, Phoenix
+  'The Dubliner Irish Pub': { lat: 33.6112, lng: -111.9986 },
+  // 15002 N Cave Creek Rd, Phoenix
+  'The Loft Again': { lat: 33.6241, lng: -112.0308 },
+  // 3134 W Carefree Hwy, Phoenix
+  'Azool Grill': { lat: 33.7999, lng: -112.1275 },
+  // 8708 E McDowell Rd, Scottsdale
+  'El Dorado Bar & Grill': { lat: 33.4663, lng: -111.8959 },
+  // 5930 W Greenway Rd, Glendale
+  'Kimmyz On Greenway Rock & Roll Bar & Grill': { lat: 33.6266, lng: -112.1862 },
+  // 20050 N 67th Ave (Village at Arrowhead), Glendale
+  '4Fridays Music Series': { lat: 33.6666, lng: -112.2056 },
+  // 2240 W Chandler Blvd, Chandler
+  'American Legion Post 35 - Mathew B Juan': { lat: 33.3069, lng: -111.8801 },
+  // 2510 E Hunt Hwy, San Tan Valley
+  'The Gym Grill and Bar': { lat: 33.1479, lng: -111.5513 },
+};
+
+/** Best-known coordinates for a show: precise venue if known, else city center. */
+export function showCoords(show: Show): Coords | null {
+  return VENUE_COORDS[show.venue] ?? (show.city ? CITY_COORDS[show.city] ?? null : null);
+}
+
+const EARTH_RADIUS_MILES = 3958.8;
+const toRad = (deg: number) => (deg * Math.PI) / 180;
+
+/** Great-circle distance in miles between two points (haversine). */
+export function distanceMiles(a: Coords, b: Coords): number {
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const lat1 = toRad(a.lat);
+  const lat2 = toRad(b.lat);
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+  return EARTH_RADIUS_MILES * 2 * Math.asin(Math.sqrt(h));
+}
+
 // Arizona does not observe daylight saving, so the offset is always -07:00.
 const AZ_OFFSET = '-07:00';
 

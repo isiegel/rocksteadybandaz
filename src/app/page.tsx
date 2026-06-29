@@ -11,7 +11,13 @@ import {
 import { VideoEmbed } from './components/VideoEmbed';
 import { rockslide } from './fonts';
 import { absoluteUrl, siteConfig } from './seo';
-import { showEndISO, showStartISO, upcomingShows, type Show } from './shows';
+import {
+  showCoords,
+  showEndISO,
+  showStartISO,
+  upcomingShows,
+  type Show,
+} from './shows';
 
 const upcoming = upcomingShows();
 const youtubeVideoId = siteConfig.video.youtubeId;
@@ -234,6 +240,7 @@ function showEventDescription(show: Show): string {
 function showStructuredData(show: Show) {
   const eventUrl = showEventUrl(show);
   const endDate = showEndISO(show);
+  const coords = showCoords(show);
 
   return {
     '@type': 'MusicEvent',
@@ -254,6 +261,13 @@ function showStructuredData(show: Show) {
         addressRegion: 'AZ',
         addressCountry: 'US',
       },
+      ...(coords && {
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: coords.lat,
+          longitude: coords.lng,
+        },
+      }),
     },
     offers: {
       '@type': 'Offer',
