@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { BackToTop } from './components/BackToTop';
 import { BookingForm } from './components/BookingForm';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
+import { UpcomingShows } from './components/UpcomingShows';
 import {
   FacebookIcon,
   InstagramIcon,
@@ -10,13 +11,7 @@ import {
 import { VideoEmbed } from './components/VideoEmbed';
 import { rockslide } from './fonts';
 import { absoluteUrl, siteConfig } from './seo';
-import {
-  formatShowDate,
-  formatShowTime,
-  showEndISO,
-  showStartISO,
-  upcomingShows,
-} from './shows';
+import { showEndISO, showStartISO, upcomingShows } from './shows';
 
 const upcoming = upcomingShows();
 const youtubeVideoId = 'TiDSYeBD4pw';
@@ -373,47 +368,7 @@ export default function Home() {
                 </p>
 
                 {upcoming.length > 0 ? (
-                  <ul className="mt-4 divide-y divide-white/10">
-                    {upcoming.map((show) => (
-                      <li
-                        key={`${show.date}-${show.venue}`}
-                        className="flex flex-col gap-1.5 py-4 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4"
-                      >
-                        <div>
-                          <p className="text-lg font-black leading-tight text-white">
-                            {show.venue}
-                          </p>
-                          {show.city || show.note ? (
-                            <p className="mt-0.5 text-sm font-bold text-white/64">
-                              {show.city ? `${show.city}, AZ` : ''}
-                              {show.city && show.note ? ' · ' : ''}
-                              {show.note ?? ''}
-                            </p>
-                          ) : null}
-                        </div>
-                        <div className="shrink-0 text-left sm:text-right">
-                          <p className="text-sm font-black uppercase text-[#37d67a]">
-                            {formatShowDate(show.date)}
-                          </p>
-                          {formatShowTime(show) ? (
-                            <p className="text-sm font-bold text-white/64">
-                              {formatShowTime(show)}
-                            </p>
-                          ) : null}
-                          {show.url ? (
-                            <a
-                              href={show.url}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="text-sm font-black text-[#ffcf33] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
-                            >
-                              Details
-                            </a>
-                          ) : null}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+                  <UpcomingShows shows={upcoming} />
                 ) : (
                   <>
                     <h3 className="mt-2 text-2xl font-black text-white">
