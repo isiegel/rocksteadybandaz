@@ -83,7 +83,7 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
       role="status"
       aria-live="polite"
       onAnimationEnd={handleAnimationEnd}
-      className={`fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-5xl border border-[#ffcf33]/35 bg-[#080808]/95 p-3 text-white shadow-[0_18px_60px_rgba(0,0,0,0.5)] backdrop-blur-md sm:bottom-5 sm:p-4 ${
+      className={`fixed inset-x-3 bottom-3 z-60 mx-auto max-w-5xl border border-[#ffcf33]/35 bg-[#080808]/95 p-3 text-white shadow-[0_8px_28px_rgba(0,0,0,0.5)] backdrop-blur-md sm:bottom-5 sm:p-4 ${
         isClosing
           ? 'animate-toast-fade-out pointer-events-none'
           : 'animate-toast-fade-in'
