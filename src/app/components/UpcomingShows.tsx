@@ -99,7 +99,7 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
             <button
               type="button"
               onClick={handleClearNearby}
-              className="cursor-pointer text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+              className="cursor-pointer text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
             >
               Clear
             </button>
@@ -109,7 +109,7 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
             type="button"
             onClick={handleFindNearby}
             disabled={geoStatus === 'locating'}
-            className="cursor-pointer text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#ffcf33] disabled:cursor-default disabled:no-underline disabled:opacity-60"
+            className="cursor-pointer text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33] disabled:cursor-default disabled:no-underline disabled:opacity-60"
           >
             {geoStatus === 'locating' ? 'Locating…' : '📍 Find shows near me'}
           </button>
@@ -164,7 +164,7 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
                   href={show.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-sm font-black text-[#ffcf33] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="text-sm font-black text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   Details
                 </a>
@@ -178,7 +178,7 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
         <button
           type="button"
           onClick={handleToggleShows}
-          className="cursor-pointer mt-4 text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+          className="cursor-pointer mt-4 text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
         >
           {showAll ? 'Show less' : `Show all ${shows.length} dates`}
         </button>

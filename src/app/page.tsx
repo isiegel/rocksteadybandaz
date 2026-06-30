@@ -430,13 +430,13 @@ export default function Home() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href="#book-form"
-                  className="rounded-full bg-[var(--rock-steady-red)] px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="rounded-full bg-(--rock-steady-red) px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   Book a rock party
                 </a>
                 <a
                   href="#video"
-                  className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-black uppercase text-white backdrop-blur transition hover:border-[#37d67a] hover:bg-[#37d67a] hover:text-[#06140b] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-black uppercase text-white backdrop-blur transition hover:border-[#37d67a] hover:bg-[#37d67a] hover:text-[#06140b] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   Watch the band
                 </a>
@@ -515,7 +515,7 @@ export default function Home() {
               </div>
 
               <div className="border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-[var(--rock-steady-red)]">
+                <p className="text-sm font-black uppercase text-(--rock-steady-red)">
                   Phoenix range
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -536,7 +536,7 @@ export default function Home() {
         <section id="video" className="bg-[#070707] px-4 py-20 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
             <div>
-              <p className="text-sm font-black uppercase text-[var(--rock-steady-red)]">
+              <p className="text-sm font-black uppercase text-(--rock-steady-red)">
                 Live video
               </p>
               <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
@@ -550,7 +550,7 @@ export default function Home() {
                 href={youtubeWatchUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-7 inline-flex rounded-full border border-[#ffcf33]/45 bg-black/35 px-5 py-3 text-sm font-black uppercase text-[#ffcf33] transition hover:border-[#ffcf33] hover:bg-[#ffcf33] hover:text-[#111] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                className="mt-7 inline-flex rounded-full border border-[#ffcf33]/45 bg-black/35 px-5 py-3 text-sm font-black uppercase text-[#ffcf33] transition hover:border-[#ffcf33] hover:bg-[#ffcf33] hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
               >
                 Open on YouTube
               </a>
@@ -589,7 +589,7 @@ export default function Home() {
                   key={style}
                   className="border border-white/12 bg-black/32 p-6 shadow-[0_16px_38px_rgba(0,0,0,0.2)]"
                 >
-                  <div className="mb-5 h-2 w-16 bg-[var(--rock-steady-red)]" />
+                  <div className="mb-5 h-2 w-16 bg-(--rock-steady-red)" />
                   <p className="text-xl font-black leading-7 text-white">
                     {style}
                   </p>
@@ -691,7 +691,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`${gear.name} — ${gear.role}`}
-                  className="group flex flex-col items-center justify-center gap-5 border border-white/12 bg-black/30 p-8 text-center shadow-[0_16px_38px_rgba(0,0,0,0.2)] transition hover:border-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="group flex flex-col items-center justify-center gap-5 border border-white/12 bg-black/30 p-8 text-center shadow-[0_16px_38px_rgba(0,0,0,0.2)] transition hover:border-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   <div className="flex h-14 items-center justify-center">
                     <Image
@@ -719,7 +719,7 @@ export default function Home() {
           <div className="mx-auto max-w-7xl">
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div className="max-w-3xl">
-                <p className="text-sm font-black uppercase text-[var(--rock-steady-red)]">
+                <p className="text-sm font-black uppercase text-(--rock-steady-red)">
                   Photos
                 </p>
                 <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
@@ -793,7 +793,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Rock Steady on Facebook"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#1877F2] px-5 py-3 text-sm font-black uppercase text-white transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#1877F2] px-5 py-3 text-sm font-black uppercase text-white transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   <FacebookIcon className="h-5 w-5 fill-current" />
                   Facebook
@@ -803,7 +803,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Rock Steady on Instagram"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-tr from-[#feda75] via-[#d62976] to-[#4f5bd5] px-5 py-3 text-sm font-black uppercase text-white transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-tr from-[#feda75] via-[#d62976] to-[#4f5bd5] px-5 py-3 text-sm font-black uppercase text-white transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   <InstagramIcon className="h-5 w-5 fill-current" />
                   Instagram
@@ -811,7 +811,7 @@ export default function Home() {
                 <a
                   href={bookingEmailHref}
                   aria-label="Email Rock Steady"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#37d67a] px-5 py-3 text-sm font-black uppercase text-[#06140b] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#37d67a] px-5 py-3 text-sm font-black uppercase text-[#06140b] transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   <MailIcon className="h-5 w-5 fill-current" />
                   Email
@@ -996,7 +996,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Rock Steady on Facebook"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   <FacebookIcon className="h-5 w-5 fill-current" />
                 </a>
@@ -1005,14 +1005,14 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Rock Steady on Instagram"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   <InstagramIcon className="h-5 w-5 fill-current" />
                 </a>
                 <a
                   href={`mailto:${siteConfig.email}`}
                   aria-label="Email Rock Steady"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   <MailIcon className="h-5 w-5 fill-current" />
                 </a>
@@ -1038,7 +1038,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Gibson guitars"
-                className="absolute left-0 top-0 block transition hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                className="absolute left-0 top-0 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
               >
                 <Image
                   src="/images/gibson-logo.svg"
@@ -1054,7 +1054,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Ludwig drums"
-                className="absolute right-2 -top-2 block transition hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                className="absolute right-2 -top-2 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
               >
                 <Image
                   src="/images/ludwig-logo.svg"
@@ -1080,7 +1080,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={gear.name}
-                  className="block opacity-60 transition hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                  className="block opacity-60 transition hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   <Image
                     src={gear.src}
@@ -1106,7 +1106,7 @@ export default function Home() {
                 href="https://siegelcraft.com"
                 target="_blank"
                 rel="noreferrer"
-                className="text-white/70 transition hover:text-[#ffcf33] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+                className="text-white/70 transition hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
               >
                 Siegelcraft
               </a>

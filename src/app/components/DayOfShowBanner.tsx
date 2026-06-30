@@ -109,7 +109,7 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
             href={detailsHref}
             target={isExternalDetailsLink ? '_blank' : undefined}
             rel={isExternalDetailsLink ? 'noreferrer' : undefined}
-            className="inline-flex h-10 items-center justify-center rounded-full bg-[#ffcf33] px-4 text-xs font-black uppercase text-[#111] transition hover:bg-[var(--rock-steady-red)] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+            className="inline-flex h-10 items-center justify-center rounded-full bg-[#ffcf33] px-4 text-xs font-black uppercase text-[#111] transition hover:bg-(--rock-steady-red) hover:text-white focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
           >
             Details
           </a>
@@ -117,7 +117,7 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
             type="button"
             aria-label="Dismiss today's show notice"
             onClick={handleDismiss}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-[var(--rock-steady-red)] hover:bg-[var(--rock-steady-red)] focus:outline-none focus:ring-2 focus:ring-[#ffcf33]"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
           >
             <svg
               viewBox="0 0 24 24"
