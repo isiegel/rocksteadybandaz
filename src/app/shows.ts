@@ -10,6 +10,8 @@ export type Show = {
   end?: string;
   /** Optional ticket or event link. */
   url?: string;
+  /** Optional link used only by the day-of-show banner Details button. */
+  toastDetailsUrl?: string;
   /** Optional short note, e.g. '21+' or 'Private event'. */
   note?: string;
 };
@@ -45,6 +47,11 @@ const CITY_COORDS: Record<string, Coords> = {
   Glendale: { lat: 33.5387, lng: -112.186 },
   Chandler: { lat: 33.3062, lng: -111.8413 },
   'San Tan Valley': { lat: 33.1936, lng: -111.5364 },
+  Mesa: { lat: 33.4152, lng: -111.8315 },
+  Gilbert: { lat: 33.3528, lng: -111.789 },
+  Peoria: { lat: 33.5806, lng: -112.2374 },
+  'Sun City': { lat: 33.5975, lng: -112.2718 },
+  Surprise: { lat: 33.6292, lng: -112.3679 },
 };
 
 // Per-venue coordinates (geocoded from each venue's street address). Add new
@@ -101,6 +108,23 @@ export function upcomingShows(today: string = todayInPhoenix()): Show[] {
   return shows
     .filter((show) => show.date >= today)
     .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+export function dayOfShowBannerShows(today: string = todayInPhoenix()): Show[] {
+  if (process.env.NODE_ENV !== 'development') return shows;
+
+  return [
+    ...shows,
+    {
+      date: today,
+      venue: 'The Loft Again',
+      city: 'Phoenix',
+      start: '20:00',
+      end: '24:00',
+      toastDetailsUrl: 'https://www.facebook.com/rocksteadybandaz/events',
+      note: 'Banner preview',
+    },
+  ];
 }
 
 export function formatShowDate(date: string): string {

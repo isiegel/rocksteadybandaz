@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { BackToTop } from './components/BackToTop';
 import { BookingForm } from './components/BookingForm';
+import { DayOfShowBanner } from './components/DayOfShowBanner';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
 import { UpcomingShows } from './components/UpcomingShows';
 import {
@@ -12,6 +13,7 @@ import { VideoEmbed } from './components/VideoEmbed';
 import { rockslide } from './fonts';
 import { absoluteUrl, siteConfig } from './seo';
 import {
+  dayOfShowBannerShows,
   showCoords,
   showEndISO,
   showStartISO,
@@ -20,6 +22,7 @@ import {
 } from './shows';
 
 const upcoming = upcomingShows();
+const dayOfShowBannerShowList = dayOfShowBannerShows();
 const youtubeVideoId = siteConfig.video.youtubeId;
 const youtubeWatchUrl = `https://youtu.be/${youtubeVideoId}`;
 const bookingEmailSubject = 'Booking inquiry for Rock Steady';
@@ -1111,6 +1114,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      <DayOfShowBanner shows={dayOfShowBannerShowList} />
       <BackToTop />
     </>
   );

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,19 +11,19 @@ export function BackToTop() {
     };
 
     updateVisibility();
-    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener('scroll', updateVisibility, { passive: true });
 
-    return () => window.removeEventListener("scroll", updateVisibility);
+    return () => window.removeEventListener('scroll', updateVisibility);
   }, []);
 
   const scrollToTop = () => {
     const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
+      '(prefers-reduced-motion: reduce)',
     ).matches;
 
     window.scrollTo({
       top: 0,
-      behavior: prefersReducedMotion ? "auto" : "smooth",
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
     });
   };
 
@@ -34,8 +34,8 @@ export function BackToTop() {
       onClick={scrollToTop}
       className={`fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-[#ffcf33] bg-[#ffcf33] text-black shadow-[0_12px_30px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-[var(--rock-steady-red)] hover:bg-[var(--rock-steady-red)] hover:text-white outline-none focus-visible:ring-2 focus-visible:ring-[#ffcf33] sm:bottom-8 sm:right-8 ${
         isVisible
-          ? "pointer-events-auto translate-y-0 opacity-100"
-          : "pointer-events-none translate-y-3 opacity-0"
+          ? 'pointer-events-auto translate-y-0 opacity-100'
+          : 'pointer-events-none translate-y-3 opacity-0'
       }`}
     >
       <svg
