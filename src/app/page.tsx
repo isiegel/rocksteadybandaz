@@ -3,12 +3,12 @@ import { BackToTop } from './components/BackToTop';
 import { BookingForm } from './components/BookingForm';
 import { DayOfShowBanner } from './components/DayOfShowBanner';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
-import { UpcomingShows } from './components/UpcomingShows';
 import {
   FacebookIcon,
   InstagramIcon,
   MailIcon,
 } from './components/SocialIcons';
+import { UpcomingShows } from './components/UpcomingShows';
 import { VideoEmbed } from './components/VideoEmbed';
 import { rockslide } from './fonts';
 import { absoluteUrl, siteConfig } from './seo';
@@ -164,6 +164,7 @@ const valleySpots = [
   'Surprise',
   'Sun City',
   'Ahwatukee',
+  'Anthem',
 ];
 
 const regularVenues = [
@@ -376,7 +377,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(websiteStructuredData).replace(/</g, '\\u003c'),
+          __html: JSON.stringify(websiteStructuredData).replace(
+            /</g,
+            '\\u003c',
+          ),
         }}
       />
       <script
