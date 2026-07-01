@@ -11,10 +11,67 @@ import {
 } from '../shows';
 
 const INITIAL_COUNT = 5;
+const EXTRA_SHOWS_ID = 'upcoming-shows-extra';
 
 type GeoStatus = 'idle' | 'locating' | 'located' | 'denied' | 'unsupported' | 'error';
 
 type RankedShow = { show: Show; distance: number | null };
+
+function ShowListItem({
+  show,
+  distance,
+  isFirst = false,
+  isLast = false,
+}: RankedShow & { isFirst?: boolean; isLast?: boolean }) {
+  return (
+    <li
+      className={`flex flex-col gap-1.5 border-white/10 ${
+        isFirst ? 'pt-0' : 'border-t pt-4'
+      } ${
+        isLast ? 'pb-0' : 'pb-4'
+      } sm:flex-row sm:items-baseline sm:justify-between sm:gap-4`}
+    >
+      <div>
+        <p className="text-lg font-black leading-tight text-white">
+          {show.venue}
+        </p>
+        {show.city || show.note || distance != null ? (
+          <p className="mt-0.5 text-sm font-bold text-white/64">
+            {show.city ? `${show.city}, AZ` : ''}
+            {show.city && show.note ? ' · ' : ''}
+            {show.note ?? ''}
+            {distance != null ? (
+              <span className="text-[#37d67a]">
+                {(show.city || show.note ? ' · ' : '') +
+                  `${Math.round(distance)} mi away`}
+              </span>
+            ) : null}
+          </p>
+        ) : null}
+      </div>
+      <div className="shrink-0 text-left sm:text-right">
+        <p className="text-sm font-black uppercase text-[#37d67a]">
+          {formatShowDate(show.date)}
+        </p>
+        {formatShowTime(show) ? (
+          <p className="text-sm font-bold text-white/64">
+            {formatShowTime(show)}
+          </p>
+        ) : null}
+        {show.url ? (
+          <a
+            href={show.url}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm font-black text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+          >
+            Details
+          </a>
+        ) : null}
+      </div>
+    </li>
+  );
+}
 
 export function UpcomingShows({ shows }: { shows: Show[] }) {
   const [showAll, setShowAll] = useState(false);
@@ -43,8 +100,9 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
     });
   }, [shows, origin]);
 
-  const visible = showAll ? ranked : ranked.slice(0, INITIAL_COUNT);
-  const hasMore = ranked.length > INITIAL_COUNT;
+  const initialShows = ranked.slice(0, INITIAL_COUNT);
+  const extraShows = ranked.slice(INITIAL_COUNT);
+  const hasMore = extraShows.length > 0;
 
   function handleFindNearby() {
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
@@ -126,58 +184,45 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
         ) : null}
       </div>
 
-      <ul ref={listRef} className="mt-4 scroll-mt-28 divide-y divide-white/10">
-        {visible.map(({ show, distance }) => (
-          <li
+      <ul ref={listRef} className="mt-4 scroll-mt-28">
+        {initialShows.map(({ show, distance }, index) => (
+          <ShowListItem
             key={`${show.date}-${show.venue}`}
-            className="flex flex-col gap-1.5 py-4 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4"
-          >
-            <div>
-              <p className="text-lg font-black leading-tight text-white">
-                {show.venue}
-              </p>
-              {show.city || show.note || distance != null ? (
-                <p className="mt-0.5 text-sm font-bold text-white/64">
-                  {show.city ? `${show.city}, AZ` : ''}
-                  {show.city && show.note ? ' · ' : ''}
-                  {show.note ?? ''}
-                  {distance != null ? (
-                    <span className="text-[#37d67a]">
-                      {(show.city || show.note ? ' · ' : '') +
-                        `${Math.round(distance)} mi away`}
-                    </span>
-                  ) : null}
-                </p>
-              ) : null}
-            </div>
-            <div className="shrink-0 text-left sm:text-right">
-              <p className="text-sm font-black uppercase text-[#37d67a]">
-                {formatShowDate(show.date)}
-              </p>
-              {formatShowTime(show) ? (
-                <p className="text-sm font-bold text-white/64">
-                  {formatShowTime(show)}
-                </p>
-              ) : null}
-              {show.url ? (
-                <a
-                  href={show.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-sm font-black text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                >
-                  Details
-                </a>
-              ) : null}
-            </div>
-          </li>
+            show={show}
+            distance={distance}
+            isFirst={index === 0}
+            isLast={!showAll && index === initialShows.length - 1}
+          />
         ))}
       </ul>
+
+      {hasMore ? (
+        <div
+          id={EXTRA_SHOWS_ID}
+          className="show-dates-reveal"
+          data-expanded={showAll}
+          aria-hidden={!showAll}
+          inert={!showAll}
+        >
+          <ul className="show-dates-reveal-inner">
+            {extraShows.map(({ show, distance }, index) => (
+              <ShowListItem
+                key={`${show.date}-${show.venue}`}
+                show={show}
+                distance={distance}
+                isLast={index === extraShows.length - 1}
+              />
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       {hasMore ? (
         <button
           type="button"
           onClick={handleToggleShows}
+          aria-expanded={showAll}
+          aria-controls={EXTRA_SHOWS_ID}
           className="cursor-pointer mt-4 text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
         >
           {showAll ? 'Show less' : `Show all ${shows.length} dates`}
