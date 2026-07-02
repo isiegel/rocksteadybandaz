@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { BackToTop } from './components/BackToTop';
 import { BookingForm } from './components/BookingForm';
 import { DayOfShowBanner } from './components/DayOfShowBanner';
+import { SampleSongListCard } from './components/SampleSongListCard';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
 import {
   FacebookIcon,
@@ -627,46 +628,7 @@ export default function Home() {
                 </ul>
               </div>
 
-              <div className="border border-white/12 bg-black/32 p-5 shadow-[0_16px_38px_rgba(0,0,0,0.2)]">
-                <p className="text-sm font-black uppercase text-(--rock-steady-red)">
-                  Full sample song list
-                </p>
-                <p className="mt-2 text-sm font-bold leading-6 text-white/68">
-                  Download the venue-friendly one-sheet with more of the Rock
-                  Steady catalog.
-                </p>
-                <a
-                  href={siteConfig.sampleSongListPath}
-                  download
-                  aria-label="Download Rock Steady sample song list"
-                  className="relative mt-5 block aspect-[3/2] overflow-hidden border border-white/12 bg-[#f4f1eb] transition hover:border-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                >
-                  <Image
-                    src={siteConfig.sampleSongListPath}
-                    alt="Rock Steady sample song list"
-                    fill
-                    sizes="(min-width: 1024px) 36vw, 100vw"
-                    className="object-cover object-top"
-                  />
-                </a>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <a
-                    href={siteConfig.sampleSongListPath}
-                    download
-                    className="inline-flex rounded-full bg-(--rock-steady-red) px-5 py-3 text-xs font-black uppercase text-white transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                  >
-                    Download PNG
-                  </a>
-                  <a
-                    href={siteConfig.sampleSongListPath}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex rounded-full border border-white/18 bg-black/30 px-5 py-3 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                  >
-                    View full size
-                  </a>
-                </div>
-              </div>
+              <SampleSongListCard imagePath={siteConfig.sampleSongListPath} />
             </div>
           </div>
         </section>
@@ -945,34 +907,10 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-[#ffcf33]">
-                  Sample song list
-                </p>
-                <a
-                  href={siteConfig.sampleSongListPath}
-                  download
-                  aria-label="Download Rock Steady sample song list"
-                  className="relative mt-4 block aspect-[3/2] overflow-hidden border border-white/12 bg-[#f4f1eb] transition hover:border-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                >
-                  <Image
-                    src={siteConfig.sampleSongListPath}
-                    alt="Rock Steady sample song list"
-                    fill
-                    sizes="(min-width: 1280px) 22vw, (min-width: 768px) 45vw, 100vw"
-                    className="object-cover object-top"
-                  />
-                </a>
-                <div className="mt-auto flex flex-wrap gap-2 pt-5">
-                  <a
-                    href={siteConfig.sampleSongListPath}
-                    download
-                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
-                  >
-                    Song list PNG
-                  </a>
-                </div>
-              </div>
+              <SampleSongListCard
+                imagePath={siteConfig.sampleSongListPath}
+                variant="pressKit"
+              />
 
               <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
                 <p className="text-sm font-black uppercase text-[#ffcf33]">
