@@ -25,6 +25,7 @@ export const siteConfig = {
   email: "info@rocksteadybandaz.com",
   logoPath: "/images/rock-steady-logo.png",
   horizontalLogoPath: "/images/rock-steady-horizontal.png",
+  sampleSongListPath: "/images/rock-steady-sample-song-list.png",
   iconPath: "/images/rock-steady-rs.png",
   heroImagePath: "/images/show-07.jpg",
   keywords: [
