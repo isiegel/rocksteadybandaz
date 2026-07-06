@@ -769,7 +769,7 @@ export default function Home() {
                 Booking
               </p>
               <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                Book a Phoenix cover band for your place.
+                Book Rock Steady for your venue or event.
               </h2>
               <p className="mt-5 text-lg leading-8 text-white/72">
                 Bars, neighborhood parties, private events, charity nights, and
