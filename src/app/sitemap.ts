@@ -28,5 +28,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       ],
     },
+    {
+      url: absoluteUrl("/book"),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+      images: [
+        absoluteUrl(siteConfig.heroImagePath),
+        absoluteUrl(siteConfig.horizontalLogoPath),
+      ],
+    },
   ];
 }

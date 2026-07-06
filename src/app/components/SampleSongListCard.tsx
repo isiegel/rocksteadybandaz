@@ -11,6 +11,7 @@ import {
 
 type SampleSongListCardProps = {
   imagePath: string;
+  previewImagePath?: string;
   variant?: 'feature' | 'pressKit';
 };
 
@@ -19,6 +20,7 @@ const modalFadeMs = 180;
 
 export function SampleSongListCard({
   imagePath,
+  previewImagePath = imagePath,
   variant = 'feature',
 }: SampleSongListCardProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -114,7 +116,7 @@ export function SampleSongListCard({
         }`}
       >
         <Image
-          src={imagePath}
+          src={previewImagePath}
           alt={imageAlt}
           fill
           sizes={

@@ -1,19 +1,20 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { rockslide } from "../fonts";
 
 const navLinks = [
-  { href: "#shows", id: "shows", label: "Shows" },
-  { href: "#video", id: "video", label: "Video" },
-  { href: "#music", id: "music", label: "Music" },
-  { href: "#sound", id: "sound", label: "Sound" },
-  { href: "#photos", id: "photos", label: "Photos" },
+  { href: "/#shows", id: "shows", label: "Shows" },
+  { href: "/#video", id: "video", label: "Video" },
+  { href: "/#music", id: "music", label: "Music" },
+  { href: "/#sound", id: "sound", label: "Sound" },
+  { href: "/#photos", id: "photos", label: "Photos" },
 ];
 
-// href targets the form card directly so the click lands on the inputs, while
-// id stays "booking" for IntersectionObserver active-section tracking.
-const bookingLink = { href: "#book-form", id: "booking", label: "Book" };
+// The booking route is shareable for venue managers, while id stays "booking"
+// for homepage IntersectionObserver active-section tracking.
+const bookingLink = { href: "/book", id: "booking", label: "Book" };
 
 export function ShrinkingHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -108,8 +109,8 @@ export function ShrinkingHeader() {
       }`}
     >
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
-        <a
-          href="#top"
+        <Link
+          href="/#top"
           aria-label="Rock Steady home"
           className={`hero-wordmark ${rockslide.className} block shrink-0 whitespace-nowrap leading-none transition-all duration-500 ease-in-out ${
             isScrolled
@@ -118,7 +119,7 @@ export function ShrinkingHeader() {
           }`}
         >
           Rock Steady
-        </a>
+        </Link>
 
         <nav
           aria-label="Main navigation"
@@ -129,7 +130,7 @@ export function ShrinkingHeader() {
           {navLinks.map((link) => {
             const isActive = activeId === link.id;
             return (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
@@ -140,11 +141,11 @@ export function ShrinkingHeader() {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             );
           })}
 
-          <a
+          <Link
             href={bookingLink.href}
             aria-current={activeId === bookingLink.id ? "true" : undefined}
             className={`rounded-full border px-4 py-2 transition outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33] ${
@@ -154,17 +155,17 @@ export function ShrinkingHeader() {
             }`}
           >
             {bookingLink.label}
-          </a>
+          </Link>
         </nav>
 
         <div className="flex shrink-0 items-center gap-2 lg:hidden">
-          <a
+          <Link
             href={bookingLink.href}
             onClick={() => setMenuOpen(false)}
             className="inline-flex h-10 items-center rounded-full bg-[#ffcf33] px-4 text-xs font-black uppercase text-black transition hover:bg-(--rock-steady-red) hover:text-white outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33]"
           >
             {bookingLink.label}
-          </a>
+          </Link>
 
           <button
             ref={menuButtonRef}
@@ -209,7 +210,7 @@ export function ShrinkingHeader() {
           {navLinks.map((link) => {
             const isActive = activeId === link.id;
             return (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
@@ -221,7 +222,7 @@ export function ShrinkingHeader() {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             );
           })}
         </div>

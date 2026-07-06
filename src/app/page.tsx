@@ -1,17 +1,17 @@
 import Image from 'next/image';
+import {
+  absoluteBookingAssets,
+  bookingAssets,
+  bookingAvailabilityCopy,
+  bookingAvailabilityLabel,
+  bookingEmailHref,
+} from './booking';
 import { BackToTop } from './components/BackToTop';
-import { BookingForm } from './components/BookingForm';
 import { DayOfShowBanner } from './components/DayOfShowBanner';
 import { SampleSongListCard } from './components/SampleSongListCard';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
-import {
-  FacebookIcon,
-  InstagramIcon,
-  MailIcon,
-} from './components/SocialIcons';
 import { UpcomingShows } from './components/UpcomingShows';
 import { VideoEmbed } from './components/VideoEmbed';
-import { rockslide } from './fonts';
 import { absoluteUrl, siteConfig } from './seo';
 import {
   dayOfShowBannerShows,
@@ -21,37 +21,12 @@ import {
   upcomingShows,
   type Show,
 } from './shows';
+import { soundGear } from './sound-gear';
 
 const upcoming = upcomingShows();
 const dayOfShowBannerShowList = dayOfShowBannerShows();
 const youtubeVideoId = siteConfig.video.youtubeId;
 const youtubeWatchUrl = `https://youtu.be/${youtubeVideoId}`;
-const bookingEmailSubject = 'Booking inquiry for Rock Steady';
-const bookingEmailBody = [
-  'Hi Rock Steady,',
-  '',
-  'I would like to check availability for an event.',
-  '',
-  'Date:',
-  'Venue / city:',
-  'Event type:',
-  'Approximate set length:',
-  'Expected crowd size:',
-  'Contact name and phone:',
-  '',
-  'Notes:',
-].join('\n');
-const bookingEmailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
-  bookingEmailSubject,
-)}&body=${encodeURIComponent(bookingEmailBody)}`;
-
-function RockSteadyFill({ className = '' }: { className?: string }) {
-  return (
-    <span className={['rock-steady-fill', className].filter(Boolean).join(' ')}>
-      {'Rock Steady'}
-    </span>
-  );
-}
 
 const gallery = [
   {
@@ -79,33 +54,6 @@ const gallery = [
   {
     src: '/images/show-11.jpg',
     alt: 'Rock Steady performing on the stage at an Irish pub under blue lights',
-  },
-];
-
-const soundGear = [
-  {
-    name: 'QSC',
-    src: '/images/qsc-logo.png',
-    role: 'Powered PA & speakers',
-    url: 'https://www.qsc.com/',
-    width: 934,
-    height: 185,
-  },
-  {
-    name: 'Mackie',
-    src: '/images/mackie-logo.svg',
-    role: 'Subwoofers',
-    url: 'https://mackie.com/',
-    width: 193,
-    height: 26,
-  },
-  {
-    name: 'Zoom',
-    src: '/images/zoom-logo.svg',
-    role: 'Digital mixing & recording',
-    url: 'https://zoomcorp.com/',
-    width: 144,
-    height: 21,
   },
 ];
 
@@ -220,13 +168,18 @@ const bookingServiceStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   '@id': `${siteConfig.url}/#booking-service`,
-  name: 'Phoenix classic rock cover band booking',
-  description:
-    'Live classic rock cover band booking for Phoenix-area bars, patios, private parties, corporate events, charity nights, and neighborhood events.',
+  name: '2027 Phoenix classic rock cover band booking',
+  description: bookingAvailabilityCopy,
   serviceType: siteConfig.bookingServiceTypes,
   provider: bandStructuredDataRef,
   areaServed: areaServedStructuredData,
-  url: absoluteUrl('/#booking'),
+  url: absoluteUrl('/book'),
+  subjectOf: absoluteBookingAssets.map((asset) => ({
+    '@type': 'DigitalDocument',
+    name: asset.title,
+    url: asset.url,
+    description: asset.description,
+  })),
 };
 
 function showEventUrl(show: Show): string {
@@ -331,16 +284,19 @@ const structuredData = {
     '@type': 'ContactPoint',
     contactType: 'booking',
     email: siteConfig.email,
-    url: siteConfig.facebookUrl,
+    url: absoluteUrl('/book'),
     areaServed: 'US-AZ',
   },
   makesOffer: {
     '@type': 'Offer',
-    url: absoluteUrl('/#booking'),
+    name: bookingAvailabilityLabel,
+    description: bookingAvailabilityCopy,
+    url: absoluteUrl('/book'),
+    availability: 'https://schema.org/InStock',
     itemOffered: {
       '@type': 'Service',
       '@id': `${siteConfig.url}/#booking-service`,
-      name: 'Phoenix classic rock cover band booking',
+      name: '2027 Phoenix classic rock cover band booking',
     },
   },
   ...(upcoming.length > 0 && {
@@ -417,7 +373,7 @@ export default function Home() {
           <div className="relative mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <p className="mb-4 inline-flex rounded-full border border-[#ffcf33]/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-[#ffcf33] shadow-[0_0_22px_rgba(255,207,51,0.18)]">
-                Phoenix classic rock cover band
+                {bookingAvailabilityLabel}
               </p>
               {/* The visible wordmark now lives in the header; this keeps a
                   single descriptive h1 on the page for SEO and screen readers. */}
@@ -428,16 +384,16 @@ export default function Home() {
               <p className="mt-6 max-w-2xl text-lg font-bold leading-8 text-white/88 sm:text-xl">
                 Rock Steady is a female-fronted Phoenix cover band with loud
                 guitars, big vocals, and the songs people shout back from the
-                first round to last call. Book the local rock party for bars,
-                patios, private events, corporate nights, and neighborhood
-                events across the Valley.
+                first round to last call. We are already booking 2027 dates for
+                bars, patios, private events, corporate nights, charity nights,
+                and neighborhood events across the Valley.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href="#book-form"
+                  href="/book"
                   className="rounded-full bg-(--rock-steady-red) px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
-                  Book a rock party
+                  Check 2027 availability
                 </a>
                 <a
                   href="#video"
@@ -492,8 +448,9 @@ export default function Home() {
                     </h3>
                     <p className="mt-3 leading-7 text-white/70">
                       Have a room, patio, neighborhood event, or private party
-                      that needs a cover band with some bite? Send the date and
-                      location and we will talk details.
+                      that needs a cover band with some bite? Send the 2027
+                      date, location, and room details and we will talk next
+                      steps.
                     </p>
                   </>
                 )}
@@ -628,7 +585,10 @@ export default function Home() {
                 </ul>
               </div>
 
-              <SampleSongListCard imagePath={siteConfig.sampleSongListPath} />
+              <SampleSongListCard
+                imagePath={siteConfig.sampleSongListPath}
+                previewImagePath={siteConfig.sampleSongListPreviewPath}
+              />
             </div>
           </div>
         </section>
@@ -762,75 +722,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="booking" className="px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl gap-8 border-y border-white/12 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-            <div>
-              <p className="text-sm font-black uppercase text-[#ffcf33]">
-                Booking
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                Book Rock Steady for your venue or event.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-white/72">
-                Bars, neighborhood parties, private events, charity nights, and
-                patio hangs all work. Send the date, city, venue, rough set
-                length, and the kind of night you want.
-              </p>
-            </div>
-
-            <div
-              id="book-form"
-              className="scroll-mt-28 border border-white/12 bg-[#101010] p-6"
-            >
-              <p className="text-2xl font-black text-white">
-                Check availability
-              </p>
-              <p className="mt-3 leading-7 text-white/70">
-                Send one quick inquiry with the details venues usually need:
-                date, city, event type, set length, crowd size, and the best
-                contact.
-              </p>
-              <div className="mt-6">
-                <BookingForm
-                  mailtoHref={bookingEmailHref}
-                  cities={valleySpots}
-                />
-              </div>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <a
-                  href={siteConfig.facebookUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Rock Steady on Facebook"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#1877F2] px-5 py-3 text-sm font-black uppercase text-white transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                >
-                  <FacebookIcon className="h-5 w-5 fill-current" />
-                  Facebook
-                </a>
-                <a
-                  href={siteConfig.instagramUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Rock Steady on Instagram"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-tr from-[#feda75] via-[#d62976] to-[#4f5bd5] px-5 py-3 text-sm font-black uppercase text-white transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                >
-                  <InstagramIcon className="h-5 w-5 fill-current" />
-                  Instagram
-                </a>
-                <a
-                  href={bookingEmailHref}
-                  aria-label="Email Rock Steady"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#37d67a] px-5 py-3 text-sm font-black uppercase text-[#06140b] transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                >
-                  <MailIcon className="h-5 w-5 fill-current" />
-                  Email
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="press" className="px-4 pb-20 sm:px-6 lg:px-8">
+        <section id="press" className="px-4 py-20 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="max-w-3xl">
               <p className="text-sm font-black uppercase text-[#37d67a]">
@@ -853,7 +745,7 @@ export default function Home() {
                 </p>
                 <div className="relative mt-4 h-24 w-full bg-black/30">
                   <Image
-                    src={siteConfig.horizontalLogoPath}
+                    src={siteConfig.horizontalLogoPreviewPath}
                     alt="Rock Steady logo"
                     fill
                     sizes="(min-width: 1024px) 24vw, 100vw"
@@ -909,8 +801,30 @@ export default function Home() {
 
               <SampleSongListCard
                 imagePath={siteConfig.sampleSongListPath}
+                previewImagePath={siteConfig.sampleSongListPreviewPath}
                 variant="pressKit"
               />
+
+              <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
+                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                  Venue docs
+                </p>
+                <div className="mt-4 grid gap-2">
+                  {bookingAssets.map((asset) => (
+                    <a
+                      key={asset.href}
+                      href={asset.href}
+                      download
+                      className="border border-white/15 bg-black/30 px-4 py-3 text-sm font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
+                    >
+                      {asset.title} PDF
+                    </a>
+                  ))}
+                </div>
+                <p className="mt-auto pt-5 text-xs font-bold leading-5 text-white/55">
+                  One-sheet, stage plot, and input list for 2027 venue advance.
+                </p>
+              </div>
 
               <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
                 <p className="text-sm font-black uppercase text-[#ffcf33]">
@@ -970,7 +884,8 @@ export default function Home() {
             </div>
 
             <p className="mt-4 text-sm font-bold text-white/60">
-              Need a stage plot or input list for your room?{' '}
+              Need room-specific production details beyond the downloadable
+              stage plot and input list?{' '}
               <a
                 href={bookingEmailHref}
                 className="text-[#ffcf33] underline-offset-4 hover:underline"
@@ -983,151 +898,6 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10 bg-black px-4 py-10 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
-            <div className="flex flex-col items-center gap-3 md:items-start">
-              <RockSteadyFill
-                className={`${rockslide.className} text-3xl leading-none`}
-              />
-              <p className="text-sm font-bold text-white/55">
-                <span className="font-black uppercase text-[#ffcf33]">
-                  It&apos;s a Rock Party!
-                </span>
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center gap-4 md:items-end">
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="text-sm font-bold text-white/70 transition hover:text-[#ffcf33]"
-              >
-                {siteConfig.email}
-              </a>
-              <div className="flex items-center gap-4">
-                <a
-                  href={siteConfig.facebookUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Rock Steady on Facebook"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                >
-                  <FacebookIcon className="h-5 w-5 fill-current" />
-                </a>
-                <a
-                  href={siteConfig.instagramUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Rock Steady on Instagram"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                >
-                  <InstagramIcon className="h-5 w-5 fill-current" />
-                </a>
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  aria-label="Email Rock Steady"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                >
-                  <MailIcon className="h-5 w-5 fill-current" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="mx-auto mt-8 w-fit py-3 text-center md:mx-0 md:text-left"
-            aria-label="Rock Steady uses Gibson guitars and Ludwig drums because they want the best."
-          >
-            <p className="text-[0.65rem] font-black uppercase leading-tight tracking-[0.12em] text-white">
-              <RockSteadyFill
-                className={`${rockslide.className} normal-case tracking-normal inline-block mr-2`}
-              />
-              uses Gibson guitars
-              <br /> and Ludwig drums because
-              <br /> they want the best.
-            </p>
-            <div className="relative mt-2 h-7">
-              <a
-                href="https://www.gibson.com/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Gibson guitars"
-                className="absolute left-0 top-0 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-              >
-                <Image
-                  src="/images/gibson-logo.svg"
-                  alt="Gibson"
-                  width={63}
-                  height={40}
-                  unoptimized
-                  className="h-7 w-auto"
-                />
-              </a>
-              <a
-                href="https://www.ludwig-drums.com/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Ludwig drums"
-                className="absolute right-2 -top-2 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-              >
-                <Image
-                  src="/images/ludwig-logo.svg"
-                  alt="Ludwig"
-                  width={269}
-                  height={87}
-                  unoptimized
-                  className="h-6 w-16 origin-top-right rotate-[-15deg] object-contain object-right"
-                />
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-col items-center gap-4 border-t border-white/10 pt-6 sm:flex-row sm:justify-center">
-            <span className="text-[0.65rem] font-black uppercase tracking-[0.12em] text-white/45">
-              Pro sound by
-            </span>
-            <div className="flex items-center gap-7">
-              {soundGear.map((gear) => (
-                <a
-                  key={gear.name}
-                  href={gear.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={gear.name}
-                  className="block opacity-60 transition hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-                >
-                  <Image
-                    src={gear.src}
-                    alt={gear.name}
-                    width={gear.width}
-                    height={gear.height}
-                    unoptimized
-                    className="h-5 w-auto"
-                  />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-col items-center gap-1 border-t border-white/10 pt-6 text-xs font-bold text-white/45 sm:flex-row sm:justify-between sm:gap-0">
-            <p>
-              &copy; {new Date().getFullYear()} Rock Steady. All rights
-              reserved.
-            </p>
-            <p>
-              Developed by{' '}
-              <a
-                href="https://siegelcraft.com"
-                target="_blank"
-                rel="noreferrer"
-                className="text-white/70 transition hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
-              >
-                Siegelcraft
-              </a>
-            </p>
-          </div>
-        </div>
-      </footer>
       <DayOfShowBanner shows={dayOfShowBannerShowList} />
       <BackToTop />
     </>

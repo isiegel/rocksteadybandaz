@@ -12,7 +12,7 @@ export const siteConfig = {
   name: "Rock Steady",
   title: "Rock Steady | Phoenix Classic Rock Cover Band",
   description:
-    "Book Rock Steady, a female-fronted Phoenix classic rock cover band for bars, patios, private parties, corporate events, and neighborhood nights across Arizona.",
+    "Now booking 2027 dates: book Rock Steady, a female-fronted Phoenix classic rock cover band for bars, patios, private parties, corporate events, and neighborhood nights across Arizona.",
   url: siteUrl.replace(/\/$/, ""),
   alternateNames: [
     "Rock Steady Band AZ",
@@ -24,8 +24,11 @@ export const siteConfig = {
   instagramHandle: "rock.steady.band.az",
   email: "info@rocksteadybandaz.com",
   logoPath: "/images/rock-steady-logo.png",
+  logoPreviewPath: "/images/rock-steady-logo-preview.webp",
   horizontalLogoPath: "/images/rock-steady-horizontal.png",
+  horizontalLogoPreviewPath: "/images/rock-steady-horizontal-preview.webp",
   sampleSongListPath: "/images/rock-steady-sample-song-list.png",
+  sampleSongListPreviewPath: "/images/rock-steady-sample-song-list-preview.webp",
   iconPath: "/images/rock-steady-rs.png",
   heroImagePath: "/images/show-07.jpg",
   keywords: [
@@ -49,6 +52,8 @@ export const siteConfig = {
     "private party band Scottsdale",
     "bar band Phoenix",
     "corporate event band Phoenix",
+    "2027 band booking Phoenix",
+    "2027 live music Phoenix",
   ],
   searchTopics: [
     "Phoenix cover band",

@@ -27,6 +27,26 @@ const EVENT_TYPES = [
   'Other',
 ];
 
+const DATE_FLEXIBILITY_OPTIONS = [
+  'Date is confirmed',
+  'Date is flexible',
+  'Looking at a few dates',
+];
+
+const SETTING_OPTIONS = [
+  'Indoor',
+  'Outdoor',
+  'Indoor or outdoor',
+  'Not sure yet',
+];
+
+const SOUND_OPTIONS = [
+  'Rock Steady provides PA',
+  'Venue has house sound',
+  'Need to coordinate sound',
+  'Not sure yet',
+];
+
 const OTHER = 'Other';
 
 // text-base (16px) on phones, text-sm (14px) at >=640px: 16px is the threshold
@@ -203,7 +223,10 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
   // state so they can be cleared on "send another".
   const [phone, setPhone] = useState('');
   const [eventDate, setEventDate] = useState('');
+  const [dateFlexibility, setDateFlexibility] = useState('');
   const [eventType, setEventType] = useState('');
+  const [eventSetting, setEventSetting] = useState('');
+  const [soundPlan, setSoundPlan] = useState('');
   const [city, setCity] = useState('');
   const [otherCity, setOtherCity] = useState('');
 
@@ -230,7 +253,10 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
   function resetFields() {
     setPhone('');
     setEventDate('');
+    setDateFlexibility('');
     setEventType('');
+    setEventSetting('');
+    setSoundPlan('');
     setCity('');
     setOtherCity('');
   }
@@ -244,7 +270,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
         aria-label="Check Rock Steady availability by email"
         className="inline-flex items-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-(--rock-steady-red) hover:text-white focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
       >
-        Check availability by email
+        Check 2027 availability by email
       </a>
     );
   }
@@ -322,7 +348,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
       <input
         type="hidden"
         name="_subject"
-        value="New booking inquiry — Rock Steady"
+        value="New 2027 booking inquiry - Rock Steady"
       />
       {/* Honeypot: bots fill hidden fields; Formspree silently drops anything
           that arrives with _gotcha set. Hidden from users and assistive tech. */}
@@ -365,25 +391,6 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div>
-          <label htmlFor="phone" className={labelClass}>
-            Phone
-          </label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            inputMode="tel"
-            autoComplete="tel"
-            placeholder="(555) 123-4567"
-            value={phone}
-            onChange={(e) => setPhone(formatPhone(e.target.value))}
-            pattern="\(\d{3}\) \d{3}-\d{4}"
-            title="Enter a 10-digit phone number, e.g. (555) 123-4567"
-            maxLength={14}
-            className={fieldClass}
-          />
-        </div>
         {/* The native iOS date control enforces a min-width wider than this column
             and ignores width:100%/min-width:0, so it overflows. The two things that DO
             cap it — -webkit-appearance:none and an overflow:hidden ancestor — each
@@ -394,12 +401,12 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
             than the field's own right border. */}
         <div className="min-w-0">
           <label htmlFor="event-date" className={labelClass}>
-            Event date
+            Preferred event date
           </label>
           <div className="overflow-clip border border-white/15 bg-black/40 transition focus-within:border-[#ffcf33] focus-within:ring-2 focus-within:ring-[#ffcf33]">
             <input
               id="event-date"
-              name="event date"
+              name="preferred event date"
               type="date"
               value={eventDate}
               onChange={(e) => setEventDate(e.target.value)}
@@ -408,6 +415,19 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
               }`}
             />
           </div>
+        </div>
+        <div>
+          <label htmlFor={`${baseId}-date-flexibility`} className={labelClass}>
+            Date flexibility
+          </label>
+          <CustomSelect
+            id={`${baseId}-date-flexibility`}
+            name="date flexibility"
+            value={dateFlexibility}
+            onChange={setDateFlexibility}
+            options={DATE_FLEXIBILITY_OPTIONS}
+            placeholder="Choose one"
+          />
         </div>
       </div>
 
@@ -456,6 +476,35 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
+          <label htmlFor={`${baseId}-event-setting`} className={labelClass}>
+            Indoor / outdoor
+          </label>
+          <CustomSelect
+            id={`${baseId}-event-setting`}
+            name="indoor / outdoor"
+            value={eventSetting}
+            onChange={setEventSetting}
+            options={SETTING_OPTIONS}
+            placeholder="Choose one"
+          />
+        </div>
+        <div>
+          <label htmlFor={`${baseId}-sound-plan`} className={labelClass}>
+            PA / sound
+          </label>
+          <CustomSelect
+            id={`${baseId}-sound-plan`}
+            name="pa / sound"
+            value={soundPlan}
+            onChange={setSoundPlan}
+            options={SOUND_OPTIONS}
+            placeholder="Choose one"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
           <label htmlFor="set-length" className={labelClass}>
             Set length
           </label>
@@ -479,6 +528,40 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
             min={1}
             step={1}
             placeholder="e.g. 120"
+            className={fieldClass}
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="load-in" className={labelClass}>
+            Load-in / start time
+          </label>
+          <input
+            id="load-in"
+            name="load-in / start time"
+            type="text"
+            placeholder="e.g. load in 5 PM, music 8 PM"
+            className={fieldClass}
+          />
+        </div>
+        <div>
+          <label htmlFor="phone" className={labelClass}>
+            Phone
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            placeholder="(555) 123-4567"
+            value={phone}
+            onChange={(e) => setPhone(formatPhone(e.target.value))}
+            pattern="\(\d{3}\) \d{3}-\d{4}"
+            title="Enter a 10-digit phone number, e.g. (555) 123-4567"
+            maxLength={14}
             className={fieldClass}
           />
         </div>
@@ -519,7 +602,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
           disabled={submitting}
           className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-(--rock-steady-red) hover:text-white focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {submitting ? 'Sending…' : 'Send booking inquiry'}
+          {submitting ? 'Sending…' : 'Send 2027 booking inquiry'}
         </button>
         {/* Native reset clears the uncontrolled inputs; resetFields clears the
             controlled state (phone, city, event type). */}

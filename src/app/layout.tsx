@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { SiteFooter } from "./components/SiteFooter";
 import { absoluteUrl, siteConfig } from "./seo";
 
 const title = {
@@ -92,7 +93,10 @@ export default function RootLayout({
           by browser extensions (password managers, Grammarly, etc.) that inject
           attributes before React hydrates. It only suppresses the body element
           itself, not its children, so real hydration bugs still surface. */}
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }
