@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import {
+  absoluteBookingAssets,
   bookingAssets,
   bookingAvailabilityCopy,
   bookingAvailabilityLabel,
@@ -72,6 +73,12 @@ const bookingPageStructuredData = {
     name: `${city}, Arizona`,
   })),
   url: absoluteUrl('/book'),
+  subjectOf: absoluteBookingAssets.map((asset) => ({
+    '@type': 'DigitalDocument',
+    name: asset.title,
+    url: asset.url,
+    description: asset.description,
+  })),
 };
 
 const eventFit = [
