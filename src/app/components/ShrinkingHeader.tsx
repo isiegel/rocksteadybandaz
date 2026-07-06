@@ -12,9 +12,9 @@ const navLinks = [
   { href: "/#photos", id: "photos", label: "Photos" },
 ];
 
-// The booking route is shareable for venue managers, while id stays "booking"
-// for homepage IntersectionObserver active-section tracking.
-const bookingLink = { href: "/book", id: "booking", label: "Book" };
+// Keep the shareable booking page canonical at /book, but action clicks should
+// land on the form when the user is already on that page.
+const bookingLink = { href: "/book#booking", id: "booking", label: "Book" };
 
 export function ShrinkingHeader() {
   const [isScrolled, setIsScrolled] = useState(false);

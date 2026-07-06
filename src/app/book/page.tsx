@@ -6,6 +6,9 @@ import {
   bookingAvailabilityCopy,
   bookingAvailabilityLabel,
   bookingEmailHref,
+  bookingServiceName,
+  bookingYear,
+  checkAvailabilityLabel,
 } from '../booking';
 import { BackToTop } from '../components/BackToTop';
 import { BookingForm } from '../components/BookingForm';
@@ -19,16 +22,18 @@ import { rockslide } from '../fonts';
 import { absoluteUrl, siteConfig } from '../seo';
 
 const bookingPageDescription =
-  'Now booking 2027 dates: check Rock Steady availability for Phoenix-area bars, patios, private parties, corporate events, charity nights, and neighborhood events.';
+  `Now booking ${bookingYear} dates: check Rock Steady availability for Phoenix-area bars, patios, private parties, corporate events, charity nights, and neighborhood events.`;
+
+const bookingPageTitle = `Book Rock Steady for ${bookingYear}`;
 
 export const metadata: Metadata = {
-  title: 'Book Rock Steady for 2027',
+  title: bookingPageTitle,
   description: bookingPageDescription,
   alternates: {
     canonical: '/book',
   },
   openGraph: {
-    title: 'Book Rock Steady for 2027',
+    title: bookingPageTitle,
     description: bookingPageDescription,
     url: '/book',
     siteName: siteConfig.name,
@@ -45,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Book Rock Steady for 2027',
+    title: bookingPageTitle,
     description: bookingPageDescription,
     images: [
       {
@@ -60,7 +65,7 @@ const bookingPageStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   '@id': `${siteConfig.url}/#booking-service`,
-  name: '2027 Phoenix classic rock cover band booking',
+  name: bookingServiceName,
   description: bookingAvailabilityCopy,
   serviceType: siteConfig.bookingServiceTypes,
   provider: {
@@ -115,7 +120,7 @@ export default function BookPage() {
                 <span className={`${rockslide.className} rock-steady-fill`}>
                   Rock Steady
                 </span>{' '}
-                for your 2027 venue or event.
+                for your {bookingYear} venue or event.
               </h1>
               <p className="mt-6 max-w-2xl text-lg font-bold leading-8 text-white/74">
                 {bookingAvailabilityCopy} Send the date, room, schedule, sound
@@ -168,7 +173,7 @@ export default function BookPage() {
               className="scroll-mt-28 border border-white/12 bg-[#101010] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.32)]"
             >
               <p className="text-2xl font-black text-white">
-                Check 2027 availability
+                {checkAvailabilityLabel}
               </p>
               <p className="mt-3 leading-7 text-white/70">
                 Tell us about the date, venue or city, event type, set length,
@@ -177,6 +182,7 @@ export default function BookPage() {
               <div className="mt-6">
                 <BookingForm
                   mailtoHref={bookingEmailHref}
+                  bookingYear={bookingYear}
                   cities={[
                     'Phoenix',
                     'Scottsdale',
@@ -211,7 +217,7 @@ export default function BookPage() {
               </h2>
               <p className="mt-5 text-lg leading-8 text-white/72">
                 Download the one-sheet, stage plot, and input list for a quick
-                2027 booking review or house-production advance.
+                {bookingYear} booking review or house-production advance.
               </p>
             </div>
 

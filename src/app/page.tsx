@@ -5,6 +5,9 @@ import {
   bookingAvailabilityCopy,
   bookingAvailabilityLabel,
   bookingEmailHref,
+  bookingServiceName,
+  bookingYear,
+  checkAvailabilityLabel,
 } from './booking';
 import { BackToTop } from './components/BackToTop';
 import { DayOfShowBanner } from './components/DayOfShowBanner';
@@ -168,7 +171,7 @@ const bookingServiceStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   '@id': `${siteConfig.url}/#booking-service`,
-  name: '2027 Phoenix classic rock cover band booking',
+  name: bookingServiceName,
   description: bookingAvailabilityCopy,
   serviceType: siteConfig.bookingServiceTypes,
   provider: bandStructuredDataRef,
@@ -296,7 +299,7 @@ const structuredData = {
     itemOffered: {
       '@type': 'Service',
       '@id': `${siteConfig.url}/#booking-service`,
-      name: '2027 Phoenix classic rock cover band booking',
+      name: bookingServiceName,
     },
   },
   ...(upcoming.length > 0 && {
@@ -384,16 +387,16 @@ export default function Home() {
               <p className="mt-6 max-w-2xl text-lg font-bold leading-8 text-white/88 sm:text-xl">
                 Rock Steady is a female-fronted Phoenix cover band with loud
                 guitars, big vocals, and the songs people shout back from the
-                first round to last call. We are already booking 2027 dates for
-                bars, patios, private events, corporate nights, charity nights,
-                and neighborhood events across the Valley.
+                first round to last call. We are already booking {bookingYear}{' '}
+                dates for bars, patios, private events, corporate nights,
+                charity nights, and neighborhood events across the Valley.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href="/book"
+                  href="/book#booking"
                   className="rounded-full bg-(--rock-steady-red) px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
-                  Check 2027 availability
+                  {checkAvailabilityLabel}
                 </a>
                 <a
                   href="#video"
@@ -448,9 +451,9 @@ export default function Home() {
                     </h3>
                     <p className="mt-3 leading-7 text-white/70">
                       Have a room, patio, neighborhood event, or private party
-                      that needs a cover band with some bite? Send the 2027
-                      date, location, and room details and we will talk next
-                      steps.
+                      that needs a cover band with some bite? Send the{' '}
+                      {bookingYear} date, location, and room details and we will
+                      talk next steps.
                     </p>
                   </>
                 )}
@@ -822,7 +825,8 @@ export default function Home() {
                   ))}
                 </div>
                 <p className="mt-auto pt-5 text-xs font-bold leading-5 text-white/55">
-                  One-sheet, stage plot, and input list for 2027 venue advance.
+                  One-sheet, stage plot, and input list for {bookingYear} venue
+                  advance.
                 </p>
               </div>
 

@@ -1,16 +1,23 @@
 import { absoluteUrl, siteConfig } from './seo';
+import { bookingYear } from './booking-year';
 
-export const bookingAvailabilityLabel = 'Now booking 2027 dates';
+export { bookingYear };
+
+export const bookingAvailabilityLabel = `Now booking ${bookingYear} dates`;
+
+export const checkAvailabilityLabel = `Check ${bookingYear} availability`;
+
+export const bookingServiceName = `${bookingYear} Phoenix classic rock cover band booking`;
 
 export const bookingAvailabilityCopy =
-  'Rock Steady is already booking 2027 venue, patio, private-event, corporate, charity, and neighborhood dates across the Phoenix area.';
+  `Rock Steady is already booking ${bookingYear} venue, patio, private-event, corporate, charity, and neighborhood dates across the Phoenix area.`;
 
-export const bookingEmailSubject = '2027 booking inquiry for Rock Steady';
+export const bookingEmailSubject = `${bookingYear} booking inquiry for Rock Steady`;
 
 export const bookingEmailBody = [
   'Hi Rock Steady,',
   '',
-  'I would like to check availability for a 2027 event.',
+  `I would like to check availability for a ${bookingYear} event.`,
   '',
   'Preferred date:',
   'Is the date flexible?',

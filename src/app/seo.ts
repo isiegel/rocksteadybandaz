@@ -1,3 +1,5 @@
+import { bookingYear } from './booking-year';
+
 // Default to the production domain so canonical URLs, og:url, the sitemap,
 // and JSON-LD @id never fall back to localhost when NEXT_PUBLIC_SITE_URL is
 // unset on the server. Override the env var only for non-production hosts.
@@ -11,8 +13,7 @@ const siteUrl = /^https?:\/\//.test(configuredSiteUrl)
 export const siteConfig = {
   name: "Rock Steady",
   title: "Rock Steady | Phoenix Classic Rock Cover Band",
-  description:
-    "Now booking 2027 dates: book Rock Steady, a female-fronted Phoenix classic rock cover band for bars, patios, private parties, corporate events, and neighborhood nights across Arizona.",
+  description: `Now booking ${bookingYear} dates: book Rock Steady, a female-fronted Phoenix classic rock cover band for bars, patios, private parties, corporate events, and neighborhood nights across Arizona.`,
   url: siteUrl.replace(/\/$/, ""),
   alternateNames: [
     "Rock Steady Band AZ",
@@ -52,8 +53,8 @@ export const siteConfig = {
     "private party band Scottsdale",
     "bar band Phoenix",
     "corporate event band Phoenix",
-    "2027 band booking Phoenix",
-    "2027 live music Phoenix",
+    `${bookingYear} band booking Phoenix`,
+    `${bookingYear} live music Phoenix`,
   ],
   searchTopics: [
     "Phoenix cover band",

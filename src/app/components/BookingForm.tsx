@@ -14,6 +14,8 @@ type Status = 'idle' | 'submitting' | 'success' | 'error';
 type BookingFormProps = {
   /** mailto: link used as a fallback when the form endpoint isn't configured. */
   mailtoHref: string;
+  /** Year displayed in booking copy and submitted subject lines. */
+  bookingYear: number;
   /** Cities offered in the venue/city dropdown (the site's Phoenix range). */
   cities: string[];
 };
@@ -215,7 +217,11 @@ function CustomSelect({
   );
 }
 
-export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
+export function BookingForm({
+  mailtoHref,
+  bookingYear,
+  cities,
+}: BookingFormProps) {
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
 
@@ -270,7 +276,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
         aria-label="Check Rock Steady availability by email"
         className="inline-flex items-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-(--rock-steady-red) hover:text-white focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
       >
-        Check 2027 availability by email
+        Check {bookingYear} availability by email
       </a>
     );
   }
@@ -348,7 +354,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
       <input
         type="hidden"
         name="_subject"
-        value="New 2027 booking inquiry - Rock Steady"
+        value={`New ${bookingYear} booking inquiry - Rock Steady`}
       />
       {/* Honeypot: bots fill hidden fields; Formspree silently drops anything
           that arrives with _gotcha set. Hidden from users and assistive tech. */}
@@ -602,7 +608,7 @@ export function BookingForm({ mailtoHref, cities }: BookingFormProps) {
           disabled={submitting}
           className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-(--rock-steady-red) hover:text-white focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {submitting ? 'Sending…' : 'Send 2027 booking inquiry'}
+          {submitting ? 'Sending…' : `Send ${bookingYear} booking inquiry`}
         </button>
         {/* Native reset clears the uncontrolled inputs; resetFields clears the
             controlled state (phone, city, event type). */}
