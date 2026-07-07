@@ -831,45 +831,47 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-[#ffcf33]">
-                  Contact
-                </p>
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="mt-4 block text-lg font-black text-white transition hover:text-[#ffcf33]"
-                >
-                  {siteConfig.email}
-                </a>
-                <div className="mt-auto flex flex-wrap gap-2 pt-5">
-                  <a
-                    href={siteConfig.facebookUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Rock Steady on Facebook"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#1877f2] text-white transition hover:brightness-110"
-                  >
-                    <FacebookIcon className="h-5 w-5 fill-current" />
-                  </a>
-                  <a
-                    href={siteConfig.instagramUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Rock Steady on Instagram"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)] text-white transition hover:brightness-110"
-                  >
-                    <InstagramIcon className="h-5 w-5 fill-current" />
-                  </a>
-                </div>
-              </div>
             </div>
 
             <div className="mt-4 grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
-              <div className="border border-white/12 bg-white/[0.045] p-6">
-                <p className="text-sm font-black uppercase text-[#ffcf33]">
-                  Short bio
-                </p>
-                <p className="mt-3 leading-7 text-white/78">{pressBio}</p>
+              <div className="flex flex-col gap-4">
+                <div className="border border-white/12 bg-white/[0.045] p-6">
+                  <p className="text-sm font-black uppercase text-[#ffcf33]">
+                    Short bio
+                  </p>
+                  <p className="mt-3 leading-7 text-white/78">{pressBio}</p>
+                </div>
+                <div className="flex flex-1 flex-col border border-white/12 bg-[#101010] p-6">
+                  <p className="text-sm font-black uppercase text-[#ffcf33]">
+                    Contact
+                  </p>
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    className="mt-4 block text-lg font-black text-white transition hover:text-[#ffcf33]"
+                  >
+                    {siteConfig.email}
+                  </a>
+                  <div className="mt-auto flex flex-wrap gap-2 pt-5">
+                    <a
+                      href={siteConfig.facebookUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Rock Steady on Facebook"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#1877f2] text-white transition hover:brightness-110"
+                    >
+                      <FacebookIcon className="h-5 w-5 fill-current" />
+                    </a>
+                    <a
+                      href={siteConfig.instagramUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Rock Steady on Instagram"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)] text-white transition hover:brightness-110"
+                    >
+                      <InstagramIcon className="h-5 w-5 fill-current" />
+                    </a>
+                  </div>
+                </div>
               </div>
               <div className="border border-white/12 bg-[#101010] p-6">
                 <p className="text-sm font-black uppercase text-[#ffcf33]">
