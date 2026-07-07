@@ -12,9 +12,7 @@ const navLinks = [
   { href: "/#photos", id: "photos", label: "Photos" },
 ];
 
-// Keep the shareable booking page canonical at /book, but action clicks should
-// land on the form when the user is already on that page.
-const bookingLink = { href: "/book#booking", id: "booking", label: "Book" };
+const bookingLink = { href: "/book", id: "booking", label: "Book" };
 
 export function ShrinkingHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
