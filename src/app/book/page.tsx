@@ -150,19 +150,19 @@ export default function BookPage() {
                   href={siteConfig.facebookUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-black/35 px-5 py-3 text-sm font-black uppercase text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                  aria-label="Rock Steady on Facebook"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#1877f2] text-white transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   <FacebookIcon className="h-5 w-5 fill-current" />
-                  Facebook
                 </a>
                 <a
                   href={siteConfig.instagramUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-black/35 px-5 py-3 text-sm font-black uppercase text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                  aria-label="Rock Steady on Instagram"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)] text-white transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
                 >
                   <InstagramIcon className="h-5 w-5 fill-current" />
-                  Instagram
                 </a>
               </div>
             </div>
