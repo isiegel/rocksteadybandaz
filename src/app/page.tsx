@@ -105,6 +105,8 @@ const pressPhotos = [
 const valleySpots = [
   'Phoenix',
   'Scottsdale',
+  'Paradise Valley',
+  'Fountain Hills',
   'Tempe',
   'Mesa',
   'Chandler',
@@ -115,9 +117,15 @@ const valleySpots = [
   'Apache Junction',
   'San Tan Valley',
   'Surprise',
+  'Goodyear',
+  'Avondale',
   'Sun City',
+  'Sun City West',
   'Ahwatukee',
+  'Cave Creek',
+  'Carefree',
   'Anthem',
+  'New River',
 ];
 
 const regularVenues = [
