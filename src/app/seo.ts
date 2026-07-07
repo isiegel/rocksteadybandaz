@@ -73,15 +73,33 @@ export const siteConfig = {
     "Private event music",
     "Corporate event music",
   ],
+  // Every Valley community the band plays. Rendered as the "Phoenix range"
+  // chips on the homepage and mirrored into areaServed structured data, so the
+  // schema always matches the on-page claim.
   areaServed: [
     "Phoenix",
     "Scottsdale",
+    "Paradise Valley",
+    "Fountain Hills",
     "Tempe",
     "Mesa",
     "Chandler",
     "Gilbert",
     "Glendale",
     "Peoria",
+    "Queen Creek",
+    "Apache Junction",
+    "San Tan Valley",
+    "Surprise",
+    "Goodyear",
+    "Avondale",
+    "Sun City",
+    "Sun City West",
+    "Ahwatukee",
+    "Cave Creek",
+    "Carefree",
+    "Anthem",
+    "New River",
   ],
   video: {
     youtubeId: "TiDSYeBD4pw",

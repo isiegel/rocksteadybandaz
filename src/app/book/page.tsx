@@ -10,7 +10,9 @@ import {
   bookingYear,
   checkAvailabilityLabel,
 } from '../booking';
+import { bookerFaqs, plainAnswerText } from '../booker-faq';
 import { BackToTop } from '../components/BackToTop';
+import { BookerFaq } from '../components/BookerFaq';
 import { BookingForm } from '../components/BookingForm';
 import { ShrinkingHeader } from '../components/ShrinkingHeader';
 import {
@@ -86,6 +88,21 @@ const bookingPageStructuredData = {
   })),
 };
 
+const faqStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${siteConfig.url}/book#faq`,
+  inLanguage: 'en-US',
+  mainEntity: bookerFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: plainAnswerText(faq.answer),
+    },
+  })),
+};
+
 const eventFit = [
   'Bars and restaurants',
   'Patios and outdoor rooms',
@@ -105,6 +122,12 @@ export default function BookPage() {
             /</g,
             '\\u003c',
           ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqStructuredData).replace(/</g, '\\u003c'),
         }}
       />
       <ShrinkingHeader />
@@ -203,6 +226,35 @@ export default function BookPage() {
                 />
               </div>
             </section>
+          </div>
+        </section>
+
+        <section
+          id="faq"
+          className="scroll-mt-28 border-t border-white/10 bg-[#070707] px-4 py-14 sm:px-6 lg:px-8"
+        >
+          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <div>
+              <p className="text-sm font-black uppercase text-[#ffcf33]">
+                Booker FAQ
+              </p>
+              <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
+                The stuff every booker asks.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-white/72">
+                Quick answers on sound, sets, space, and pricing. Anything we
+                missed,{' '}
+                <a
+                  href={bookingEmailHref}
+                  className="text-[#ffcf33] underline-offset-4 hover:underline"
+                >
+                  email us
+                </a>{' '}
+                or use the form above.
+              </p>
+            </div>
+
+            <BookerFaq />
           </div>
         </section>
 

@@ -102,31 +102,7 @@ const pressPhotos = [
   { src: '/images/show-04.jpg', label: 'Live photo 3' },
 ];
 
-const valleySpots = [
-  'Phoenix',
-  'Scottsdale',
-  'Paradise Valley',
-  'Fountain Hills',
-  'Tempe',
-  'Mesa',
-  'Chandler',
-  'Gilbert',
-  'Glendale',
-  'Peoria',
-  'Queen Creek',
-  'Apache Junction',
-  'San Tan Valley',
-  'Surprise',
-  'Goodyear',
-  'Avondale',
-  'Sun City',
-  'Sun City West',
-  'Ahwatukee',
-  'Cave Creek',
-  'Carefree',
-  'Anthem',
-  'New River',
-];
+const valleySpots = siteConfig.areaServed;
 
 const regularVenues = [
   'The Loft Again',
@@ -901,7 +877,14 @@ export default function Home() {
             </div>
 
             <p className="mt-4 text-sm font-bold text-white/60">
-              Need room-specific production details beyond the downloadable
+              Questions about sound, sets, space, or pricing?{' '}
+              <a
+                href="/book#faq"
+                className="text-[#ffcf33] underline-offset-4 hover:underline"
+              >
+                Read the booker FAQ
+              </a>
+              . Need room-specific production details beyond the downloadable
               stage plot and input list?{' '}
               <a
                 href={bookingEmailHref}

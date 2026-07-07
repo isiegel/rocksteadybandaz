@@ -77,6 +77,8 @@ export async function GET(
       'Content-Type': 'text/calendar; charset=utf-8',
       'Content-Disposition': `attachment; filename="rock-steady-${cleanSlug}.ics"`,
       'Cache-Control': 'public, max-age=3600',
+      // Machine-readable calendar files — keep them out of search indexes.
+      'X-Robots-Tag': 'noindex',
     },
   });
 }
