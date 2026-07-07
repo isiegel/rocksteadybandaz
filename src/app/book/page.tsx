@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { bookerFaqs, plainAnswerText } from '../booker-faq';
 import {
   absoluteBookingAssets,
   bookingAssets,
@@ -10,7 +11,6 @@ import {
   bookingYear,
   checkAvailabilityLabel,
 } from '../booking';
-import { bookerFaqs, plainAnswerText } from '../booker-faq';
 import { BackToTop } from '../components/BackToTop';
 import { BookerFaq } from '../components/BookerFaq';
 import { BookingForm } from '../components/BookingForm';
@@ -23,8 +23,7 @@ import {
 import { rockslide } from '../fonts';
 import { absoluteUrl, siteConfig } from '../seo';
 
-const bookingPageDescription =
-  `Now booking ${bookingYear} dates: check Rock Steady availability for Phoenix-area bars, patios, private parties, corporate events, charity nights, and neighborhood events.`;
+const bookingPageDescription = `Now booking ${bookingYear} dates: check Rock Steady availability for Phoenix-area bars, patios, private parties, corporate events, charity nights, and neighborhood events.`;
 
 const bookingPageTitle = `Book Rock Steady for ${bookingYear}`;
 
@@ -193,7 +192,7 @@ export default function BookPage() {
             <section
               id="booking"
               aria-label="Booking inquiry form"
-              className="scroll-mt-28 border border-white/12 bg-[#101010] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.32)]"
+              className="scroll-mt-28! border border-white/12 bg-[#101010] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.32)]"
             >
               <p className="text-2xl font-black text-white">
                 {checkAvailabilityLabel}
@@ -250,7 +249,14 @@ export default function BookPage() {
                 >
                   email us
                 </a>{' '}
-                or use the form above.
+                or use{' '}
+                <a
+                  href="#booking"
+                  className="text-[#ffcf33] underline-offset-4 hover:underline"
+                >
+                  the form above
+                </a>
+                .
               </p>
             </div>
 
@@ -268,7 +274,7 @@ export default function BookPage() {
                 Press kit and production docs.
               </h2>
               <p className="mt-5 text-lg leading-8 text-white/72">
-                Download the one-sheet, stage plot, and input list for a quick
+                Download the one-sheet, stage plot, and input list for a quick{' '}
                 {bookingYear} booking review or house-production advance.
               </p>
             </div>
