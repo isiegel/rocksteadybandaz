@@ -1,6 +1,7 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { DownloadTracking } from "./components/DownloadTracking";
 import { SiteFooter } from "./components/SiteFooter";
 import { absoluteUrl, siteConfig } from "./seo";
 
@@ -98,6 +99,7 @@ export default function RootLayout({
         {children}
         <SiteFooter />
         <Analytics />
+        <DownloadTracking />
       </body>
     </html>
   );

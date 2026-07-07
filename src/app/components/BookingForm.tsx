@@ -1,5 +1,6 @@
 'use client';
 
+import { track } from '@vercel/analytics';
 import { useEffect, useId, useRef, useState } from 'react';
 
 // Formspree form ID, set via NEXT_PUBLIC_FORMSPREE_FORM_ID (the ID is part of a
@@ -321,6 +322,11 @@ export function BookingForm({
       });
 
       if (response.ok) {
+        // No PII — event type and city only, for the analytics dashboard.
+        track('Booking Inquiry', {
+          eventType: eventType || 'unspecified',
+          city: cityValue || 'unspecified',
+        });
         form.reset();
         resetFields();
         setStatus('success');
