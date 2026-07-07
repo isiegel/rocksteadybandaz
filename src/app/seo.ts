@@ -100,6 +100,7 @@ export const siteConfig = {
     "Carefree",
     "Anthem",
     "New River",
+    "Buckeye",
   ],
   video: {
     youtubeId: "TiDSYeBD4pw",
