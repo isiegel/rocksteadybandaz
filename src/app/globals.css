@@ -5,6 +5,7 @@
   --background: #050505;
   --foreground: #fff7f1;
   --rock-steady-red: #ff2700;
+  --rock-steady-yellow: #ffcf33;
 }
 
 * {
@@ -71,7 +72,7 @@ input[type="date"]::-webkit-date-and-time-value {
 }
 
 ::selection {
-  background: #ffcf33;
+  background: var(--rock-steady-yellow);
   color: #111;
 }
 

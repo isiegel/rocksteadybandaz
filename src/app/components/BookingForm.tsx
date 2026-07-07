@@ -55,7 +55,7 @@ const OTHER = 'Other';
 // below which iOS Safari auto-zooms a focused input, so this avoids that zoom on
 // mobile while keeping the original sizing on larger screens.
 const fieldClass =
-  'w-full border border-white/15 bg-black/40 px-4 py-3 text-base font-bold text-white placeholder:font-medium placeholder:text-white/40 transition focus:border-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33] sm:text-sm';
+  'w-full border border-white/15 bg-black/40 px-4 py-3 text-base font-bold text-white placeholder:font-medium placeholder:text-white/40 transition focus:border-(--rock-steady-yellow) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow) sm:text-sm';
 const labelClass = 'mb-1.5 block text-xs font-black uppercase text-white/55';
 
 // Formats raw input into (xxx) xxx-xxxx as the user types, tolerating deletes.
@@ -72,7 +72,7 @@ function ChevronIcon({ open }: { open: boolean }) {
     <svg
       viewBox="0 0 20 20"
       aria-hidden="true"
-      className={`h-4 w-4 shrink-0 fill-current text-[#ffcf33] transition-transform ${
+      className={`h-4 w-4 shrink-0 fill-current text-(--rock-steady-yellow) transition-transform ${
         open ? 'rotate-180' : ''
       }`}
     >
@@ -201,7 +201,7 @@ function CustomSelect({
                 onClick={() => choose(option)}
                 className={`cursor-pointer px-4 py-2.5 text-base font-bold sm:text-sm ${
                   highlighted
-                    ? 'bg-[#ffcf33] text-[#111]'
+                    ? 'bg-(--rock-steady-yellow) text-[#111]'
                     : selected
                       ? 'bg-white/10 text-white'
                       : 'text-white/85'
@@ -274,7 +274,7 @@ export function BookingForm({
       <a
         href={mailtoHref}
         aria-label="Check Rock Steady availability by email"
-        className="inline-flex items-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-(--rock-steady-red) hover:text-white focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+        className="inline-flex items-center gap-2 rounded-full bg-(--rock-steady-yellow) px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-(--rock-steady-red) hover:text-white focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
       >
         Check {bookingYear} availability by email
       </a>
@@ -299,7 +299,7 @@ export function BookingForm({
             setReturningToForm(true);
             setStatus('idle');
           }}
-          className="cursor-pointer mt-5 inline-flex items-center justify-center rounded-full border border-[#ffcf33]/45 bg-black/35 px-5 py-2.5 text-sm font-black uppercase text-[#ffcf33] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+          className="cursor-pointer mt-5 inline-flex items-center justify-center rounded-full border border-(--rock-steady-yellow)/45 bg-black/35 px-5 py-2.5 text-sm font-black uppercase text-(--rock-steady-yellow) transition hover:bg-(--rock-steady-yellow) hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
         >
           Send another inquiry
         </button>
@@ -409,7 +409,7 @@ export function BookingForm({
           <label htmlFor="event-date" className={labelClass}>
             Preferred event date
           </label>
-          <div className="overflow-clip border border-white/15 bg-black/40 transition focus-within:border-[#ffcf33] focus-within:ring-2 focus-within:ring-[#ffcf33]">
+          <div className="overflow-clip border border-white/15 bg-black/40 transition focus-within:border-(--rock-steady-yellow) focus-within:ring-2 focus-within:ring-(--rock-steady-yellow)">
             <input
               id="event-date"
               name="preferred event date"
@@ -594,7 +594,7 @@ export function BookingForm({
           {error}{' '}
           <a
             href={mailtoHref}
-            className="text-[#ffcf33] underline-offset-4 hover:underline"
+            className="text-(--rock-steady-yellow) underline-offset-4 hover:underline"
           >
             Email us instead
           </a>
@@ -606,7 +606,7 @@ export function BookingForm({
         <button
           type="submit"
           disabled={submitting}
-          className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-[#ffcf33] px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-(--rock-steady-red) hover:text-white focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33] disabled:cursor-not-allowed disabled:opacity-60"
+          className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-(--rock-steady-yellow) px-6 py-3 text-sm font-black uppercase text-[#111] shadow-[0_12px_30px_rgba(255,207,51,0.24)] transition hover:bg-(--rock-steady-red) hover:text-white focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow) disabled:cursor-not-allowed disabled:opacity-60"
         >
           {submitting ? 'Sending…' : `Send ${bookingYear} booking inquiry`}
         </button>
@@ -616,7 +616,7 @@ export function BookingForm({
           type="reset"
           onClick={resetFields}
           disabled={submitting}
-          className="cursor-pointer inline-flex items-center justify-center rounded-full border border-white/15 bg-black/30 px-4 py-2.5 text-xs font-black uppercase text-white/60 transition hover:border-white/40 hover:text-white focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33] disabled:cursor-not-allowed disabled:opacity-60"
+          className="cursor-pointer inline-flex items-center justify-center rounded-full border border-white/15 bg-black/30 px-4 py-2.5 text-xs font-black uppercase text-white/60 transition hover:border-white/40 hover:text-white focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow) disabled:cursor-not-allowed disabled:opacity-60"
         >
           Reset
         </button>
@@ -626,7 +626,7 @@ export function BookingForm({
         Prefer email? Reach us at{' '}
         <a
           href={mailtoHref}
-          className="text-[#ffcf33] underline-offset-4 hover:underline"
+          className="text-(--rock-steady-yellow) underline-offset-4 hover:underline"
         >
           our inbox
         </a>

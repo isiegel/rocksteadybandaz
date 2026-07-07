@@ -134,7 +134,7 @@ export default function BookPage() {
         <section className="px-4 pb-16 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
-              <p className="inline-flex rounded-full border border-[#ffcf33]/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-[#ffcf33] shadow-[0_0_22px_rgba(255,207,51,0.18)]">
+              <p className="inline-flex rounded-full border border-(--rock-steady-yellow)/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-(--rock-steady-yellow) shadow-[0_0_22px_rgba(255,207,51,0.18)]">
                 {bookingAvailabilityLabel}
               </p>
               <h1 className="mt-6 text-5xl font-black leading-none text-white sm:text-6xl">
@@ -163,7 +163,7 @@ export default function BookPage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href={bookingEmailHref}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#37d67a] px-5 py-3 text-sm font-black uppercase text-[#06140b] transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#37d67a] px-5 py-3 text-sm font-black uppercase text-[#06140b] transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
                 >
                   <MailIcon className="h-5 w-5 fill-current" />
                   Email instead
@@ -173,7 +173,7 @@ export default function BookPage() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Rock Steady on Facebook"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#1877f2] text-white transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#1877f2] text-white transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
                 >
                   <FacebookIcon className="h-5 w-5 fill-current" />
                 </a>
@@ -182,7 +182,7 @@ export default function BookPage() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Rock Steady on Instagram"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)] text-white transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)] text-white transition hover:brightness-110 focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
                 >
                   <InstagramIcon className="h-5 w-5 fill-current" />
                 </a>
@@ -234,7 +234,7 @@ export default function BookPage() {
         >
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
             <div>
-              <p className="text-sm font-black uppercase text-[#ffcf33]">
+              <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                 Booker FAQ
               </p>
               <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
@@ -245,14 +245,14 @@ export default function BookPage() {
                 missed,{' '}
                 <a
                   href={bookingEmailHref}
-                  className="text-[#ffcf33] underline-offset-4 hover:underline"
+                  className="text-(--rock-steady-yellow) underline-offset-4 hover:underline"
                 >
                   email us
                 </a>{' '}
                 or use{' '}
                 <a
                   href="#booking"
-                  className="text-[#ffcf33] underline-offset-4 hover:underline"
+                  className="text-(--rock-steady-yellow) underline-offset-4 hover:underline"
                 >
                   the form above
                 </a>
@@ -285,15 +285,15 @@ export default function BookPage() {
                   key={asset.href}
                   href={asset.href}
                   download
-                  className="group border border-white/12 bg-black/32 p-5 transition hover:border-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                  className="group border border-white/12 bg-black/32 p-5 transition hover:border-(--rock-steady-yellow) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
                 >
-                  <p className="text-sm font-black uppercase text-[#ffcf33]">
+                  <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                     {asset.title}
                   </p>
                   <p className="mt-3 text-sm font-bold leading-6 text-white/65">
                     {asset.description}
                   </p>
-                  <span className="mt-5 inline-flex text-xs font-black uppercase text-white group-hover:text-[#ffcf33]">
+                  <span className="mt-5 inline-flex text-xs font-black uppercase text-white group-hover:text-(--rock-steady-yellow)">
                     Download PDF
                   </span>
                 </a>
@@ -332,7 +332,7 @@ export default function BookPage() {
               <a
                 href={siteConfig.horizontalLogoPath}
                 download
-                className="mt-5 inline-flex rounded-full border border-[#ffcf33]/45 bg-black/35 px-5 py-3 text-xs font-black uppercase text-[#ffcf33] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                className="mt-5 inline-flex rounded-full border border-(--rock-steady-yellow)/45 bg-black/35 px-5 py-3 text-xs font-black uppercase text-(--rock-steady-yellow) transition hover:bg-(--rock-steady-yellow) hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
               >
                 Download logo PNG
               </a>

@@ -140,7 +140,7 @@ export function ShrinkingHeader() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
-                className={`rounded-full border px-3 py-2 transition outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33] ${
+                className={`rounded-full border px-3 py-2 transition outline-hidden focus-visible:ring-2 focus-visible:ring-(--rock-steady-yellow) ${
                   isActive
                     ? "border-(--rock-steady-red) bg-(--rock-steady-red) text-white"
                     : "border-white/15 bg-black/35 text-white hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red)"
@@ -154,10 +154,10 @@ export function ShrinkingHeader() {
           <Link
             href={bookingLink.href}
             aria-current={activeId === bookingLink.id ? "true" : undefined}
-            className={`rounded-full border px-4 py-2 transition outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33] ${
+            className={`rounded-full border px-4 py-2 transition outline-hidden focus-visible:ring-2 focus-visible:ring-(--rock-steady-yellow) ${
               activeId === bookingLink.id
                 ? "border-(--rock-steady-red) bg-(--rock-steady-red) text-white"
-                : "border-[#ffcf33] bg-[#ffcf33] text-black hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) hover:text-white"
+                : "border-(--rock-steady-yellow) bg-(--rock-steady-yellow) text-black hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) hover:text-white"
             }`}
           >
             {bookingLink.label}
@@ -168,7 +168,7 @@ export function ShrinkingHeader() {
           <Link
             href={bookingLink.href}
             onClick={() => setMenuOpen(false)}
-            className="inline-flex h-10 items-center rounded-full bg-[#ffcf33] px-4 text-xs font-black uppercase text-black transition hover:bg-(--rock-steady-red) hover:text-white outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33]"
+            className="inline-flex h-10 items-center rounded-full bg-(--rock-steady-yellow) px-4 text-xs font-black uppercase text-black transition hover:bg-(--rock-steady-red) hover:text-white outline-hidden focus-visible:ring-2 focus-visible:ring-(--rock-steady-yellow)"
           >
             {bookingLink.label}
           </Link>
@@ -180,7 +180,7 @@ export function ShrinkingHeader() {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33]"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) outline-hidden focus-visible:ring-2 focus-visible:ring-(--rock-steady-yellow)"
           >
             <svg
               viewBox="0 0 24 24"

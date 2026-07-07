@@ -360,7 +360,7 @@ export default function Home() {
 
           <div className="relative mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <p className="mb-4 inline-flex rounded-full border border-[#ffcf33]/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-[#ffcf33] shadow-[0_0_22px_rgba(255,207,51,0.18)]">
+              <p className="mb-4 inline-flex rounded-full border border-(--rock-steady-yellow)/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-(--rock-steady-yellow) shadow-[0_0_22px_rgba(255,207,51,0.18)]">
                 {bookingAvailabilityLabel}
               </p>
               {/* The visible wordmark now lives in the header; this keeps a
@@ -379,13 +379,13 @@ export default function Home() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href="/book"
-                  className="rounded-full bg-(--rock-steady-red) px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                  className="rounded-full bg-(--rock-steady-red) px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-(--rock-steady-yellow) hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
                 >
                   {checkAvailabilityLabel}
                 </a>
                 <a
                   href="#video"
-                  className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-black uppercase text-white backdrop-blur transition hover:border-[#37d67a] hover:bg-[#37d67a] hover:text-[#06140b] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                  className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-black uppercase text-white backdrop-blur transition hover:border-[#37d67a] hover:bg-[#37d67a] hover:text-[#06140b] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
                 >
                   Watch the band
                 </a>
@@ -423,7 +423,7 @@ export default function Home() {
 
             <div className="grid gap-4">
               <div className="border border-white/12 bg-white/4.5 p-6 shadow-[0_18px_45px_rgba(0,0,0,0.24)]">
-                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                   Upcoming public dates
                 </p>
 
@@ -445,7 +445,7 @@ export default function Home() {
               </div>
 
               <div className="border border-white/12 bg-white/[0.045] p-6 shadow-[0_18px_45px_rgba(0,0,0,0.2)]">
-                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                   Regular stops include
                 </p>
                 <p className="mt-2 text-sm font-bold leading-6 text-white/68">
@@ -456,7 +456,7 @@ export default function Home() {
                   {regularVenues.map((venue) => (
                     <span
                       key={venue}
-                      className="rounded-full border border-[#ffcf33]/22 bg-black/32 px-3 py-2 text-xs font-black uppercase text-white/88"
+                      className="rounded-full border border-(--rock-steady-yellow)/22 bg-black/32 px-3 py-2 text-xs font-black uppercase text-white/88"
                     >
                       {venue}
                     </span>
@@ -500,7 +500,7 @@ export default function Home() {
                 href={youtubeWatchUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-7 inline-flex rounded-full border border-[#ffcf33]/45 bg-black/35 px-5 py-3 text-sm font-black uppercase text-[#ffcf33] transition hover:border-[#ffcf33] hover:bg-[#ffcf33] hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                className="mt-7 inline-flex rounded-full border border-(--rock-steady-yellow)/45 bg-black/35 px-5 py-3 text-sm font-black uppercase text-(--rock-steady-yellow) transition hover:border-(--rock-steady-yellow) hover:bg-(--rock-steady-yellow) hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
               >
                 Open on YouTube
               </a>
@@ -518,7 +518,7 @@ export default function Home() {
         <section id="music" className="bg-[#101010] px-4 py-20 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="max-w-3xl">
-              <p className="text-sm font-black uppercase text-[#ffcf33]">
+              <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                 The set
               </p>
               <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
@@ -549,7 +549,7 @@ export default function Home() {
 
             <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_0.72fr] lg:items-start">
               <div>
-                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                   A few from the set
                 </p>
                 <p className="mt-2 max-w-3xl text-sm font-bold leading-6 text-white/68">
@@ -648,7 +648,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`${gear.name} — ${gear.role}`}
-                  className="group flex flex-col items-center justify-center gap-5 border border-white/12 bg-black/30 p-8 text-center shadow-[0_16px_38px_rgba(0,0,0,0.2)] transition hover:border-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                  className="group flex flex-col items-center justify-center gap-5 border border-white/12 bg-black/30 p-8 text-center shadow-[0_16px_38px_rgba(0,0,0,0.2)] transition hover:border-(--rock-steady-yellow) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
                 >
                   <div className="flex h-14 items-center justify-center">
                     <Image
@@ -728,7 +728,7 @@ export default function Home() {
 
             <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                   Logo
                 </p>
                 <div className="relative mt-4 h-24 w-full bg-black/30">
@@ -744,14 +744,14 @@ export default function Home() {
                   <a
                     href={siteConfig.horizontalLogoPath}
                     download
-                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
+                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow)"
                   >
                     Horizontal PNG
                   </a>
                   <a
                     href={siteConfig.logoPath}
                     download
-                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
+                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow)"
                   >
                     Stacked PNG
                   </a>
@@ -759,7 +759,7 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                   Press photos
                 </p>
                 <div className="mt-4 grid grid-cols-3 gap-2">
@@ -769,7 +769,7 @@ export default function Home() {
                       href={photo.src}
                       download
                       aria-label={`Download ${photo.label}`}
-                      className="relative block aspect-square overflow-hidden border border-white/12 transition hover:border-[#ffcf33]"
+                      className="relative block aspect-square overflow-hidden border border-white/12 transition hover:border-(--rock-steady-yellow)"
                     >
                       <Image
                         src={photo.src}
@@ -794,7 +794,7 @@ export default function Home() {
               />
 
               <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                   Venue docs
                 </p>
                 <div className="mt-4 grid gap-2">
@@ -803,7 +803,7 @@ export default function Home() {
                       key={asset.href}
                       href={asset.href}
                       download
-                      className="border border-white/15 bg-black/30 px-4 py-3 text-sm font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
+                      className="border border-white/15 bg-black/30 px-4 py-3 text-sm font-black uppercase text-white/88 transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow)"
                     >
                       {asset.title} PDF
                     </a>
@@ -820,18 +820,18 @@ export default function Home() {
             <div className="mt-4 grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
               <div className="flex flex-col gap-4">
                 <div className="border border-white/12 bg-white/[0.045] p-6">
-                  <p className="text-sm font-black uppercase text-[#ffcf33]">
+                  <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                     Short bio
                   </p>
                   <p className="mt-3 leading-7 text-white/78">{pressBio}</p>
                 </div>
                 <div className="flex flex-1 flex-col border border-white/12 bg-[#101010] p-6">
-                  <p className="text-sm font-black uppercase text-[#ffcf33]">
+                  <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                     Contact
                   </p>
                   <a
                     href={`mailto:${siteConfig.email}`}
-                    className="mt-4 block text-lg font-black text-white transition hover:text-[#ffcf33]"
+                    className="mt-4 block text-lg font-black text-white transition hover:text-(--rock-steady-yellow)"
                   >
                     {siteConfig.email}
                   </a>
@@ -858,7 +858,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-[#ffcf33]">
+                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
                   Quick facts
                 </p>
                 <dl className="mt-4 space-y-3">
@@ -880,7 +880,7 @@ export default function Home() {
               Questions about sound, sets, space, or pricing?{' '}
               <a
                 href="/book#faq"
-                className="text-[#ffcf33] underline-offset-4 hover:underline"
+                className="text-(--rock-steady-yellow) underline-offset-4 hover:underline"
               >
                 Read the booker FAQ
               </a>
@@ -888,7 +888,7 @@ export default function Home() {
               stage plot and input list?{' '}
               <a
                 href={bookingEmailHref}
-                className="text-[#ffcf33] underline-offset-4 hover:underline"
+                className="text-(--rock-steady-yellow) underline-offset-4 hover:underline"
               >
                 Email us
               </a>{' '}

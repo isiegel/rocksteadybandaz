@@ -20,12 +20,12 @@ type RankedShow = { show: Show; distance: number | null };
 
 function AddToCalendar({ show }: { show: Show }) {
   const linkClass =
-    'text-sm font-black text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]';
+    'text-sm font-black text-(--rock-steady-yellow) underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)';
 
   return (
     <details className="group mt-0.5">
       <summary
-        className="cursor-pointer list-none text-sm font-bold text-white/64 underline-offset-4 transition hover:text-[#ffcf33] hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33] [&::-webkit-details-marker]:hidden"
+        className="cursor-pointer list-none text-sm font-bold text-white/64 underline-offset-4 transition hover:text-(--rock-steady-yellow) hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-(--rock-steady-yellow) [&::-webkit-details-marker]:hidden"
         aria-label={`Add the ${formatShowDate(show.date)} show at ${show.venue} to your calendar`}
       >
         <span aria-hidden="true">
@@ -97,7 +97,7 @@ function ShowListItem({
             href={show.url}
             target="_blank"
             rel="noreferrer"
-            className="text-sm font-black text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+            className="text-sm font-black text-(--rock-steady-yellow) underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
           >
             Details
           </a>
@@ -192,7 +192,7 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
             <button
               type="button"
               onClick={handleClearNearby}
-              className="cursor-pointer text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+              className="cursor-pointer text-sm font-black uppercase text-(--rock-steady-yellow) underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
             >
               Clear
             </button>
@@ -202,7 +202,7 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
             type="button"
             onClick={handleFindNearby}
             disabled={geoStatus === 'locating'}
-            className="cursor-pointer text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33] disabled:cursor-default disabled:no-underline disabled:opacity-60"
+            className="cursor-pointer text-sm font-black uppercase text-(--rock-steady-yellow) underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow) disabled:cursor-default disabled:no-underline disabled:opacity-60"
           >
             {geoStatus === 'locating' ? 'Locating…' : '📍 Find shows near me'}
           </button>
@@ -258,7 +258,7 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
           onClick={handleToggleShows}
           aria-expanded={showAll}
           aria-controls={EXTRA_SHOWS_ID}
-          className="cursor-pointer mt-4 text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33]"
+          className="cursor-pointer mt-4 text-sm font-black uppercase text-(--rock-steady-yellow) underline-offset-4 hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-(--rock-steady-yellow)"
         >
           {showAll ? 'Show less' : `Show all ${shows.length} dates`}
         </button>

@@ -15,7 +15,7 @@ function renderAnswer(answer: string): ReactNode[] {
       <a
         key={match.index}
         href={href}
-        className="text-[#ffcf33] underline-offset-4 hover:underline"
+        className="text-(--rock-steady-yellow) underline-offset-4 hover:underline"
       >
         {label}
       </a>,
@@ -36,15 +36,15 @@ export function BookerFaq() {
       {bookerFaqs.map((faq) => (
         <details
           key={faq.question}
-          className="group border border-white/12 bg-[#101010] px-5 py-4 transition open:border-[#ffcf33]/40"
+          className="group border border-white/12 bg-[#101010] px-5 py-4 transition open:border-(--rock-steady-yellow)/40"
         >
-          <summary className="flex cursor-pointer list-none items-baseline justify-between gap-4 text-left focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33] [&::-webkit-details-marker]:hidden">
-            <span className="text-lg font-black leading-6 text-white transition group-hover:text-[#ffcf33]">
+          <summary className="flex cursor-pointer list-none items-baseline justify-between gap-4 text-left focus:outline-hidden focus-visible:ring-2 focus-visible:ring-(--rock-steady-yellow) [&::-webkit-details-marker]:hidden">
+            <span className="text-lg font-black leading-6 text-white transition group-hover:text-(--rock-steady-yellow)">
               {faq.question}
             </span>
             <span
               aria-hidden="true"
-              className="shrink-0 text-lg font-black text-[#ffcf33]"
+              className="shrink-0 text-lg font-black text-(--rock-steady-yellow)"
             >
               <span className="group-open:hidden">+</span>
               <span className="hidden group-open:inline">&minus;</span>
@@ -60,7 +60,7 @@ export function BookerFaq() {
                   key={link.href}
                   href={link.href}
                   download
-                  className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
+                  className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow)"
                 >
                   {link.label}
                 </a>

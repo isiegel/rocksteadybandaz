@@ -32,7 +32,7 @@ export function BackToTop() {
       type="button"
       aria-label="Back to top"
       onClick={scrollToTop}
-      className={`fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-[#ffcf33] bg-[#ffcf33] text-black shadow-[0_12px_30px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) hover:text-white outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33] sm:bottom-8 sm:right-8 ${
+      className={`fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-(--rock-steady-yellow) bg-(--rock-steady-yellow) text-black shadow-[0_12px_30px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) hover:text-white outline-hidden focus-visible:ring-2 focus-visible:ring-(--rock-steady-yellow) sm:bottom-8 sm:right-8 ${
         isVisible
           ? 'pointer-events-auto translate-y-0 opacity-100'
           : 'pointer-events-none translate-y-3 opacity-0'

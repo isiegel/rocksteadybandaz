@@ -40,7 +40,7 @@ export function VideoEmbed({ videoId, title }: VideoEmbedProps) {
       type="button"
       onClick={() => setPlaying(true)}
       aria-label={`Play video: ${title}`}
-      className="group relative flex aspect-video w-full items-center justify-center overflow-hidden focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33]"
+      className="group relative flex aspect-video w-full items-center justify-center overflow-hidden focus:outline-hidden focus-visible:ring-2 focus-visible:ring-(--rock-steady-yellow)"
     >
       {/* YouTube thumbnail. A plain <img> is intentional: it's a single remote
           image that YouTube already serves pre-sized, so routing it through the
@@ -62,7 +62,7 @@ export function VideoEmbed({ videoId, title }: VideoEmbedProps) {
       />
 
       {/* Play button over the thumbnail */}
-      <span className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-(--rock-steady-red) text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_40%,transparent)] transition group-hover:scale-105 group-hover:bg-[#ffcf33] group-hover:text-[#111]">
+      <span className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-(--rock-steady-red) text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_40%,transparent)] transition group-hover:scale-105 group-hover:bg-(--rock-steady-yellow) group-hover:text-[#111]">
         <svg viewBox="0 0 24 24" aria-hidden="true" className="ml-1 h-7 w-7 fill-current">
           <path d="M8 5v14l11-7z" />
         </svg>

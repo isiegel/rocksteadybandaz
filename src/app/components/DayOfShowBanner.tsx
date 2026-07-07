@@ -83,7 +83,7 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
       role="status"
       aria-live="polite"
       onAnimationEnd={handleAnimationEnd}
-      className={`fixed inset-x-3 bottom-3 z-60 mx-auto max-w-5xl border border-[#ffcf33]/35 bg-[#080808]/95 p-3 text-white shadow-[0_8px_28px_rgba(0,0,0,0.5)] backdrop-blur-md sm:bottom-5 sm:p-4 ${
+      className={`fixed inset-x-3 bottom-3 z-60 mx-auto max-w-5xl border border-(--rock-steady-yellow)/35 bg-[#080808]/95 p-3 text-white shadow-[0_8px_28px_rgba(0,0,0,0.5)] backdrop-blur-md sm:bottom-5 sm:p-4 ${
         isClosing
           ? 'animate-toast-fade-out pointer-events-none'
           : 'animate-toast-fade-in'
@@ -91,7 +91,7 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
-          <p className="text-xs font-black uppercase text-[#ffcf33]">
+          <p className="text-xs font-black uppercase text-(--rock-steady-yellow)">
             Today&apos;s show
           </p>
           <p className="mt-1 text-base font-black leading-6 text-white sm:text-lg">
@@ -109,7 +109,7 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
             href={detailsHref}
             target={isExternalDetailsLink ? '_blank' : undefined}
             rel={isExternalDetailsLink ? 'noreferrer' : undefined}
-            className="inline-flex h-10 items-center justify-center rounded-full bg-[#ffcf33] px-4 text-xs font-black uppercase text-[#111] transition hover:bg-(--rock-steady-red) hover:text-white focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+            className="inline-flex h-10 items-center justify-center rounded-full bg-(--rock-steady-yellow) px-4 text-xs font-black uppercase text-[#111] transition hover:bg-(--rock-steady-red) hover:text-white focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
           >
             Details
           </a>
@@ -117,7 +117,7 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
             type="button"
             aria-label="Dismiss today's show notice"
             onClick={handleDismiss}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
           >
             <svg
               viewBox="0 0 24 24"

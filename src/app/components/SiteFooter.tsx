@@ -22,7 +22,7 @@ export function SiteFooter() {
               className={`${rockslide.className} text-3xl leading-none`}
             />
             <p className="text-sm font-bold text-white/55">
-              <span className="font-black uppercase text-[#ffcf33]">
+              <span className="font-black uppercase text-(--rock-steady-yellow)">
                 It&apos;s a Rock Party!
               </span>
             </p>
@@ -31,7 +31,7 @@ export function SiteFooter() {
           <div className="flex flex-col items-center gap-4 md:items-end">
             <a
               href={`mailto:${siteConfig.email}`}
-              className="text-sm font-bold text-white/70 transition hover:text-[#ffcf33]"
+              className="text-sm font-bold text-white/70 transition hover:text-(--rock-steady-yellow)"
             >
               {siteConfig.email}
             </a>
@@ -41,7 +41,7 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Rock Steady on Facebook"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
               >
                 <FacebookIcon className="h-5 w-5 fill-current" />
               </a>
@@ -50,14 +50,14 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Rock Steady on Instagram"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
               >
                 <InstagramIcon className="h-5 w-5 fill-current" />
               </a>
               <a
                 href={`mailto:${siteConfig.email}`}
                 aria-label="Email Rock Steady"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
               >
                 <MailIcon className="h-5 w-5 fill-current" />
               </a>
@@ -83,7 +83,7 @@ export function SiteFooter() {
               target="_blank"
               rel="noreferrer"
               aria-label="Gibson guitars"
-              className="absolute left-0 top-0 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+              className="absolute left-0 top-0 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
             >
               <Image
                 src="/images/gibson-logo.svg"
@@ -99,7 +99,7 @@ export function SiteFooter() {
               target="_blank"
               rel="noreferrer"
               aria-label="Ludwig drums"
-              className="absolute right-2 -top-2 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+              className="absolute right-2 -top-2 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
             >
               <Image
                 src="/images/ludwig-logo.svg"
@@ -125,7 +125,7 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={gear.name}
-                className="block opacity-60 transition hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                className="block opacity-60 transition hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
               >
                 <Image
                   src={gear.src}
@@ -150,7 +150,7 @@ export function SiteFooter() {
               href="https://siegelcraft.com"
               target="_blank"
               rel="noreferrer"
-              className="text-white/70 transition hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+              className="text-white/70 transition hover:text-(--rock-steady-yellow) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
             >
               Siegelcraft
             </a>

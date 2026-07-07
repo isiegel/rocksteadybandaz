@@ -92,7 +92,7 @@ export function SampleSongListCard({
         className={
           isFeature
             ? 'text-sm font-black uppercase text-(--rock-steady-red)'
-            : 'text-sm font-black uppercase text-[#ffcf33]'
+            : 'text-sm font-black uppercase text-(--rock-steady-yellow)'
         }
       >
         {isFeature ? 'Full sample song list' : 'Sample song list'}
@@ -111,7 +111,7 @@ export function SampleSongListCard({
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-label="View Rock Steady sample song list full size"
-        className={`group relative block aspect-[3/2] w-full cursor-pointer overflow-hidden border border-white/12 bg-[#f4f1eb] transition hover:border-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33] ${
+        className={`group relative block aspect-[3/2] w-full cursor-pointer overflow-hidden border border-white/12 bg-[#f4f1eb] transition hover:border-(--rock-steady-yellow) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow) ${
           isFeature ? 'mt-5' : 'mt-4'
         }`}
       >
@@ -126,7 +126,7 @@ export function SampleSongListCard({
           }
           className="cursor-pointer object-cover object-top transition duration-300 group-hover:scale-[1.02]"
         />
-        <span className="absolute bottom-3 right-3 rounded-full bg-black/78 px-3 py-2 text-[0.68rem] font-black uppercase text-white shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition group-hover:bg-[#ffcf33] group-hover:text-[#111]">
+        <span className="absolute bottom-3 right-3 rounded-full bg-black/78 px-3 py-2 text-[0.68rem] font-black uppercase text-white shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition group-hover:bg-(--rock-steady-yellow) group-hover:text-[#111]">
           View full size
         </span>
       </button>
@@ -141,8 +141,8 @@ export function SampleSongListCard({
           download
           className={
             isFeature
-              ? 'inline-flex rounded-full bg-(--rock-steady-red) px-5 py-3 text-xs font-black uppercase text-white transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]'
-              : 'border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]'
+              ? 'inline-flex rounded-full bg-(--rock-steady-red) px-5 py-3 text-xs font-black uppercase text-white transition hover:bg-(--rock-steady-yellow) hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)'
+              : 'border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow)'
           }
         >
           {isFeature ? 'Download PNG' : 'Song list PNG'}
@@ -151,7 +151,7 @@ export function SampleSongListCard({
           <button
             type="button"
             onClick={openModal}
-            className="inline-flex cursor-pointer rounded-full border border-white/18 bg-black/30 px-5 py-3 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+            className="inline-flex cursor-pointer rounded-full border border-white/18 bg-black/30 px-5 py-3 text-xs font-black uppercase text-white/88 transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
           >
             View full size
           </button>
@@ -182,7 +182,7 @@ export function SampleSongListCard({
                 <a
                   href={imagePath}
                   download
-                  className="rounded-full bg-(--rock-steady-red) px-4 py-2 text-xs font-black uppercase text-white transition hover:bg-[#ffcf33] hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                  className="rounded-full bg-(--rock-steady-red) px-4 py-2 text-xs font-black uppercase text-white transition hover:bg-(--rock-steady-yellow) hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
                 >
                   Download PNG
                 </a>
@@ -191,7 +191,7 @@ export function SampleSongListCard({
                   type="button"
                   onClick={closeModal}
                   aria-label="Close sample song list"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/18 bg-black/58 text-white transition hover:border-[#ffcf33] hover:text-[#ffcf33] focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/18 bg-black/58 text-white transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
                 >
                   <svg
                     viewBox="0 0 24 24"
