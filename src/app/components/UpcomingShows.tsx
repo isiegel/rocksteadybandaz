@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { googleCalendarUrl, showIcsPath } from '../calendar-links';
 import {
   distanceMiles,
   formatShowDate,
@@ -16,6 +17,39 @@ const EXTRA_SHOWS_ID = 'upcoming-shows-extra';
 type GeoStatus = 'idle' | 'locating' | 'located' | 'denied' | 'unsupported' | 'error';
 
 type RankedShow = { show: Show; distance: number | null };
+
+function AddToCalendar({ show }: { show: Show }) {
+  const linkClass =
+    'text-sm font-black text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]';
+
+  return (
+    <details className="group mt-0.5">
+      <summary
+        className="cursor-pointer list-none text-sm font-bold text-white/64 underline-offset-4 transition hover:text-[#ffcf33] hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33] [&::-webkit-details-marker]:hidden"
+        aria-label={`Add the ${formatShowDate(show.date)} show at ${show.venue} to your calendar`}
+      >
+        <span aria-hidden="true">
+          <span className="group-open:hidden">+</span>
+          <span className="hidden group-open:inline">&minus;</span>
+        </span>{' '}
+        Add to calendar
+      </summary>
+      <p className="mt-1 flex flex-wrap gap-x-3 gap-y-1 sm:justify-end">
+        <a
+          href={googleCalendarUrl(show)}
+          target="_blank"
+          rel="noreferrer"
+          className={linkClass}
+        >
+          Google
+        </a>
+        <a href={showIcsPath(show)} className={linkClass}>
+          Apple / Outlook
+        </a>
+      </p>
+    </details>
+  );
+}
 
 function ShowListItem({
   show,
@@ -68,6 +102,7 @@ function ShowListItem({
             Details
           </a>
         ) : null}
+        <AddToCalendar show={show} />
       </div>
     </li>
   );
@@ -223,7 +258,7 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
           onClick={handleToggleShows}
           aria-expanded={showAll}
           aria-controls={EXTRA_SHOWS_ID}
-          className="cursor-pointer mt-4 text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#ffcf33]"
+          className="cursor-pointer mt-4 text-sm font-black uppercase text-[#ffcf33] underline-offset-4 hover:underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#ffcf33]"
         >
           {showAll ? 'Show less' : `Show all ${shows.length} dates`}
         </button>
