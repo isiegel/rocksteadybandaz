@@ -4,6 +4,12 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { rockslide } from "../fonts";
 
+// Section links render as plain <a> tags, not next/link: the App Router's
+// segment cache seeds its canonical URL from location.href on a hard load, so
+// arriving at /#video and then soft-navigating to another hash link produces
+// aggregated URLs like /#video#top (bug present through next@16.3 previews).
+// Native fragment navigation always replaces the hash, and same-document
+// anchor clicks never hit the router.
 const navLinks = [
   { href: "/#shows", id: "shows", label: "Shows" },
   { href: "/#video", id: "video", label: "Video" },
@@ -107,7 +113,9 @@ export function ShrinkingHeader() {
       }`}
     >
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
-        <Link
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- plain
+            anchor on purpose; see the hash-aggregation note above navLinks */}
+        <a
           href="/#top"
           aria-label="Rock Steady home"
           className={`hero-wordmark ${rockslide.className} block shrink-0 whitespace-nowrap leading-none transition-all duration-500 ease-in-out ${
@@ -117,7 +125,7 @@ export function ShrinkingHeader() {
           }`}
         >
           Rock Steady
-        </Link>
+        </a>
 
         <nav
           aria-label="Main navigation"
@@ -128,7 +136,7 @@ export function ShrinkingHeader() {
           {navLinks.map((link) => {
             const isActive = activeId === link.id;
             return (
-              <Link
+              <a
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
@@ -139,7 +147,7 @@ export function ShrinkingHeader() {
                 }`}
               >
                 {link.label}
-              </Link>
+              </a>
             );
           })}
 
@@ -208,7 +216,7 @@ export function ShrinkingHeader() {
           {navLinks.map((link) => {
             const isActive = activeId === link.id;
             return (
-              <Link
+              <a
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
@@ -220,7 +228,7 @@ export function ShrinkingHeader() {
                 }`}
               >
                 {link.label}
-              </Link>
+              </a>
             );
           })}
         </div>
