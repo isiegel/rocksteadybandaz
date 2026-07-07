@@ -10,6 +10,7 @@ import {
   checkAvailabilityLabel,
 } from './booking';
 import { BackToTop } from './components/BackToTop';
+import { FacebookIcon, InstagramIcon } from './components/SocialIcons';
 import { DayOfShowBanner } from './components/DayOfShowBanner';
 import { SampleSongListCard } from './components/SampleSongListCard';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
@@ -845,17 +846,19 @@ export default function Home() {
                     href={siteConfig.facebookUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
+                    aria-label="Rock Steady on Facebook"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#1877f2] text-white transition hover:brightness-110"
                   >
-                    Facebook
+                    <FacebookIcon className="h-5 w-5 fill-current" />
                   </a>
                   <a
                     href={siteConfig.instagramUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-[#ffcf33] hover:text-[#ffcf33]"
+                    aria-label="Rock Steady on Instagram"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)] text-white transition hover:brightness-110"
                   >
-                    Instagram
+                    <InstagramIcon className="h-5 w-5 fill-current" />
                   </a>
                 </div>
               </div>
