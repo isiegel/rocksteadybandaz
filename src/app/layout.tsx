@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SiteFooter } from "./components/SiteFooter";
@@ -96,6 +97,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         {children}
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );
