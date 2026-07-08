@@ -16,7 +16,6 @@ const navLinks = [
   { href: "/#music", id: "music", label: "Music" },
   { href: "/#sound", id: "sound", label: "Sound" },
   { href: "/#photos", id: "photos", label: "Photos" },
-  { href: "/#press", id: "press", label: "Press" },
 ];
 
 const bookingLink = { href: "/book", id: "booking", label: "Book" };
