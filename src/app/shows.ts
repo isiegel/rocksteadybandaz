@@ -36,7 +36,7 @@ export const shows: Show[] = [
   { date: '2026-12-04', venue: 'The Gym Grill and Bar', city: 'San Tan Valley', start: '20:00', end: '24:00' },
   { date: '2026-12-11', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00' },
   { date: '2027-01-29', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
-  { date: '2027-02-20', venue: 'Ironwood Country Club (Barrell House)', start: '20:00', end: '23:00', note: 'Private event' },
+  { date: '2027-02-20', venue: 'Ironwood Country Club (Barrel House)', start: '20:00', end: '23:00', note: 'Private event' },
   { date: '2027-02-26', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
   { date: '2027-03-26', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
   { date: '2027-04-30', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
