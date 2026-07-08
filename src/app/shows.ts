@@ -35,6 +35,19 @@ export const shows: Show[] = [
   { date: '2026-11-20', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00' },
   { date: '2026-12-04', venue: 'The Gym Grill and Bar', city: 'San Tan Valley', start: '20:00', end: '24:00' },
   { date: '2026-12-11', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00' },
+  { date: '2027-01-29', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2027-02-20', venue: 'Ironwood Country Club (Barrell House)', start: '20:00', end: '23:00', note: 'Private event' },
+  { date: '2027-02-26', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2027-03-26', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2027-04-30', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2027-05-28', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2027-06-25', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2027-07-30', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2027-08-27', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2027-09-24', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2027-10-29', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2027-11-26', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
+  { date: '2027-12-31', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
 ];
 
 export type Coords = { lat: number; lng: number };
