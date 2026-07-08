@@ -24,7 +24,6 @@ export const shows: Show[] = [
   { date: '2026-07-25', venue: 'El Dorado Bar & Grill', city: 'Scottsdale', start: '20:00', end: '24:00' },
   { date: '2026-08-07', venue: 'The Dubliner Irish Pub', city: 'Phoenix', start: '20:00', end: '24:00' },
   { date: '2026-08-21', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00' },
-  { date: '2026-09-05', venue: 'Azool Grill', city: 'Phoenix', start: '20:00', end: '23:00' },
   { date: '2026-09-11', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00' },
   { date: '2026-09-25', venue: 'Kimmyz On Greenway Rock & Roll Bar & Grill', city: 'Glendale', start: '20:00', end: '24:00' },
   { date: '2026-10-09', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00' },
