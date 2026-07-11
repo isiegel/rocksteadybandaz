@@ -1,5 +1,6 @@
 'use client';
 
+import { track } from '@vercel/analytics';
 import Image from 'next/image';
 import {
   useEffect,
@@ -32,6 +33,7 @@ export function SampleSongListCard({
   const isFeature = variant === 'feature';
 
   const openModal = () => {
+    track('Song List View', { placement: variant });
     if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
     setIsOpen(true);
   };
@@ -139,6 +141,7 @@ export function SampleSongListCard({
         <a
           href={imagePath}
           download
+          onClick={() => track('Song List Download', { placement: variant })}
           className={
             isFeature
               ? 'inline-flex rounded-full bg-(--rock-steady-red) px-5 py-3 text-xs font-black uppercase text-white transition hover:bg-(--rock-steady-yellow) hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)'

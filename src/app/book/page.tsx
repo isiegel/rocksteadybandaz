@@ -149,6 +149,29 @@ export default function BookPage() {
                 needs, and contact details so we can confirm fit and next steps.
               </p>
 
+              <div className="mt-8 border border-white/12 bg-black/30 p-5">
+                <p className="text-xs font-black uppercase text-(--rock-steady-yellow)">
+                  What happens next
+                </p>
+                <ol className="mt-4 grid gap-4">
+                  {[
+                    ['1', 'Send the basics', 'Share the date, location, schedule, and event details.'],
+                    ['2', 'We confirm fit', 'We review availability, production needs, and the right set format.'],
+                    ['3', 'Lock in the show', 'Once the details and quote work, we confirm the date and advance the event.'],
+                  ].map(([number, title, description]) => (
+                    <li key={number} className="grid grid-cols-[2.25rem_1fr] gap-3">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-(--rock-steady-red) text-sm font-black text-white">
+                        {number}
+                      </span>
+                      <span>
+                        <strong className="block text-sm font-black uppercase text-white">{title}</strong>
+                        <span className="mt-1 block text-sm font-bold leading-6 text-white/62">{description}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 {eventFit.map((item) => (
                   <div
@@ -198,8 +221,8 @@ export default function BookPage() {
                 {checkAvailabilityLabel}
               </p>
               <p className="mt-3 leading-7 text-white/70">
-                Tell us about the date, venue or city, event type, set length,
-                load-in timing, sound plan, and expected crowd.
+                Start with what you know. Only your name and email are required;
+                the extra details help us give you a useful answer faster.
               </p>
               <div className="mt-6">
                 <BookingForm

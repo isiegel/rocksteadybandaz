@@ -114,6 +114,12 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-8 flex flex-col items-center gap-4 border-t border-white/10 pt-6 sm:flex-row sm:justify-center">
+          <a href="/bar-band-phoenix" className="text-xs font-black uppercase text-white/60 transition hover:text-(--rock-steady-yellow)">Bars &amp; venues</a>
+          <a href="/private-party-band-phoenix" className="text-xs font-black uppercase text-white/60 transition hover:text-(--rock-steady-yellow)">Private parties</a>
+          <a href="/corporate-event-band-phoenix" className="text-xs font-black uppercase text-white/60 transition hover:text-(--rock-steady-yellow)">Corporate events</a>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center gap-4 border-t border-white/10 pt-6 sm:flex-row sm:justify-center">
           <span className="text-[0.65rem] font-black uppercase tracking-[0.12em] text-white/45">
             Pro sound by
           </span>

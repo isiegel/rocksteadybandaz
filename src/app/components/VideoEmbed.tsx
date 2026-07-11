@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from '@vercel/analytics';
 import { useEffect, useRef, useState } from "react";
 
 type VideoEmbedProps = {
@@ -38,7 +39,10 @@ export function VideoEmbed({ videoId, title }: VideoEmbedProps) {
   return (
     <button
       type="button"
-      onClick={() => setPlaying(true)}
+      onClick={() => {
+        track('Video Start', { platform: 'YouTube', video: videoId });
+        setPlaying(true);
+      }}
       aria-label={`Play video: ${title}`}
       className="group relative flex aspect-video w-full items-center justify-center overflow-hidden focus:outline-hidden focus-visible:ring-2 focus-visible:ring-(--rock-steady-yellow)"
     >

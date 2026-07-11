@@ -12,10 +12,12 @@ import {
 import { BackToTop } from './components/BackToTop';
 import { FacebookIcon, InstagramIcon } from './components/SocialIcons';
 import { DayOfShowBanner } from './components/DayOfShowBanner';
+import { FacebookReelEmbed } from './components/FacebookReelEmbed';
 import { SampleSongListCard } from './components/SampleSongListCard';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
 import { UpcomingShows } from './components/UpcomingShows';
 import { VideoEmbed } from './components/VideoEmbed';
+import { TrackedLink } from './components/TrackedLink';
 import { absoluteUrl, siteConfig } from './seo';
 import {
   dayOfShowBannerShows,
@@ -74,13 +76,13 @@ const setlistSample = [
   { song: 'Sharp Dressed Man', artist: 'ZZ Top' },
   { song: 'Highway to Hell', artist: 'AC/DC' },
   { song: 'Sweet Emotion', artist: 'Aerosmith' },
-  { song: 'Gimme Shelter', artist: 'The Rolling Stones' },
+  { song: "Ex's & Oh's", artist: 'Elle King' },
   { song: 'You Wreck Me', artist: 'Tom Petty' },
   { song: 'We Got the Beat', artist: "The Go-Go's" },
   { song: 'Brass in Pocket', artist: 'The Pretenders' },
   { song: 'Surrender', artist: 'Cheap Trick' },
-  { song: 'Superstition', artist: 'Stevie Wonder' },
-  { song: 'Come Together', artist: 'The Beatles' },
+  { song: 'Black Horse and the Cherry Tree', artist: 'KT Tunstall' },
+  { song: 'No Roots', artist: 'Alice Merton' },
   { song: "Summer of '69", artist: 'Bryan Adams' },
   { song: 'Are You Gonna Be My Girl', artist: 'Jet' },
   { song: 'Seven Nation Army', artist: 'The White Stripes' },
@@ -377,12 +379,14 @@ export default function Home() {
                 charity nights, and neighborhood events across the Valley.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a
+                <TrackedLink
                   href="/book"
+                  eventName="Booking CTA Click"
+                  eventProperties={{ placement: 'homepage hero', destination: 'booking page' }}
                   className="rounded-full bg-(--rock-steady-red) px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-(--rock-steady-yellow) hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
                 >
                   {checkAvailabilityLabel}
-                </a>
+                </TrackedLink>
                 <a
                   href="#video"
                   className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-black uppercase text-white backdrop-blur transition hover:border-[#37d67a] hover:bg-[#37d67a] hover:text-[#06140b] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
@@ -511,6 +515,35 @@ export default function Home() {
                 videoId={youtubeVideoId}
                 title="Rock Steady live performance video"
               />
+            </div>
+          </div>
+
+          <div className="mx-auto mt-12 grid max-w-7xl gap-8 border-t border-white/10 pt-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
+            <div className="mx-auto w-full max-w-[22rem] overflow-hidden border border-white/12 bg-black shadow-[0_24px_70px_rgba(0,0,0,0.38)] lg:mx-0">
+              <FacebookReelEmbed
+                reelUrl="https://www.facebook.com/reel/773938001675087"
+                title="Rock Steady live at The Dubliner Irish Pub"
+              />
+            </div>
+            <div>
+              <p className="text-sm font-black uppercase text-[#37d67a]">
+                Quick crowd check
+              </p>
+              <h3 className="mt-3 text-3xl font-black leading-tight text-white sm:text-4xl">
+                A fast look at a real night out.
+              </h3>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/72">
+                Rock Steady live at The Dubliner Irish Pub: a familiar song, a
+                full room, and the kind of energy we bring to Valley stages.
+              </p>
+              <a
+                href="https://www.facebook.com/reel/773938001675087"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-7 inline-flex rounded-full border border-[#1877f2]/60 bg-[#1877f2]/15 px-5 py-3 text-sm font-black uppercase text-white transition hover:bg-[#1877f2] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
+              >
+                Open reel on Facebook
+              </a>
             </div>
           </div>
         </section>

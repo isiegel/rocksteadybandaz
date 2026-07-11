@@ -225,6 +225,7 @@ export function BookingForm({
 }: BookingFormProps) {
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
+  const startedRef = useRef(false);
 
   // Controlled fields (the custom dropdowns and the formatted phone). Kept in
   // state so they can be cleared on "send another".
@@ -342,9 +343,11 @@ export function BookingForm({
           'Something went wrong. Please try again.',
       );
       setStatus('error');
+      track('Booking Form Error', { type: 'response' });
     } catch {
       setError('Network error. Please try again or email us directly.');
       setStatus('error');
+      track('Booking Form Error', { type: 'network' });
     }
   }
 
@@ -353,6 +356,11 @@ export function BookingForm({
   return (
     <form
       onSubmit={handleSubmit}
+      onFocusCapture={() => {
+        if (startedRef.current) return;
+        startedRef.current = true;
+        track('Booking Form Start');
+      }}
       className={`grid grid-cols-1 gap-4${
         returningToForm ? ' animate-fade-in' : ''
       }`}
