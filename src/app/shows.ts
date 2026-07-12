@@ -33,7 +33,7 @@ export const shows: Show[] = [
   { date: '2026-11-06', venue: 'American Legion Post 35 - Mathew B Juan', city: 'Chandler', start: '19:00', end: '22:00' },
   { date: '2026-11-13', venue: 'The Dubliner Irish Pub', city: 'Phoenix', start: '20:00', end: '24:00' },
   { date: '2026-11-20', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00' },
-  { date: '2027-11-21', venue: 'Tailgaters', city: 'Glendale', start: '20:00', end: '24:00' },
+  { date: '2026-11-21', venue: 'Tailgaters', city: 'Glendale', start: '20:00', end: '24:00' },
   { date: '2026-12-04', venue: 'The Gym Grill and Bar', city: 'San Tan Valley', start: '20:00', end: '24:00' },
   { date: '2026-12-11', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00' },
   { date: '2027-01-29', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '23:00' },
