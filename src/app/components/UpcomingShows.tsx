@@ -13,6 +13,7 @@ import {
 
 const INITIAL_COUNT = 5;
 const EXTRA_SHOWS_ID = 'upcoming-shows-extra';
+const SHOWS_COLLAPSE_MS = 420;
 
 type GeoStatus = 'idle' | 'locating' | 'located' | 'denied' | 'unsupported' | 'error';
 
@@ -167,10 +168,14 @@ export function UpcomingShows({ shows }: { shows: Show[] }) {
   }
 
   useEffect(() => {
-    if (!showAll && shouldScrollToList.current) {
-      shouldScrollToList.current = false;
+    if (showAll || !shouldScrollToList.current) return;
+
+    shouldScrollToList.current = false;
+    const scrollTimer = window.setTimeout(() => {
       listRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    }, SHOWS_COLLAPSE_MS);
+
+    return () => window.clearTimeout(scrollTimer);
   }, [showAll]);
 
   function handleToggleShows() {
