@@ -14,6 +14,7 @@ const navLinks = [
   { href: "/#shows", id: "shows", label: "Shows" },
   { href: "/#video", id: "video", label: "Video" },
   { href: "/#music", id: "music", label: "Music" },
+  { href: "/#band", id: "band", label: "Band" },
   { href: "/#sound", id: "sound", label: "Sound" },
   { href: "/#photos", id: "photos", label: "Photos" },
 ];

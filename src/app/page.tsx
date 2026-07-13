@@ -10,14 +10,14 @@ import {
   checkAvailabilityLabel,
 } from './booking';
 import { BackToTop } from './components/BackToTop';
-import { FacebookIcon, InstagramIcon } from './components/SocialIcons';
 import { DayOfShowBanner } from './components/DayOfShowBanner';
 import { FacebookReelEmbed } from './components/FacebookReelEmbed';
 import { SampleSongListCard } from './components/SampleSongListCard';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
+import { FacebookIcon, InstagramIcon } from './components/SocialIcons';
+import { TrackedLink } from './components/TrackedLink';
 import { UpcomingShows } from './components/UpcomingShows';
 import { VideoEmbed } from './components/VideoEmbed';
-import { TrackedLink } from './components/TrackedLink';
 import { absoluteUrl, siteConfig } from './seo';
 import {
   dayOfShowBannerShows,
@@ -87,6 +87,38 @@ const setlistSample = [
   { song: 'Are You Gonna Be My Girl', artist: 'Jet' },
   { song: 'Seven Nation Army', artist: 'The White Stripes' },
 ];
+
+const bandMembers = [
+  {
+    name: 'Maija',
+    role: 'Lead vocals',
+    image: '/images/band/maija.jpg',
+    imageAlt: 'Maija, Rock Steady lead singer, holding a microphone',
+    imagePosition: 'object-[50%_28%]',
+    bio: 'Maija is Rock Steady’s powerhouse lead singer, fueled by post-punk, punk, Frank Zappa, classic R&B, and anything with a little attitude. Her influences range from The Damned, Buzzcocks, and Nina Hagen to Tina Turner, which explains both the voice and the swagger. She’s also on a lifelong mission to find a mic-check phrase more creative than “things, lists, lists of things.”',
+  },
+  {
+    name: 'Mike',
+    role: 'Guitar & vocals',
+    image: '/images/band/mike.jpg',
+    imageAlt: 'Mike Ross playing guitar with Rock Steady onstage',
+    imagePosition: 'object-[50%_32%]',
+    bio: 'Mike Ross brings riffs, muscle, and the occasional airborne move to Rock Steady. His raw guitar style leads Rock Steady through some of the best rock songs ever by bands like Led Zeppelin, Rolling Stones, Tom Petty, Aerosmith, and ZZ Top. He’s a skilled slide guitarist who also sings a few favorites. Known as “GunZ” or “Capt. T,” Mike brings humor and energy to every show.',
+  },
+  {
+    name: 'Gene',
+    role: 'Bass',
+    bio: 'A splashy exaggeration of common traits, Gene was a walking contradiction years before Billie Joe Armstrong was even a gleam in his mother’s eye. An early fixture of the L.A. punk scene, Gene’s influences range from shoegaze to classic rock to indie pop to gospel to ’60s garage rock and beyond. The guy’s a real mess. Buy him a beer at a show and he’ll tell you a dad joke. Or maybe you shouldn’t.',
+  },
+  {
+    name: 'Ira',
+    role: 'Drums',
+    image: '/images/band/ira.jpg',
+    imageAlt: 'Ira Siegel playing drums with Rock Steady',
+    imagePosition: 'object-center',
+    bio: 'Ira’s drumming is informed by diverse influences from prog to metal, but he’s meticulous about respecting the original style of every song he plays. He generates the pocket and holds the groove while simultaneously owning his crown as the reigning King of Jorts.',
+  },
+] as const;
 
 const pressBio =
   "Rock Steady is a female-fronted Phoenix cover band built for packed, loud, crowd-first nights. The set spans classic rock, '80s and '90s sing-alongs, and dance-floor staples — Joan Jett, Heart, Tom Petty, ZZ Top, AC/DC and more — played with vocals up front and guitar hooks that cut through. Available for bars, private events, patios, and charity nights across the Phoenix area.";
@@ -382,7 +414,10 @@ export default function Home() {
                 <TrackedLink
                   href="/book"
                   eventName="Booking CTA Click"
-                  eventProperties={{ placement: 'homepage hero', destination: 'booking page' }}
+                  eventProperties={{
+                    placement: 'homepage hero',
+                    destination: 'booking page',
+                  }}
                   className="rounded-full bg-(--rock-steady-red) px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-(--rock-steady-yellow) hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
                 >
                   {checkAvailabilityLabel}
@@ -614,44 +649,69 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1.15fr] lg:items-center">
-            <div className="relative aspect-[4/3] overflow-hidden border border-white/12 shadow-[0_24px_70px_rgba(0,0,0,0.36)]">
-              <Image
-                src="/images/show-10.jpg"
-                alt="Rock Steady full band performing in black and white"
-                fill
-                sizes="(min-width: 1024px) 48vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-
-            <div>
+        <section id="band" className="px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
               <p className="text-sm font-black uppercase text-[#37d67a]">
-                About the band
+                Meet the band
               </p>
               <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                Local, loose, and ready to turn the room up.
+                Four personalities. One loud night out.
               </h2>
               <p className="mt-5 text-lg leading-8 text-white/72">
-                Rock Steady delivers high-energy performances with faithful
-                arrangements that sound instantly familiar and keep audiences
-                singing along.
+                Rock Steady brings different corners of rock together in one
+                crowd-first band &mdash; with faithful arrangements, plenty of
+                personality, and no interest in playing it safe.
               </p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                {[
-                  'High-energy sets',
-                  'Crowd-first songs',
-                  'Real band energy',
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="border border-white/12 bg-white/[0.045] px-4 py-5 text-center text-sm font-black uppercase text-white"
-                  >
-                    {item}
+            </div>
+
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {bandMembers.map((member, index) => (
+                <article
+                  key={member.name}
+                  className="group grid overflow-hidden border border-white/12 bg-[#101010] shadow-[0_20px_50px_rgba(0,0,0,0.24)] sm:grid-cols-[minmax(11rem,0.72fr)_1.28fr]"
+                >
+                  <div className="relative min-h-80 overflow-hidden bg-[#171717] sm:min-h-full">
+                    {'image' in member ? (
+                      <Image
+                        src={member.image}
+                        alt={member.imageAlt}
+                        fill
+                        sizes="(min-width: 768px) 25vw, 100vw"
+                        className={`object-cover ${member.imagePosition} transition duration-500 group-hover:scale-[1.025]`}
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-[radial-gradient(circle_at_50%_30%,rgba(255,39,0,0.22),transparent_52%),linear-gradient(145deg,#1b1b1b,#090909)] p-8 text-center">
+                        <span
+                          aria-hidden="true"
+                          className="text-8xl font-black leading-none text-white/8"
+                        >
+                          G
+                        </span>
+                        <span className="mt-4 text-xs font-black uppercase tracking-[0.22em] text-white/48">
+                          Photo coming soon
+                        </span>
+                      </div>
+                    )}
                   </div>
-                ))}
-              </div>
+
+                  <div className="flex flex-col p-6 sm:p-7">
+                    <p className="text-xs font-black uppercase tracking-[0.18em] text-(--rock-steady-yellow)">
+                      {member.role}
+                    </p>
+                    <h3 className="mt-2 text-3xl font-black text-white">
+                      {member.name}
+                    </h3>
+                    <div
+                      aria-hidden="true"
+                      className={`mt-4 h-1.5 w-14 ${index % 2 === 0 ? 'bg-(--rock-steady-red)' : 'bg-[#37d67a]'}`}
+                    />
+                    <p className="mt-5 text-base leading-7 text-white/72">
+                      {member.bio}
+                    </p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -847,7 +907,6 @@ export default function Home() {
                   advance.
                 </p>
               </div>
-
             </div>
 
             <div className="mt-4 grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
