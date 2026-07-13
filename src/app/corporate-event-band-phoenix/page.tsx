@@ -1,11 +1,13 @@
-import type { Metadata } from 'next';
 import { EventBookingPage } from '../components/EventBookingPage';
+import { createPageMetadata } from '../seo';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Phoenix Corporate Event Band',
   description: 'Book Rock Steady for Phoenix corporate events, company parties, fundraisers, and community nights with professional live sound and familiar rock favorites.',
-  alternates: { canonical: '/corporate-event-band-phoenix' },
-};
+  path: '/corporate-event-band-phoenix',
+  image: '/images/show-09.jpg',
+  imageAlt: 'Rock Steady full band performing on a Phoenix stage',
+});
 
 export default function CorporateEventBandPage() {
   return <EventBookingPage content={{

@@ -15,42 +15,13 @@ import { ShrinkingHeader } from './components/ShrinkingHeader';
 import { TrackedLink } from './components/TrackedLink';
 import { UpcomingShows } from './components/UpcomingShows';
 import { absoluteUrl, siteConfig } from './seo';
-import {
-  dayOfShowBannerShows,
-  showCoords,
-  showEndISO,
-  showStartISO,
-  upcomingShows,
-  type Show,
-} from './shows';
+import { dayOfShowBannerShows, upcomingShows } from './shows';
 
 const upcoming = upcomingShows();
 const dayOfShowBannerShowList = dayOfShowBannerShows();
-const youtubeVideoId = siteConfig.video.youtubeId;
 
 const bandRef = { '@type': 'MusicGroup', '@id': `${siteConfig.url}/#band`, name: siteConfig.name };
 const areaServed = siteConfig.areaServed.map((name) => ({ '@type': 'City', name: `${name}, Arizona` }));
-
-function eventData(show: Show) {
-  const url = show.url ? new URL(show.url, siteConfig.url).toString() : absoluteUrl('/shows');
-  const coords = showCoords(show);
-  return {
-    '@type': 'MusicEvent',
-    name: `${siteConfig.name} at ${show.venue}`,
-    startDate: showStartISO(show),
-    ...(showEndISO(show) && { endDate: showEndISO(show) }),
-    eventStatus: 'https://schema.org/EventScheduled',
-    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    url,
-    location: {
-      '@type': 'Place', name: show.venue,
-      address: { '@type': 'PostalAddress', ...(show.city && { addressLocality: show.city }), addressRegion: 'AZ', addressCountry: 'US' },
-      ...(coords && { geo: { '@type': 'GeoCoordinates', latitude: coords.lat, longitude: coords.lng } }),
-    },
-    offers: { '@type': 'Offer', url, price: 0, priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
-    performer: bandRef,
-  };
-}
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -65,7 +36,6 @@ const structuredData = {
   genre: ['Classic rock', 'Cover band', 'Dance rock'],
   sameAs: [siteConfig.facebookUrl, siteConfig.instagramUrl],
   areaServed,
-  ...(upcoming.length && { event: upcoming.map(eventData) }),
 };
 
 const websiteData = {
@@ -80,14 +50,6 @@ const bookingData = {
   subjectOf: absoluteBookingAssets.map((asset) => ({ '@type': 'DigitalDocument', name: asset.title, url: asset.url, description: asset.description })),
 };
 
-const videoData = {
-  '@context': 'https://schema.org', '@type': 'VideoObject', '@id': `${siteConfig.url}/#performance-video`,
-  name: siteConfig.video.title, description: siteConfig.video.description,
-  thumbnailUrl: `https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`,
-  embedUrl: `https://www.youtube-nocookie.com/embed/${youtubeVideoId}`,
-  contentUrl: `https://youtu.be/${youtubeVideoId}`, uploadDate: siteConfig.video.uploadDate, publisher: bandRef,
-};
-
 const destinations = [
   { href: '/shows', eyebrow: 'Live dates', title: 'Find the next show', copy: 'Upcoming public dates across Phoenix and the Valley.', color: 'text-[#37d67a]' },
   { href: '/music', eyebrow: 'The set', title: 'Hear what we play', copy: 'Live video, set highlights, and the downloadable song list.', color: 'text-(--rock-steady-yellow)' },
@@ -97,14 +59,14 @@ const destinations = [
 
 export default function Home() {
   return <>
-    {[structuredData, websiteData, bookingData, videoData].map((data, index) => <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }} />)}
+    {[structuredData, websiteData, bookingData].map((data, index) => <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }} />)}
     <ShrinkingHeader />
     <main id="top" className="overflow-hidden bg-[#050505] text-white">
       <section className="relative min-h-[88vh] px-4 pb-16 pt-32 sm:px-6 md:pt-40 lg:px-8">
         <Image src="/images/show-07.jpg" alt="Rock Steady performing live on a Phoenix stage" fill loading="eager" fetchPriority="high" sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-black/58" /><div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#050505] to-transparent" />
         <div className="relative mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-3xl"><p className="mb-4 inline-flex rounded-full border border-(--rock-steady-yellow)/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-(--rock-steady-yellow)">{bookingAvailabilityLabel}</p><h1 className="sr-only">Rock Steady - Phoenix classic rock cover band for bars, parties, and events</h1><p className="mt-6 max-w-2xl text-lg font-bold leading-8 text-white/88 sm:text-xl">Rock Steady is a female-fronted Phoenix cover band with loud guitars, big vocals, and the songs people shout back from the first round to last call. Now booking {bookingYear} dates across the Valley.</p><div className="mt-8 flex flex-wrap gap-3"><TrackedLink href="/book" eventName="Booking CTA Click" eventProperties={{ placement: 'homepage hero', destination: 'booking page' }} className="rounded-full bg-(--rock-steady-red) px-6 py-3 text-sm font-black uppercase shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-(--rock-steady-yellow) hover:text-black">{checkAvailabilityLabel}</TrackedLink><Link href="/music" className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-black uppercase backdrop-blur transition hover:border-[#37d67a] hover:bg-[#37d67a] hover:text-[#06140b]">Watch the band</Link></div></div>
+          <div className="max-w-3xl"><p className="mb-4 inline-flex rounded-full border border-(--rock-steady-yellow)/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-(--rock-steady-yellow)">{bookingAvailabilityLabel}</p><h1 className="max-w-3xl text-4xl font-black leading-tight text-white sm:text-5xl">Phoenix classic rock built for loud nights.</h1><p className="mt-5 max-w-2xl text-lg font-bold leading-8 text-white/88 sm:text-xl">Rock Steady is a female-fronted Phoenix cover band with big vocals, loud guitars, and the songs people shout back from the first round to last call. Now booking {bookingYear} dates across the Valley.</p><div className="mt-8 flex flex-wrap gap-3"><TrackedLink href="/book" eventName="Booking CTA Click" eventProperties={{ placement: 'homepage hero', destination: 'booking page' }} className="rounded-full bg-(--rock-steady-red) px-6 py-3 text-sm font-black uppercase shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-(--rock-steady-yellow) hover:text-black">{checkAvailabilityLabel}</TrackedLink><Link href="/music" className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-black uppercase backdrop-blur transition hover:border-[#37d67a] hover:bg-[#37d67a] hover:text-[#06140b]">Watch the band</Link></div></div>
           <div className="grid max-w-xl grid-cols-2 gap-3 text-sm font-black uppercase sm:grid-cols-4 lg:max-w-md">{['Bars','Patios','Parties','Events'].map(label => <div key={label} className="border border-white/14 bg-black/42 px-4 py-4 text-center backdrop-blur">{label}</div>)}</div>
         </div>
       </section>

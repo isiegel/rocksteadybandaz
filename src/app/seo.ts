@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { bookingYear } from './booking-year';
 
 // Default to the production domain so canonical URLs, og:url, the sitemap,
@@ -113,4 +114,39 @@ export const siteConfig = {
 
 export function absoluteUrl(path: string) {
   return new URL(path, siteConfig.url).toString();
+}
+
+export function createPageMetadata({
+  title,
+  description,
+  path,
+  image = siteConfig.heroImagePath,
+  imageAlt = 'Rock Steady Phoenix classic rock cover band performing live',
+}: {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  imageAlt?: string;
+}): Metadata {
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      title: `${title} | ${siteConfig.name}`,
+      description,
+      url: path,
+      siteName: siteConfig.name,
+      locale: 'en_US',
+      type: 'website',
+      images: [{ url: image, alt: imageAlt }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} | ${siteConfig.name}`,
+      description,
+      images: [{ url: absoluteUrl(image), alt: imageAlt }],
+    },
+  };
 }

@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import { bandMembers } from '../band-members';
 import { ShrinkingHeader } from '../components/ShrinkingHeader';
+import { createPageMetadata } from '../seo';
 
-export const metadata: Metadata = { title: 'Meet the Band', description: 'Meet the musicians behind Rock Steady, Phoenix’s female-fronted classic rock cover band.', alternates: { canonical: '/band' } };
+export const metadata = createPageMetadata({ title: 'Meet the Band', description: 'Meet the musicians behind Rock Steady, Phoenix’s female-fronted classic rock cover band.', path: '/band', image: '/images/band/maija.jpg', imageAlt: 'Maija, lead singer of Rock Steady' });
 
 export default function BandPage() {
   return <><ShrinkingHeader /><main className="min-h-screen bg-[#050505] px-4 pb-20 pt-36 text-white sm:px-6 lg:px-8"><section className="mx-auto max-w-7xl">

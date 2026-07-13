@@ -1,12 +1,11 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import { bookingAssets, bookingYear } from '../booking';
 import { SampleSongListCard } from '../components/SampleSongListCard';
 import { ShrinkingHeader } from '../components/ShrinkingHeader';
-import { siteConfig } from '../seo';
+import { createPageMetadata, siteConfig } from '../seo';
 import { soundGear } from '../sound-gear';
 
-export const metadata: Metadata = { title: 'Press Kit & Venue Assets', description: 'Download Rock Steady logos, press photos, sample song list, stage plot, input list, and venue one-sheet.', alternates: { canonical: '/press' } };
+export const metadata = createPageMetadata({ title: 'Press Kit & Venue Assets', description: 'Download Rock Steady logos, press photos, sample song list, stage plot, input list, and venue one-sheet.', path: '/press', image: siteConfig.horizontalLogoPreviewPath, imageAlt: 'Rock Steady band logo' });
 const pressPhotos = ['/images/show-08.jpg','/images/show-10.jpg','/images/show-04.jpg'];
 
 export default function PressPage() { return <><ShrinkingHeader /><main className="min-h-screen bg-[#050505] pb-20 pt-36 text-white"><section className="px-4 sm:px-6 lg:px-8"><div className="mx-auto max-w-7xl"><p className="text-sm font-black uppercase text-[#37d67a]">For venues &amp; media</p><h1 className="mt-3 max-w-4xl text-5xl font-black leading-tight sm:text-6xl">Press kit, production info, and booking assets.</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-white/72">Everything needed to promote and advance a Rock Steady show, all in one place.</p>
