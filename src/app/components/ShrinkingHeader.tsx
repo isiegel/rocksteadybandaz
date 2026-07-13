@@ -1,29 +1,23 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { rockslide } from "../fonts";
 
-// Section links render as plain <a> tags, not next/link: the App Router's
-// segment cache seeds its canonical URL from location.href on a hard load, so
-// arriving at /#video and then soft-navigating to another hash link produces
-// aggregated URLs like /#video#top (bug present through next@16.3 previews).
-// Native fragment navigation always replaces the hash, and same-document
-// anchor clicks never hit the router.
 const navLinks = [
-  { href: "/#shows", id: "shows", label: "Shows" },
-  { href: "/#video", id: "video", label: "Video" },
-  { href: "/#music", id: "music", label: "Music" },
-  { href: "/#band", id: "band", label: "Band" },
-  { href: "/#sound", id: "sound", label: "Sound" },
-  { href: "/#photos", id: "photos", label: "Photos" },
+  { href: "/shows", label: "Shows" },
+  { href: "/music", label: "Music" },
+  { href: "/band", label: "Band" },
+  { href: "/photos", label: "Photos" },
+  { href: "/press", label: "Press" },
 ];
 
-const bookingLink = { href: "/book", id: "booking", label: "Book" };
+const bookingLink = { href: "/book", label: "Book" };
 
 export function ShrinkingHeader() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeId, setActiveId] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
@@ -37,40 +31,6 @@ export function ShrinkingHeader() {
     window.addEventListener("scroll", updateHeader, { passive: true });
 
     return () => window.removeEventListener("scroll", updateHeader);
-  }, []);
-
-  useEffect(() => {
-    const orderedIds = [...navLinks, bookingLink].map((link) => link.id);
-    const sections = orderedIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    const visibleIds = new Set<string>();
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            visibleIds.add(entry.target.id);
-          } else {
-            visibleIds.delete(entry.target.id);
-          }
-        });
-
-        // Pick the topmost section currently within the band so overlapping
-        // entries in a single callback resolve deterministically. When nothing
-        // is in the band (e.g. landing at the top in the hero), clear the
-        // active link so no nav item — including Shows — is highlighted until
-        // the user scrolls into a section.
-        const nextActive = orderedIds.find((id) => visibleIds.has(id));
-        setActiveId(nextActive ?? "");
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-
-    return () => observer.disconnect();
   }, []);
 
   // While the mobile menu is open: close it on desktop resize or Escape, lock
@@ -114,10 +74,8 @@ export function ShrinkingHeader() {
       }`}
     >
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
-        {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- plain
-            anchor on purpose; see the hash-aggregation note above navLinks */}
-        <a
-          href="/#top"
+        <Link
+          href="/"
           aria-label="Rock Steady home"
           className={`hero-wordmark ${rockslide.className} block shrink-0 whitespace-nowrap leading-none transition-all duration-500 ease-in-out ${
             isScrolled
@@ -126,7 +84,7 @@ export function ShrinkingHeader() {
           }`}
         >
           Rock Steady
-        </a>
+        </Link>
 
         <nav
           aria-label="Main navigation"
@@ -135,9 +93,9 @@ export function ShrinkingHeader() {
           }`}
         >
           {navLinks.map((link) => {
-            const isActive = activeId === link.id;
+            const isActive = pathname === link.href;
             return (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
@@ -148,15 +106,15 @@ export function ShrinkingHeader() {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             );
           })}
 
           <Link
             href={bookingLink.href}
-            aria-current={activeId === bookingLink.id ? "true" : undefined}
+            aria-current={pathname === bookingLink.href ? "page" : undefined}
             className={`rounded-full border px-4 py-2 transition outline-hidden focus-visible:ring-2 focus-visible:ring-(--rock-steady-yellow) ${
-              activeId === bookingLink.id
+              pathname === bookingLink.href
                 ? "border-(--rock-steady-red) bg-(--rock-steady-red) text-white"
                 : "border-(--rock-steady-yellow) bg-(--rock-steady-yellow) text-black hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) hover:text-white"
             }`}
@@ -215,9 +173,9 @@ export function ShrinkingHeader() {
       >
         <div className="flex flex-col gap-2 px-4 py-4 text-sm font-black uppercase sm:px-6">
           {navLinks.map((link) => {
-            const isActive = activeId === link.id;
+            const isActive = pathname === link.href;
             return (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
@@ -229,7 +187,7 @@ export function ShrinkingHeader() {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             );
           })}
         </div>

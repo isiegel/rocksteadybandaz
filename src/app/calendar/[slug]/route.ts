@@ -34,7 +34,7 @@ function buildShowICS(show: Show): string {
   const coords = showCoords(show);
   const eventUrl = show.url
     ? new URL(show.url, siteConfig.url).toString()
-    : absoluteUrl('/#shows');
+    : absoluteUrl('/shows');
 
   const lines = [
     'BEGIN:VCALENDAR',

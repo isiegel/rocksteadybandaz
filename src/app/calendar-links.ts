@@ -29,7 +29,7 @@ export function calendarEventLocation(show: Show): string {
 
 export function calendarEventDescription(show: Show): string {
   const note = show.note ? `${show.note}. ` : '';
-  return `${note}Live classic rock, sing-alongs, and dance-floor covers with ${siteConfig.name}. Full schedule: ${siteConfig.url}/#shows`;
+  return `${note}Live classic rock, sing-alongs, and dance-floor covers with ${siteConfig.name}. Full schedule: ${siteConfig.url}/shows`;
 }
 
 export type CalendarTimes =

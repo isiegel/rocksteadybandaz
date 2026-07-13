@@ -38,6 +38,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         absoluteUrl(siteConfig.horizontalLogoPath),
       ],
     },
+    ...["/shows", "/music", "/band", "/photos", "/press"].map((path) => ({
+      url: absoluteUrl(path),
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+      images: [absoluteUrl(siteConfig.heroImagePath)],
+    })),
     ...[
       "/bar-band-phoenix",
       "/private-party-band-phoenix",

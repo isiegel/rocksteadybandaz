@@ -1,20 +1,16 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   absoluteBookingAssets,
-  bookingAssets,
   bookingAvailabilityCopy,
   bookingAvailabilityLabel,
-  bookingEmailHref,
   bookingServiceName,
   bookingYear,
   checkAvailabilityLabel,
 } from './booking';
 import { BackToTop } from './components/BackToTop';
 import { DayOfShowBanner } from './components/DayOfShowBanner';
-import { FacebookReelEmbed } from './components/FacebookReelEmbed';
-import { SampleSongListCard } from './components/SampleSongListCard';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
-import { FacebookIcon, InstagramIcon } from './components/SocialIcons';
 import { TrackedLink } from './components/TrackedLink';
 import { UpcomingShows } from './components/UpcomingShows';
 import { VideoEmbed } from './components/VideoEmbed';
@@ -27,971 +23,101 @@ import {
   upcomingShows,
   type Show,
 } from './shows';
-import { soundGear } from './sound-gear';
 
 const upcoming = upcomingShows();
 const dayOfShowBannerShowList = dayOfShowBannerShows();
 const youtubeVideoId = siteConfig.video.youtubeId;
-const youtubeWatchUrl = `https://youtu.be/${youtubeVideoId}`;
 
-const gallery = [
-  {
-    src: '/images/show-04.jpg',
-    alt: 'Rock Steady vocalist singing under colorful stage lights',
-    feature: true,
-  },
-  {
-    src: '/images/show-10.jpg',
-    alt: 'Black and white photo of Rock Steady playing live',
-  },
-  {
-    src: '/images/show-05.jpg',
-    alt: 'Rock Steady vocalist reaching out to a packed crowd at Kimmyz',
-  },
-  {
-    src: '/images/show-09.jpg',
-    alt: 'Rock Steady full band with bright club lights',
-    feature: true,
-  },
-  {
-    src: '/images/show-03.jpg',
-    alt: 'Wide black and white photo of Rock Steady onstage',
-  },
-  {
-    src: '/images/show-11.jpg',
-    alt: 'Rock Steady performing on the stage at an Irish pub under blue lights',
-  },
-];
+const bandRef = { '@type': 'MusicGroup', '@id': `${siteConfig.url}/#band`, name: siteConfig.name };
+const areaServed = siteConfig.areaServed.map((name) => ({ '@type': 'City', name: `${name}, Arizona` }));
 
-const setStyles = [
-  'Classic rock that starts conversations',
-  'Your favorite sing-alongs from the ’70s to today',
-  'Dance-floor bar favorites',
-  'Guitar hooks, big choruses, no dead air',
-];
-
-const setlistSample = [
-  { song: "I Love Rock 'n' Roll", artist: 'Joan Jett' },
-  { song: 'Straight On', artist: 'Heart' },
-  { song: 'Sharp Dressed Man', artist: 'ZZ Top' },
-  { song: 'Highway to Hell', artist: 'AC/DC' },
-  { song: 'Sweet Emotion', artist: 'Aerosmith' },
-  { song: "Ex's & Oh's", artist: 'Elle King' },
-  { song: 'You Wreck Me', artist: 'Tom Petty' },
-  { song: 'We Got the Beat', artist: "The Go-Go's" },
-  { song: 'Brass in Pocket', artist: 'The Pretenders' },
-  { song: 'Surrender', artist: 'Cheap Trick' },
-  { song: 'Black Horse and the Cherry Tree', artist: 'KT Tunstall' },
-  { song: 'No Roots', artist: 'Alice Merton' },
-  { song: "Summer of '69", artist: 'Bryan Adams' },
-  { song: 'Are You Gonna Be My Girl', artist: 'Jet' },
-  { song: 'Seven Nation Army', artist: 'The White Stripes' },
-];
-
-const bandMembers = [
-  {
-    name: 'Maija',
-    role: 'Lead vocals',
-    image: '/images/band/maija.jpg',
-    imageAlt: 'Maija, Rock Steady lead singer, holding a microphone',
-    imagePosition: 'object-[50%_28%]',
-    bio: 'Maija is Rock Steady’s powerhouse lead singer, fueled by post-punk, punk, Frank Zappa, classic R&B, and anything with a little attitude. Her influences range from The Damned, Buzzcocks, and Nina Hagen to Tina Turner, which explains both the voice and the swagger. She’s also on a lifelong mission to find a mic-check phrase more creative than “things, lists, lists of things.”',
-  },
-  {
-    name: 'Mike',
-    role: 'Guitar & vocals',
-    image: '/images/band/mike.jpg',
-    imageAlt: 'Mike Ross playing guitar with Rock Steady onstage',
-    imagePosition: 'object-[50%_32%]',
-    bio: 'Mike Ross brings riffs, muscle, and the occasional airborne move to Rock Steady. His raw guitar style leads Rock Steady through some of the best rock songs ever by bands like Led Zeppelin, Rolling Stones, Tom Petty, Aerosmith, and ZZ Top. He’s a skilled slide guitarist who also sings a few favorites. Known as “GunZ” or “Capt. T,” Mike brings humor and energy to every show.',
-  },
-  {
-    name: 'Gene',
-    role: 'Bass',
-    bio: 'A splashy exaggeration of common traits, Gene was a walking contradiction years before Billie Joe Armstrong was even a gleam in his mother’s eye. An early fixture of the L.A. punk scene, Gene’s influences range from shoegaze to classic rock to indie pop to gospel to ’60s garage rock and beyond. The guy’s a real mess. Buy him a beer at a show and he’ll tell you a dad joke. Or maybe you shouldn’t.',
-  },
-  {
-    name: 'Ira',
-    role: 'Drums',
-    image: '/images/band/ira.jpg',
-    imageAlt: 'Ira Siegel playing drums with Rock Steady',
-    imagePosition: 'object-center',
-    bio: 'Ira’s drumming is informed by diverse influences from prog to metal, but he’s meticulous about respecting the original style of every song he plays. He generates the pocket and holds the groove while simultaneously owning his crown as the reigning King of Jorts.',
-  },
-] as const;
-
-const pressBio =
-  "Rock Steady is a female-fronted Phoenix cover band built for packed, loud, crowd-first nights. The set spans classic rock, '80s and '90s sing-alongs, and dance-floor staples — Joan Jett, Heart, Tom Petty, ZZ Top, AC/DC and more — played with vocals up front and guitar hooks that cut through. Available for bars, private events, patios, and charity nights across the Phoenix area.";
-
-const pressFacts = [
-  { label: 'Based in', value: 'Phoenix, AZ' },
-  { label: 'Style', value: "Classic rock · '70s/'80s/'90s · dance covers" },
-  { label: 'Format', value: 'Female-fronted full band' },
-  { label: 'Sets', value: 'Flexible — up to three sets' },
-];
-
-const pressPhotos = [
-  { src: '/images/show-08.jpg', label: 'Live photo 1' },
-  { src: '/images/show-10.jpg', label: 'Live photo 2' },
-  { src: '/images/show-04.jpg', label: 'Live photo 3' },
-];
-
-const valleySpots = siteConfig.areaServed;
-
-const regularVenues = [
-  'The Loft Again',
-  'The Dubliner Irish Pub',
-  'Azool Grill',
-  'El Dorado Bar & Grill',
-  'Kimmyz On Greenway',
-  "Jolie's Place",
-  'Tailgaters',
-  'Luckys Indoor Outdoor',
-  'Caesars Sportsbook DTPHX',
-  'Starz',
-  "J&T's Copper Penny",
-  'Sage & Sand',
-  'Anthem Country Club',
-  'Encantarra Country Club',
-  '4Fridays Music Series',
-  'Lucky Strikes',
-];
-
-const bandStructuredDataRef = {
-  '@type': 'MusicGroup',
-  '@id': `${siteConfig.url}/#band`,
-  name: siteConfig.name,
-};
-
-const eventImages = [
-  absoluteUrl(siteConfig.heroImagePath),
-  absoluteUrl('/images/show-04.jpg'),
-  absoluteUrl('/images/show-10.jpg'),
-];
-
-const areaServedStructuredData = siteConfig.areaServed.map((city) => ({
-  '@type': 'City',
-  name: `${city}, Arizona`,
-}));
-
-const websiteStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  '@id': `${siteConfig.url}/#website`,
-  url: siteConfig.url,
-  name: siteConfig.name,
-  alternateName: siteConfig.alternateNames,
-  description: siteConfig.description,
-  inLanguage: 'en-US',
-  publisher: bandStructuredDataRef,
-};
-
-const bookingServiceStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': `${siteConfig.url}/#booking-service`,
-  name: bookingServiceName,
-  description: bookingAvailabilityCopy,
-  serviceType: siteConfig.bookingServiceTypes,
-  provider: bandStructuredDataRef,
-  areaServed: areaServedStructuredData,
-  url: absoluteUrl('/book'),
-  subjectOf: absoluteBookingAssets.map((asset) => ({
-    '@type': 'DigitalDocument',
-    name: asset.title,
-    url: asset.url,
-    description: asset.description,
-  })),
-};
-
-function showEventUrl(show: Show): string {
-  return show.url
-    ? new URL(show.url, siteConfig.url).toString()
-    : absoluteUrl('/#shows');
-}
-
-function showEventDescription(show: Show): string {
-  const city = show.city ? `${show.city}-area` : 'Phoenix-area';
-  const note = show.note ? ` ${show.note}.` : '';
-
-  return `A live Rock Steady ${city} set with classic rock, '80s and '90s sing-alongs, dance-floor bar favorites, loud guitars, and female-fronted vocals.${note}`;
-}
-
-function showStructuredData(show: Show) {
-  const eventUrl = showEventUrl(show);
-  const endDate = showEndISO(show);
+function eventData(show: Show) {
+  const url = show.url ? new URL(show.url, siteConfig.url).toString() : absoluteUrl('/shows');
   const coords = showCoords(show);
-
   return {
     '@type': 'MusicEvent',
     name: `${siteConfig.name} at ${show.venue}`,
-    description: showEventDescription(show),
-    image: eventImages,
     startDate: showStartISO(show),
-    ...(endDate && { endDate }),
+    ...(showEndISO(show) && { endDate: showEndISO(show) }),
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    url: eventUrl,
+    url,
     location: {
-      '@type': 'Place',
-      name: show.venue,
-      address: {
-        '@type': 'PostalAddress',
-        ...(show.city && { addressLocality: show.city }),
-        addressRegion: 'AZ',
-        addressCountry: 'US',
-      },
-      ...(coords && {
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: coords.lat,
-          longitude: coords.lng,
-        },
-      }),
+      '@type': 'Place', name: show.venue,
+      address: { '@type': 'PostalAddress', ...(show.city && { addressLocality: show.city }), addressRegion: 'AZ', addressCountry: 'US' },
+      ...(coords && { geo: { '@type': 'GeoCoordinates', latitude: coords.lat, longitude: coords.lng } }),
     },
-    offers: {
-      '@type': 'Offer',
-      url: eventUrl,
-      price: 0,
-      priceCurrency: 'USD',
-      availability: 'https://schema.org/InStock',
-    },
-    organizer: {
-      '@type': 'Organization',
-      name: show.venue,
-      ...(show.url && { url: eventUrl }),
-    },
-    performer: bandStructuredDataRef,
+    offers: { '@type': 'Offer', url, price: 0, priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+    performer: bandRef,
   };
 }
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'MusicGroup',
-  '@id': `${siteConfig.url}/#band`,
-  name: siteConfig.name,
+  ...bandRef,
   alternateName: siteConfig.alternateNames,
   url: siteConfig.url,
   email: siteConfig.email,
   logo: absoluteUrl(siteConfig.logoPath),
-  image: [
-    absoluteUrl(siteConfig.heroImagePath),
-    absoluteUrl('/images/show-04.jpg'),
-    absoluteUrl('/images/show-10.jpg'),
-  ],
+  image: [absoluteUrl(siteConfig.heroImagePath), absoluteUrl('/images/show-04.jpg')],
   description: siteConfig.description,
   slogan: "It's a rock party.",
-  genre: ['Classic rock', 'Cover band', 'Dance rock', '80s music', '90s music'],
-  knowsAbout: siteConfig.searchTopics,
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': `${siteConfig.url}/#webpage`,
-    url: siteConfig.url,
-    name: siteConfig.title,
-  },
+  genre: ['Classic rock', 'Cover band', 'Dance rock'],
   sameAs: [siteConfig.facebookUrl, siteConfig.instagramUrl],
-  foundingLocation: {
-    '@type': 'Place',
-    name: 'Phoenix, Arizona',
-  },
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Phoenix',
-    addressRegion: 'AZ',
-    addressCountry: 'US',
-  },
-  areaServed: areaServedStructuredData,
-  keywords: siteConfig.keywords.join(', '),
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'booking',
-    email: siteConfig.email,
-    url: absoluteUrl('/book'),
-    areaServed: 'US-AZ',
-  },
-  makesOffer: {
-    '@type': 'Offer',
-    name: bookingAvailabilityLabel,
-    description: bookingAvailabilityCopy,
-    url: absoluteUrl('/book'),
-    availability: 'https://schema.org/InStock',
-    itemOffered: {
-      '@type': 'Service',
-      '@id': `${siteConfig.url}/#booking-service`,
-      name: bookingServiceName,
-    },
-  },
-  ...(upcoming.length > 0 && {
-    event: upcoming.map(showStructuredData),
-  }),
+  areaServed,
+  ...(upcoming.length && { event: upcoming.map(eventData) }),
 };
 
-// VideoObject keeps the live performance discoverable now that it loads behind a
-// click-to-play facade (the iframe is no longer in the initial HTML for crawlers).
-const videoStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'VideoObject',
-  '@id': `${siteConfig.url}/#performance-video`,
-  name: siteConfig.video.title,
-  description: siteConfig.video.description,
-  thumbnailUrl: [
-    `https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`,
-    `https://i.ytimg.com/vi/${youtubeVideoId}/maxresdefault.jpg`,
-  ],
-  embedUrl: `https://www.youtube-nocookie.com/embed/${youtubeVideoId}`,
-  contentUrl: youtubeWatchUrl,
-  uploadDate: siteConfig.video.uploadDate,
-  publisher: bandStructuredDataRef,
+const websiteData = {
+  '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${siteConfig.url}/#website`,
+  url: siteConfig.url, name: siteConfig.name, description: siteConfig.description, publisher: bandRef,
 };
+
+const bookingData = {
+  '@context': 'https://schema.org', '@type': 'Service', '@id': `${siteConfig.url}/#booking-service`,
+  name: bookingServiceName, description: bookingAvailabilityCopy, provider: bandRef, areaServed,
+  url: absoluteUrl('/book'),
+  subjectOf: absoluteBookingAssets.map((asset) => ({ '@type': 'DigitalDocument', name: asset.title, url: asset.url, description: asset.description })),
+};
+
+const videoData = {
+  '@context': 'https://schema.org', '@type': 'VideoObject', '@id': `${siteConfig.url}/#performance-video`,
+  name: siteConfig.video.title, description: siteConfig.video.description,
+  thumbnailUrl: `https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`,
+  embedUrl: `https://www.youtube-nocookie.com/embed/${youtubeVideoId}`,
+  contentUrl: `https://youtu.be/${youtubeVideoId}`, uploadDate: siteConfig.video.uploadDate, publisher: bandRef,
+};
+
+const destinations = [
+  { href: '/shows', eyebrow: 'Live dates', title: 'Find the next show', copy: 'Upcoming public dates across Phoenix and the Valley.', color: 'text-[#37d67a]' },
+  { href: '/music', eyebrow: 'The set', title: 'Hear what we play', copy: 'Live video, set highlights, and the downloadable song list.', color: 'text-(--rock-steady-yellow)' },
+  { href: '/band', eyebrow: 'Meet Rock Steady', title: 'Know the band', copy: 'Four different personalities behind one loud night out.', color: 'text-(--rock-steady-red)' },
+  { href: '/photos', eyebrow: 'From the stage', title: 'See the live show', copy: 'Photos from Valley stages, patios, bars, and events.', color: 'text-[#37d67a]' },
+  { href: '/press', eyebrow: 'For venues', title: 'Get the press kit', copy: 'Logos, photos, production documents, and booking assets.', color: 'text-(--rock-steady-yellow)' },
+];
 
 export default function Home() {
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(websiteStructuredData).replace(
-            /</g,
-            '\\u003c',
-          ),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(bookingServiceStructuredData).replace(
-            /</g,
-            '\\u003c',
-          ),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(videoStructuredData).replace(/</g, '\\u003c'),
-        }}
-      />
-      <ShrinkingHeader />
-      <main id="top" className="overflow-hidden bg-[#050505] text-white">
-        <section className="relative min-h-[88vh] px-4 pb-16 pt-32 sm:px-6 md:pt-40 lg:px-8">
-          <Image
-            src="/images/show-07.jpg"
-            alt="Rock Steady performing live on a Phoenix stage"
-            fill
-            loading="eager"
-            fetchPriority="high"
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-black/58" />
-          <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#050505] to-transparent" />
+  return <>
+    {[structuredData, websiteData, bookingData, videoData].map((data, index) => <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }} />)}
+    <ShrinkingHeader />
+    <main id="top" className="overflow-hidden bg-[#050505] text-white">
+      <section className="relative min-h-[88vh] px-4 pb-16 pt-32 sm:px-6 md:pt-40 lg:px-8">
+        <Image src="/images/show-07.jpg" alt="Rock Steady performing live on a Phoenix stage" fill loading="eager" fetchPriority="high" sizes="100vw" className="object-cover object-center" />
+        <div className="absolute inset-0 bg-black/58" /><div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#050505] to-transparent" />
+        <div className="relative mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl"><p className="mb-4 inline-flex rounded-full border border-(--rock-steady-yellow)/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-(--rock-steady-yellow)">{bookingAvailabilityLabel}</p><h1 className="sr-only">Rock Steady - Phoenix classic rock cover band for bars, parties, and events</h1><p className="mt-6 max-w-2xl text-lg font-bold leading-8 text-white/88 sm:text-xl">Rock Steady is a female-fronted Phoenix cover band with loud guitars, big vocals, and the songs people shout back from the first round to last call. Now booking {bookingYear} dates across the Valley.</p><div className="mt-8 flex flex-wrap gap-3"><TrackedLink href="/book" eventName="Booking CTA Click" eventProperties={{ placement: 'homepage hero', destination: 'booking page' }} className="rounded-full bg-(--rock-steady-red) px-6 py-3 text-sm font-black uppercase shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-(--rock-steady-yellow) hover:text-black">{checkAvailabilityLabel}</TrackedLink><Link href="/music" className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-black uppercase backdrop-blur transition hover:border-[#37d67a] hover:bg-[#37d67a] hover:text-[#06140b]">Watch the band</Link></div></div>
+          <div className="grid max-w-xl grid-cols-2 gap-3 text-sm font-black uppercase sm:grid-cols-4 lg:max-w-md">{['Bars','Patios','Parties','Events'].map(label => <div key={label} className="border border-white/14 bg-black/42 px-4 py-4 text-center backdrop-blur">{label}</div>)}</div>
+        </div>
+      </section>
 
-          <div className="relative mx-auto flex max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl">
-              <p className="mb-4 inline-flex rounded-full border border-(--rock-steady-yellow)/40 bg-black/45 px-4 py-2 text-xs font-black uppercase text-(--rock-steady-yellow) shadow-[0_0_22px_rgba(255,207,51,0.18)]">
-                {bookingAvailabilityLabel}
-              </p>
-              {/* The visible wordmark now lives in the header; this keeps a
-                  single descriptive h1 on the page for SEO and screen readers. */}
-              <h1 className="sr-only">
-                Rock Steady — Phoenix classic rock cover band for bars, parties,
-                and events
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg font-bold leading-8 text-white/88 sm:text-xl">
-                Rock Steady is a female-fronted Phoenix cover band with loud
-                guitars, big vocals, and the songs people shout back from the
-                first round to last call. We are already booking {bookingYear}{' '}
-                dates for bars, patios, private events, corporate nights,
-                charity nights, and neighborhood events across the Valley.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <TrackedLink
-                  href="/book"
-                  eventName="Booking CTA Click"
-                  eventProperties={{
-                    placement: 'homepage hero',
-                    destination: 'booking page',
-                  }}
-                  className="rounded-full bg-(--rock-steady-red) px-6 py-3 text-sm font-black uppercase text-white shadow-[0_10px_30px_color-mix(in_srgb,var(--rock-steady-red)_34%,transparent)] transition hover:bg-(--rock-steady-yellow) hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
-                >
-                  {checkAvailabilityLabel}
-                </TrackedLink>
-                <a
-                  href="#video"
-                  className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-black uppercase text-white backdrop-blur transition hover:border-[#37d67a] hover:bg-[#37d67a] hover:text-[#06140b] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
-                >
-                  Watch the band
-                </a>
-              </div>
-            </div>
+      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]"><div><p className="text-sm font-black uppercase text-[#37d67a]">Next up</p><h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Catch Rock Steady around the Valley.</h2><p className="mt-5 text-lg leading-8 text-white/72">Public shows, familiar rooms, and a set made for singing along.</p><Link href="/shows" className="mt-7 inline-flex rounded-full border border-(--rock-steady-yellow) px-5 py-3 text-sm font-black uppercase text-(--rock-steady-yellow) hover:bg-(--rock-steady-yellow) hover:text-black">View all shows</Link></div><div className="border border-white/12 bg-white/[0.045] p-6">{upcoming.length ? <UpcomingShows shows={upcoming.slice(0, 3)} /> : <p className="text-xl font-black">More public dates coming soon.</p>}</div></div></section>
 
-            <div className="grid max-w-xl grid-cols-2 gap-3 text-sm font-black uppercase text-white sm:grid-cols-4 lg:max-w-md">
-              {['Bars', 'Patios', 'Parties', 'Events'].map((label) => (
-                <div
-                  key={label}
-                  className="border border-white/14 bg-black/42 px-4 py-4 text-center shadow-[0_12px_30px_rgba(0,0,0,0.25)] backdrop-blur"
-                >
-                  {label}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+      <section className="bg-[#101010] px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center"><div><p className="text-sm font-black uppercase text-(--rock-steady-red)">Live video</p><h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">See the room before you book it.</h2><p className="mt-5 text-lg leading-8 text-white/72">Big choruses, loud guitars, and a crowd-first set in motion.</p><Link href="/music" className="mt-7 inline-flex rounded-full border border-white/20 px-5 py-3 text-sm font-black uppercase hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow)">Explore the music</Link></div><div className="overflow-hidden border border-white/12 bg-black shadow-[0_24px_70px_rgba(0,0,0,0.38)]"><VideoEmbed videoId={youtubeVideoId} title="Rock Steady live performance video" /></div></div></section>
 
-        <section id="shows" className="px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-            <div>
-              <p className="text-sm font-black uppercase text-[#37d67a]">
-                Around town
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                Phoenix live music built for Valley rooms that like it loud.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-white/72">
-                Rock Steady plays the Phoenix area with a set that keeps people
-                close to the stage: familiar hooks, danceable tempos, and enough
-                grit to still feel like a band in a room.
-              </p>
-            </div>
+      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto max-w-7xl"><p className="text-sm font-black uppercase text-(--rock-steady-yellow)">Explore Rock Steady</p><h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight sm:text-5xl">Everything has a place now.</h2><div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">{destinations.map(item => <Link key={item.href} href={item.href} className="group border border-white/12 bg-[#101010] p-6 transition hover:-translate-y-1 hover:border-(--rock-steady-red)"><p className={`text-xs font-black uppercase tracking-[0.15em] ${item.color}`}>{item.eyebrow}</p><h3 className="mt-3 text-2xl font-black">{item.title}</h3><p className="mt-3 leading-7 text-white/65">{item.copy}</p><span className="mt-6 inline-block text-sm font-black uppercase text-white transition group-hover:text-(--rock-steady-yellow)">Explore →</span></Link>)}</div></div></section>
 
-            <div className="grid gap-4">
-              <div className="border border-white/12 bg-white/4.5 p-6 shadow-[0_18px_45px_rgba(0,0,0,0.24)]">
-                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
-                  Upcoming public dates
-                </p>
-
-                {upcoming.length > 0 ? (
-                  <UpcomingShows shows={upcoming} />
-                ) : (
-                  <>
-                    <h3 className="mt-2 text-2xl font-black text-white">
-                      More show announcements coming soon
-                    </h3>
-                    <p className="mt-3 leading-7 text-white/70">
-                      Have a room, patio, neighborhood event, or private party
-                      that needs a cover band with some bite? Send the{' '}
-                      {bookingYear} date, location, and room details and we will
-                      talk next steps.
-                    </p>
-                  </>
-                )}
-              </div>
-
-              <div className="border border-white/12 bg-white/[0.045] p-6 shadow-[0_18px_45px_rgba(0,0,0,0.2)]">
-                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
-                  Regular stops include
-                </p>
-                <p className="mt-2 text-sm font-bold leading-6 text-white/68">
-                  Valley rooms that bring Rock Steady back for loud, familiar,
-                  crowd-first nights.
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {regularVenues.map((venue) => (
-                    <span
-                      key={venue}
-                      className="rounded-full border border-(--rock-steady-yellow)/22 bg-black/32 px-3 py-2 text-xs font-black uppercase text-white/88"
-                    >
-                      {venue}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-(--rock-steady-red)">
-                  Phoenix range
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {valleySpots.map((spot) => (
-                    <span
-                      key={spot}
-                      className="rounded-full border border-white/14 bg-black/35 px-4 py-2 text-sm font-bold text-white/86"
-                    >
-                      {spot}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="video" className="bg-[#070707] px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
-            <div>
-              <p className="text-sm font-black uppercase text-(--rock-steady-red)">
-                Live video
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                See the room before you book it.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-white/72">
-                Watch Rock Steady in motion: big choruses, loud guitars, and a
-                set built to keep a local crowd close to the stage.
-              </p>
-              <a
-                href={youtubeWatchUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-7 inline-flex rounded-full border border-(--rock-steady-yellow)/45 bg-black/35 px-5 py-3 text-sm font-black uppercase text-(--rock-steady-yellow) transition hover:border-(--rock-steady-yellow) hover:bg-(--rock-steady-yellow) hover:text-[#111] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
-              >
-                Open on YouTube
-              </a>
-            </div>
-
-            <div className="overflow-hidden border border-white/12 bg-black shadow-[0_24px_70px_rgba(0,0,0,0.38)]">
-              <VideoEmbed
-                videoId={youtubeVideoId}
-                title="Rock Steady live performance video"
-              />
-            </div>
-          </div>
-
-          <div className="mx-auto mt-12 grid max-w-7xl gap-8 border-t border-white/10 pt-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
-            <div className="mx-auto w-full max-w-[22rem] overflow-hidden border border-white/12 bg-black shadow-[0_24px_70px_rgba(0,0,0,0.38)] lg:mx-0">
-              <FacebookReelEmbed
-                reelUrl="https://www.facebook.com/reel/773938001675087"
-                title="Rock Steady live at The Dubliner Irish Pub"
-              />
-            </div>
-            <div>
-              <p className="text-sm font-black uppercase text-[#37d67a]">
-                Quick crowd check
-              </p>
-              <h3 className="mt-3 text-3xl font-black leading-tight text-white sm:text-4xl">
-                A fast look at a real night out.
-              </h3>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/72">
-                Rock Steady live at The Dubliner Irish Pub: a familiar song, a
-                full room, and the kind of energy we bring to Valley stages.
-              </p>
-              <a
-                href="https://www.facebook.com/reel/773938001675087"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-7 inline-flex rounded-full border border-[#1877f2]/60 bg-[#1877f2]/15 px-5 py-3 text-sm font-black uppercase text-white transition hover:bg-[#1877f2] focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
-              >
-                Open reel on Facebook
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <section id="music" className="bg-[#101010] px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
-                The set
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                Songs people actually sing.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-white/72">
-                The set leans into the songs that work in a packed local room:
-                classic rock, throwback favorites, dance-floor staples, and
-                closing-time choruses&mdash;all performed with faithful
-                arrangements that capture the sound and energy of the original
-                recordings.
-              </p>
-            </div>
-
-            <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              {setStyles.map((style) => (
-                <div
-                  key={style}
-                  className="border border-white/12 bg-black/32 p-6 shadow-[0_16px_38px_rgba(0,0,0,0.2)]"
-                >
-                  <div className="mb-5 h-2 w-16 bg-(--rock-steady-red)" />
-                  <p className="text-xl font-black leading-7 text-white">
-                    {style}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_0.72fr] lg:items-start">
-              <div>
-                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
-                  A few from the set
-                </p>
-                <p className="mt-2 max-w-3xl text-sm font-bold leading-6 text-white/68">
-                  A sample of what the night sounds like &mdash; the full set
-                  runs deeper and bends to the room.
-                </p>
-                <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-                  {setlistSample.map(({ song, artist }) => (
-                    <li
-                      key={`${song}-${artist}`}
-                      className="flex items-baseline gap-2 border border-white/12 bg-black/32 px-4 py-3"
-                    >
-                      <span className="text-base font-black leading-6 text-white">
-                        {song}
-                      </span>
-                      <span className="text-sm font-bold text-white/60">
-                        {artist}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <SampleSongListCard
-                imagePath={siteConfig.sampleSongListPath}
-                previewImagePath={siteConfig.sampleSongListPreviewPath}
-              />
-            </div>
-          </div>
-        </section>
-
-        <section id="band" className="px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <p className="text-sm font-black uppercase text-[#37d67a]">
-                Meet the band
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                Four personalities. One loud night out.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-white/72">
-                Rock Steady brings different corners of rock together in one
-                crowd-first band &mdash; with faithful arrangements, plenty of
-                personality, and no interest in playing it safe.
-              </p>
-            </div>
-
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
-              {bandMembers.map((member, index) => (
-                <article
-                  key={member.name}
-                  className="group grid overflow-hidden border border-white/12 bg-[#101010] shadow-[0_20px_50px_rgba(0,0,0,0.24)] sm:grid-cols-[minmax(11rem,0.72fr)_1.28fr]"
-                >
-                  <div className="relative min-h-80 overflow-hidden bg-[#171717] sm:min-h-full">
-                    {'image' in member ? (
-                      <Image
-                        src={member.image}
-                        alt={member.imageAlt}
-                        fill
-                        sizes="(min-width: 768px) 25vw, 100vw"
-                        className={`object-cover ${member.imagePosition} transition duration-500 group-hover:scale-[1.025]`}
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-[radial-gradient(circle_at_50%_30%,rgba(255,39,0,0.22),transparent_52%),linear-gradient(145deg,#1b1b1b,#090909)] p-8 text-center">
-                        <span
-                          aria-hidden="true"
-                          className="text-8xl font-black leading-none text-white/8"
-                        >
-                          G
-                        </span>
-                        <span className="mt-4 text-xs font-black uppercase tracking-[0.22em] text-white/48">
-                          Photo coming soon
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex flex-col p-6 sm:p-7">
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-(--rock-steady-yellow)">
-                      {member.role}
-                    </p>
-                    <h3 className="mt-2 text-3xl font-black text-white">
-                      {member.name}
-                    </h3>
-                    <div
-                      aria-hidden="true"
-                      className={`mt-4 h-1.5 w-14 ${index % 2 === 0 ? 'bg-(--rock-steady-red)' : 'bg-[#37d67a]'}`}
-                    />
-                    <p className="mt-5 text-base leading-7 text-white/72">
-                      {member.bio}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="sound" className="bg-[#0b0b0b] px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <p className="text-sm font-black uppercase text-[#37d67a]">
-                Our sound
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                Pro sound, dialed in for the room.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-white/72">
-                We bring our own professional PA and run it right &mdash; full,
-                clear, and loud without turning to mud. We play on some of the
-                best gear in the business so the vocals cut, the kick hits, and
-                every seat in the room hears the party.
-              </p>
-            </div>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              {soundGear.map((gear) => (
-                <a
-                  key={gear.name}
-                  href={gear.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`${gear.name} — ${gear.role}`}
-                  className="group flex flex-col items-center justify-center gap-5 border border-white/12 bg-black/30 p-8 text-center shadow-[0_16px_38px_rgba(0,0,0,0.2)] transition hover:border-(--rock-steady-yellow) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
-                >
-                  <div className="flex h-14 items-center justify-center">
-                    <Image
-                      src={gear.src}
-                      alt={gear.name}
-                      width={gear.width}
-                      height={gear.height}
-                      unoptimized
-                      className="h-9 w-auto opacity-85 transition group-hover:opacity-100"
-                    />
-                  </div>
-                  <p className="text-sm font-black uppercase tracking-wide text-white/64">
-                    {gear.role}
-                  </p>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="photos"
-          className="bg-[#070707] px-4 py-20 sm:px-6 lg:px-8"
-        >
-          <div className="mx-auto max-w-7xl">
-            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div className="max-w-3xl">
-                <p className="text-sm font-black uppercase text-(--rock-steady-red)">
-                  Photos
-                </p>
-                <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                  Straight from the stage.
-                </h2>
-              </div>
-            </div>
-
-            <div className="mt-10 grid auto-rows-[15rem] gap-4 md:grid-cols-3 md:auto-rows-[18rem]">
-              {gallery.map((photo) => (
-                <div
-                  key={photo.src}
-                  className={`relative overflow-hidden border border-white/10 bg-[#181818] ${
-                    photo.feature ? 'md:col-span-2' : ''
-                  }`}
-                >
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    sizes={
-                      photo.feature
-                        ? '(min-width: 768px) 66vw, 100vw'
-                        : '(min-width: 768px) 33vw, 100vw'
-                    }
-                    className="object-cover transition duration-500 hover:scale-[1.03]"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="press" className="px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <p className="text-sm font-black uppercase text-[#37d67a]">
-                For venues
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight text-white sm:text-5xl">
-                Press kit &amp; booking assets.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-white/72">
-                Everything you need to promote the night in one place &mdash;
-                grab the logo, pull a few photos, copy the bio, and reach us
-                direct.
-              </p>
-            </div>
-
-            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
-                  Logo
-                </p>
-                <div className="relative mt-4 h-24 w-full bg-black/30">
-                  <Image
-                    src={siteConfig.horizontalLogoPreviewPath}
-                    alt="Rock Steady logo"
-                    fill
-                    sizes="(min-width: 1024px) 24vw, 100vw"
-                    className="object-contain p-3"
-                  />
-                </div>
-                <div className="mt-auto flex flex-wrap gap-2 pt-5">
-                  <a
-                    href={siteConfig.horizontalLogoPath}
-                    download
-                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow)"
-                  >
-                    Horizontal PNG
-                  </a>
-                  <a
-                    href={siteConfig.logoPath}
-                    download
-                    className="border border-white/15 bg-black/30 px-4 py-2 text-xs font-black uppercase text-white/88 transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow)"
-                  >
-                    Stacked PNG
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
-                  Press photos
-                </p>
-                <div className="mt-4 grid grid-cols-3 gap-2">
-                  {pressPhotos.map((photo) => (
-                    <a
-                      key={photo.src}
-                      href={photo.src}
-                      download
-                      aria-label={`Download ${photo.label}`}
-                      className="relative block aspect-square overflow-hidden border border-white/12 transition hover:border-(--rock-steady-yellow)"
-                    >
-                      <Image
-                        src={photo.src}
-                        alt={photo.label}
-                        fill
-                        sizes="120px"
-                        className="object-cover"
-                      />
-                    </a>
-                  ))}
-                </div>
-                <p className="mt-auto pt-5 text-xs font-bold leading-5 text-white/55">
-                  Click any photo to download. Credit &ldquo;Rock Steady&rdquo;
-                  when you post.
-                </p>
-              </div>
-
-              <SampleSongListCard
-                imagePath={siteConfig.sampleSongListPath}
-                previewImagePath={siteConfig.sampleSongListPreviewPath}
-                variant="pressKit"
-              />
-
-              <div className="flex flex-col border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
-                  Venue docs
-                </p>
-                <div className="mt-4 grid gap-2">
-                  {bookingAssets.map((asset) => (
-                    <a
-                      key={asset.href}
-                      href={asset.href}
-                      download
-                      className="border border-white/15 bg-black/30 px-4 py-3 text-sm font-black uppercase text-white/88 transition hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow)"
-                    >
-                      {asset.title} PDF
-                    </a>
-                  ))}
-                </div>
-                <p className="mt-auto pt-5 text-xs font-bold leading-5 text-white/55">
-                  One-sheet, stage plot, and input list for {bookingYear} venue
-                  advance.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4 grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
-              <div className="flex flex-col gap-4">
-                <div className="border border-white/12 bg-white/[0.045] p-6">
-                  <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
-                    Short bio
-                  </p>
-                  <p className="mt-3 leading-7 text-white/78">{pressBio}</p>
-                </div>
-                <div className="flex flex-1 flex-col border border-white/12 bg-[#101010] p-6">
-                  <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
-                    Contact
-                  </p>
-                  <a
-                    href={`mailto:${siteConfig.email}`}
-                    className="mt-4 block text-lg font-black text-white transition hover:text-(--rock-steady-yellow)"
-                  >
-                    {siteConfig.email}
-                  </a>
-                  <div className="mt-auto flex flex-wrap gap-2 pt-5">
-                    <a
-                      href={siteConfig.facebookUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="Rock Steady on Facebook"
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#1877f2] text-white transition hover:brightness-110"
-                    >
-                      <FacebookIcon className="h-5 w-5 fill-current" />
-                    </a>
-                    <a
-                      href={siteConfig.instagramUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="Rock Steady on Instagram"
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)] text-white transition hover:brightness-110"
-                    >
-                      <InstagramIcon className="h-5 w-5 fill-current" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="border border-white/12 bg-[#101010] p-6">
-                <p className="text-sm font-black uppercase text-(--rock-steady-yellow)">
-                  Quick facts
-                </p>
-                <dl className="mt-4 space-y-3">
-                  {pressFacts.map((fact) => (
-                    <div key={fact.label}>
-                      <dt className="text-xs font-black uppercase text-white/45">
-                        {fact.label}
-                      </dt>
-                      <dd className="text-sm font-bold text-white/85">
-                        {fact.value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </div>
-
-            <p className="mt-4 text-sm font-bold text-white/60">
-              Questions about sound, sets, space, or pricing?{' '}
-              <a
-                href="/book#faq"
-                className="text-(--rock-steady-yellow) underline-offset-4 hover:underline"
-              >
-                Read the booker FAQ
-              </a>
-              . Need room-specific production details beyond the downloadable
-              stage plot and input list?{' '}
-              <a
-                href={bookingEmailHref}
-                className="text-(--rock-steady-yellow) underline-offset-4 hover:underline"
-              >
-                Email us
-              </a>{' '}
-              and we&apos;ll send specifics.
-            </p>
-          </div>
-        </section>
-      </main>
-
-      <DayOfShowBanner shows={dayOfShowBannerShowList} />
-      <BackToTop />
-    </>
-  );
+      <section className="bg-(--rock-steady-red) px-4 py-16 text-center sm:px-6 lg:px-8"><h2 className="text-4xl font-black sm:text-5xl">Ready to bring the rock party?</h2><p className="mx-auto mt-4 max-w-2xl text-lg font-bold text-white/88">Send the date, location, schedule, and room details. We will confirm fit and next steps.</p><TrackedLink href="/book" eventName="Booking CTA Click" eventProperties={{ placement: 'homepage bottom', destination: 'booking page' }} className="mt-7 inline-flex rounded-full bg-(--rock-steady-yellow) px-7 py-3 text-sm font-black uppercase text-black transition hover:bg-white">Check availability</TrackedLink></section>
+    </main>
+    <DayOfShowBanner shows={dayOfShowBannerShowList} /><BackToTop />
+  </>;
 }

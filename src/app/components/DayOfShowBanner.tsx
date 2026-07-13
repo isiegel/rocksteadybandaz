@@ -64,7 +64,7 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
 
   const show = todaysShows[0];
   const meta = formatShowMeta(show);
-  const detailsHref = show.toastDetailsUrl ?? '#shows';
+  const detailsHref = show.toastDetailsUrl ?? '/shows';
   const isExternalDetailsLink = Boolean(show.toastDetailsUrl);
 
   function handleDismiss() {
