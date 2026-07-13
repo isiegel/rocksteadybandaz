@@ -10,10 +10,10 @@ import {
 } from './booking';
 import { BackToTop } from './components/BackToTop';
 import { DayOfShowBanner } from './components/DayOfShowBanner';
+import { FacebookReelEmbed } from './components/FacebookReelEmbed';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
 import { TrackedLink } from './components/TrackedLink';
 import { UpcomingShows } from './components/UpcomingShows';
-import { VideoEmbed } from './components/VideoEmbed';
 import { absoluteUrl, siteConfig } from './seo';
 import {
   dayOfShowBannerShows,
@@ -93,7 +93,6 @@ const destinations = [
   { href: '/music', eyebrow: 'The set', title: 'Hear what we play', copy: 'Live video, set highlights, and the downloadable song list.', color: 'text-(--rock-steady-yellow)' },
   { href: '/band', eyebrow: 'Meet Rock Steady', title: 'Know the band', copy: 'Four different personalities behind one loud night out.', color: 'text-(--rock-steady-red)' },
   { href: '/photos', eyebrow: 'From the stage', title: 'See the live show', copy: 'Photos from Valley stages, patios, bars, and events.', color: 'text-[#37d67a]' },
-  { href: '/press', eyebrow: 'For venues', title: 'Get the press kit', copy: 'Logos, photos, production documents, and booking assets.', color: 'text-(--rock-steady-yellow)' },
 ];
 
 export default function Home() {
@@ -112,9 +111,14 @@ export default function Home() {
 
       <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]"><div><p className="text-sm font-black uppercase text-[#37d67a]">Next up</p><h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Catch Rock Steady around the Valley.</h2><p className="mt-5 text-lg leading-8 text-white/72">Public shows, familiar rooms, and a set made for singing along.</p><Link href="/shows" className="mt-7 inline-flex rounded-full border border-(--rock-steady-yellow) px-5 py-3 text-sm font-black uppercase text-(--rock-steady-yellow) hover:bg-(--rock-steady-yellow) hover:text-black">View all shows</Link></div><div className="border border-white/12 bg-white/[0.045] p-6">{upcoming.length ? <UpcomingShows shows={upcoming.slice(0, 3)} /> : <p className="text-xl font-black">More public dates coming soon.</p>}</div></div></section>
 
-      <section className="bg-[#101010] px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center"><div><p className="text-sm font-black uppercase text-(--rock-steady-red)">Live video</p><h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">See the room before you book it.</h2><p className="mt-5 text-lg leading-8 text-white/72">Big choruses, loud guitars, and a crowd-first set in motion.</p><Link href="/music" className="mt-7 inline-flex rounded-full border border-white/20 px-5 py-3 text-sm font-black uppercase hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow)">Explore the music</Link></div><div className="overflow-hidden border border-white/12 bg-black shadow-[0_24px_70px_rgba(0,0,0,0.38)]"><VideoEmbed videoId={youtubeVideoId} title="Rock Steady live performance video" /></div></div></section>
+      <section className="bg-[#101010] px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
+          <div className="mx-auto w-full max-w-[22rem] overflow-hidden border border-white/12 bg-black shadow-[0_24px_70px_rgba(0,0,0,0.38)] lg:mx-0"><FacebookReelEmbed reelUrl="https://www.facebook.com/reel/773938001675087" title="Rock Steady live at The Dubliner Irish Pub" /></div>
+          <div><p className="text-sm font-black uppercase text-[#37d67a]">Quick crowd check</p><h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">A fast look at a real night out.</h2><p className="mt-5 max-w-2xl text-lg leading-8 text-white/72">Rock Steady live at The Dubliner Irish Pub: a familiar song, a full room, and the kind of energy we bring to Valley stages.</p><div className="mt-7 flex flex-wrap gap-3"><a href="https://www.facebook.com/reel/773938001675087" target="_blank" rel="noreferrer" className="inline-flex rounded-full border border-[#1877f2]/60 bg-[#1877f2]/15 px-5 py-3 text-sm font-black uppercase transition hover:bg-[#1877f2]">Open reel on Facebook</a><Link href="/music" className="inline-flex rounded-full border border-white/20 px-5 py-3 text-sm font-black uppercase hover:border-(--rock-steady-yellow) hover:text-(--rock-steady-yellow)">Explore the music</Link></div></div>
+        </div>
+      </section>
 
-      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto max-w-7xl"><p className="text-sm font-black uppercase text-(--rock-steady-yellow)">Explore Rock Steady</p><h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight sm:text-5xl">Everything has a place now.</h2><div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">{destinations.map(item => <Link key={item.href} href={item.href} className="group border border-white/12 bg-[#101010] p-6 transition hover:-translate-y-1 hover:border-(--rock-steady-red)"><p className={`text-xs font-black uppercase tracking-[0.15em] ${item.color}`}>{item.eyebrow}</p><h3 className="mt-3 text-2xl font-black">{item.title}</h3><p className="mt-3 leading-7 text-white/65">{item.copy}</p><span className="mt-6 inline-block text-sm font-black uppercase text-white transition group-hover:text-(--rock-steady-yellow)">Explore →</span></Link>)}</div></div></section>
+      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto max-w-7xl"><p className="text-sm font-black uppercase text-(--rock-steady-yellow)">Explore Rock Steady</p><h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight sm:text-5xl">Everything has a place now.</h2><div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">{destinations.map(item => <Link key={item.href} href={item.href} className="group border border-white/12 bg-[#101010] p-6 transition hover:-translate-y-1 hover:border-(--rock-steady-red)"><p className={`text-xs font-black uppercase tracking-[0.15em] ${item.color}`}>{item.eyebrow}</p><h3 className="mt-3 text-2xl font-black">{item.title}</h3><p className="mt-3 leading-7 text-white/65">{item.copy}</p><span className="mt-6 inline-block text-sm font-black uppercase text-white transition group-hover:text-(--rock-steady-yellow)">Explore →</span></Link>)}</div></div></section>
 
       <section className="bg-(--rock-steady-red) px-4 py-16 text-center sm:px-6 lg:px-8"><h2 className="text-4xl font-black sm:text-5xl">Ready to bring the rock party?</h2><p className="mx-auto mt-4 max-w-2xl text-lg font-bold text-white/88">Send the date, location, schedule, and room details. We will confirm fit and next steps.</p><TrackedLink href="/book" eventName="Booking CTA Click" eventProperties={{ placement: 'homepage bottom', destination: 'booking page' }} className="mt-7 inline-flex rounded-full bg-(--rock-steady-yellow) px-7 py-3 text-sm font-black uppercase text-black transition hover:bg-white">Check availability</TrackedLink></section>
     </main>
