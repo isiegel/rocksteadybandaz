@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl('/band'),
       changeFrequency: 'monthly',
       priority: 0.8,
-      images: imageUrls(['/images/band/maija.jpg', '/images/band/mike.jpg', '/images/band/ira.jpg']),
+      images: imageUrls(['/images/band/maija.jpg', '/images/band/mike.jpg', '/images/band/gene.jpg', '/images/band/ira.jpg']),
     },
     {
       url: absoluteUrl('/photos'),
