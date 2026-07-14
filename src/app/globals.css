@@ -94,6 +94,13 @@ input[type="date"]::-webkit-date-and-time-value {
 }
 
 /* Keep route changes feeling responsive while softening the content swap. */
+/* The browser also creates a root transition for the entire viewport. Disable
+   it so persistent UI such as the header never joins the crossfade. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
 ::view-transition-old(.route-fade) {
   animation: route-fade-out 90ms ease-in both;
 }
