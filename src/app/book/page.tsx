@@ -13,7 +13,6 @@ import {
 } from '../booking';
 import { BookerFaq } from '../components/BookerFaq';
 import { BookingForm } from '../components/BookingForm';
-import { ShrinkingHeader } from '../components/ShrinkingHeader';
 import {
   FacebookIcon,
   InstagramIcon,
@@ -128,7 +127,6 @@ export default function BookPage() {
           __html: JSON.stringify(faqStructuredData).replace(/</g, '\\u003c'),
         }}
       />
-      <ShrinkingHeader />
       <main id="top" className="min-h-screen bg-[#050505] pt-32 text-white">
         <section className="px-4 pb-16 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">

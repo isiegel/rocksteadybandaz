@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { bookingEmailHref, bookingYear } from '../booking';
 import { rockslide } from '../fonts';
-import { ShrinkingHeader } from './ShrinkingHeader';
 import { TrackedLink } from './TrackedLink';
 
 export type EventBookingPageContent = {
@@ -18,7 +17,6 @@ export type EventBookingPageContent = {
 export function EventBookingPage({ content }: { content: EventBookingPageContent }) {
   return (
     <>
-      <ShrinkingHeader />
       <main id="top" className="min-h-screen bg-[#050505] pt-28 text-white">
         <section className="px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
