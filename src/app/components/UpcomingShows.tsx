@@ -98,7 +98,7 @@ function ShowListItem({
             href={show.url}
             target="_blank"
             rel="noreferrer"
-            className="text-sm font-black text-(--rock-steady-yellow) underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
+            className="text-sm font-black text-[#1877f2] underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-[#1877f2]"
           >
             Facebook event
           </a>
