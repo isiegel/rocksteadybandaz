@@ -1,11 +1,9 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
-import { ViewTransition } from "react";
 import "./globals.css";
 import { BackToTop } from "./components/BackToTop";
 import { DownloadTracking } from "./components/DownloadTracking";
 import { FunnelTracking } from "./components/FunnelTracking";
-import { ShrinkingHeader } from "./components/ShrinkingHeader";
 import { SiteFooter } from "./components/SiteFooter";
 import { absoluteUrl, siteConfig } from "./seo";
 
@@ -100,10 +98,7 @@ export default function RootLayout({
           attributes before React hydrates. It only suppresses the body element
           itself, not its children, so real hydration bugs still surface. */}
       <body suppressHydrationWarning>
-        <ShrinkingHeader />
-        <ViewTransition name="route-content" default="route-fade">
-          {children}
-        </ViewTransition>
+        {children}
         <SiteFooter />
         <BackToTop />
         <Analytics />

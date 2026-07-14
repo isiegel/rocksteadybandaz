@@ -1,9 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    viewTransition: true,
-  },
   images: {
     // Serve modern formats — AVIF first (smallest), WebP as fallback — so the
     // optimizer ships far smaller photos than the source JPEGs/PNGs.

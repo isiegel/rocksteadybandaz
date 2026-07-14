@@ -93,34 +93,6 @@ input[type="date"]::-webkit-date-and-time-value {
   animation: fade-in 400ms ease-out both;
 }
 
-/* Keep route changes feeling responsive while softening the content swap. */
-/* The browser also creates a root transition for the entire viewport. Disable
-   it so persistent UI such as the header never joins the crossfade. */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-}
-
-::view-transition-old(.route-fade) {
-  animation: route-fade-out 90ms ease-in both;
-}
-
-::view-transition-new(.route-fade) {
-  animation: route-fade-in 180ms ease-out 30ms both;
-}
-
-@keyframes route-fade-out {
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes route-fade-in {
-  from {
-    opacity: 0;
-  }
-}
-
 @keyframes toast-fade-in {
   from {
     opacity: 0;
@@ -220,10 +192,4 @@ input[type="date"]::-webkit-date-and-time-value {
     transition-duration: 0.01ms !important;
   }
 
-  ::view-transition-old(*),
-  ::view-transition-new(*),
-  ::view-transition-group(*) {
-    animation-duration: 0s !important;
-    animation-delay: 0s !important;
-  }
 }
