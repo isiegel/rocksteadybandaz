@@ -100,7 +100,7 @@ function ShowListItem({
             rel="noreferrer"
             className="text-sm font-black text-(--rock-steady-yellow) underline-offset-4 hover:underline focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
           >
-            Details
+            Facebook event
           </a>
         ) : null}
         <AddToCalendar show={show} />
