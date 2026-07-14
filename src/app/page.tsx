@@ -14,6 +14,7 @@ import { FacebookReelEmbed } from './components/FacebookReelEmbed';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
 import { TrackedLink } from './components/TrackedLink';
 import { UpcomingShows } from './components/UpcomingShows';
+import { rockslide } from './fonts';
 import { absoluteUrl, siteConfig } from './seo';
 import { dayOfShowBannerShows, upcomingShows } from './shows';
 
@@ -82,7 +83,7 @@ export default function Home() {
 
       <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto max-w-7xl"><p className="text-sm font-black uppercase text-(--rock-steady-yellow)">Explore Rock Steady</p><h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight sm:text-5xl">Everything has a place now.</h2><div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">{destinations.map(item => <Link key={item.href} href={item.href} className="group border border-white/12 bg-[#101010] p-6 transition hover:-translate-y-1 hover:border-(--rock-steady-red)"><p className={`text-xs font-black uppercase tracking-[0.15em] ${item.color}`}>{item.eyebrow}</p><h3 className="mt-3 text-2xl font-black">{item.title}</h3><p className="mt-3 leading-7 text-white/65">{item.copy}</p><span className="mt-6 inline-block text-sm font-black uppercase text-white transition group-hover:text-(--rock-steady-yellow)">Explore →</span></Link>)}</div></div></section>
 
-      <section className="bg-(--rock-steady-red) px-4 py-16 text-center sm:px-6 lg:px-8"><h2 className="text-4xl font-black sm:text-5xl">Ready to bring the rock party?</h2><p className="mx-auto mt-4 max-w-2xl text-lg font-bold text-white/88">Send the date, location, schedule, and room details. We will confirm fit and next steps.</p><TrackedLink href="/book" eventName="Booking CTA Click" eventProperties={{ placement: 'homepage bottom', destination: 'booking page' }} className="mt-7 inline-flex rounded-full bg-(--rock-steady-yellow) px-7 py-3 text-sm font-black uppercase text-black transition hover:bg-white">Check availability</TrackedLink></section>
+      <section className="bg-(--rock-steady-red) px-4 py-16 text-center sm:px-6 lg:px-8"><h2 className={`${rockslide.className} text-5xl leading-none text-white sm:text-6xl`}>Bring the rock party.</h2><p className="mx-auto mt-4 max-w-2xl text-lg font-bold text-white/88">Send the date, location, schedule, and room details. We will confirm fit and next steps.</p><TrackedLink href="/book" eventName="Booking CTA Click" eventProperties={{ placement: 'homepage bottom', destination: 'booking page' }} className="mt-7 inline-flex rounded-full bg-(--rock-steady-yellow) px-7 py-3 text-sm font-black uppercase text-black transition hover:bg-white">Check availability</TrackedLink></section>
     </main>
     <DayOfShowBanner shows={dayOfShowBannerShowList} /><BackToTop />
   </>;
