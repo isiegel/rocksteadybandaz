@@ -8,7 +8,6 @@ import {
   bookingYear,
   checkAvailabilityLabel,
 } from './booking';
-import { BackToTop } from './components/BackToTop';
 import { DayOfShowBanner } from './components/DayOfShowBanner';
 import { FacebookReelEmbed } from './components/FacebookReelEmbed';
 import { ShrinkingHeader } from './components/ShrinkingHeader';
@@ -85,6 +84,6 @@ export default function Home() {
 
       <section className="bg-(--rock-steady-red) px-4 py-16 text-center sm:px-6 lg:px-8"><h2 className={`${rockslide.className} text-5xl leading-none text-white sm:text-6xl`}>Bring the rock party.</h2><p className="mx-auto mt-4 max-w-2xl text-lg font-bold text-white/88">Send the date, location, schedule, and room details. We will confirm fit and next steps.</p><TrackedLink href="/book" eventName="Booking CTA Click" eventProperties={{ placement: 'homepage bottom', destination: 'booking page' }} className="mt-7 inline-flex rounded-full bg-(--rock-steady-yellow) px-7 py-3 text-sm font-black uppercase text-black transition hover:bg-white">Check availability</TrackedLink></section>
     </main>
-    <DayOfShowBanner shows={dayOfShowBannerShowList} /><BackToTop />
+    <DayOfShowBanner shows={dayOfShowBannerShowList} />
   </>;
 }

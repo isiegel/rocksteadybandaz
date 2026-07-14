@@ -11,7 +11,6 @@ import {
   bookingYear,
   checkAvailabilityLabel,
 } from '../booking';
-import { BackToTop } from '../components/BackToTop';
 import { BookerFaq } from '../components/BookerFaq';
 import { BookingForm } from '../components/BookingForm';
 import { ShrinkingHeader } from '../components/ShrinkingHeader';
@@ -363,7 +362,6 @@ export default function BookPage() {
           </div>
         </section>
       </main>
-      <BackToTop />
     </>
   );
 }

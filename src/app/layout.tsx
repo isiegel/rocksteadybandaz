@@ -1,6 +1,7 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { BackToTop } from "./components/BackToTop";
 import { DownloadTracking } from "./components/DownloadTracking";
 import { FunnelTracking } from "./components/FunnelTracking";
 import { SiteFooter } from "./components/SiteFooter";
@@ -99,6 +100,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         {children}
         <SiteFooter />
+        <BackToTop />
         <Analytics />
         <DownloadTracking />
         <FunnelTracking />
