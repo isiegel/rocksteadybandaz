@@ -10,7 +10,6 @@ import {
 } from './booking';
 import { DayOfShowBanner } from './components/DayOfShowBanner';
 import { FacebookReelEmbed } from './components/FacebookReelEmbed';
-import { ShrinkingHeader } from './components/ShrinkingHeader';
 import { TrackedLink } from './components/TrackedLink';
 import { UpcomingShows } from './components/UpcomingShows';
 import { rockslide } from './fonts';
@@ -60,7 +59,7 @@ const destinations = [
 export default function Home() {
   return <>
     {[structuredData, websiteData, bookingData].map((data, index) => <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }} />)}
-    <ShrinkingHeader />
+
     <main id="top" className="overflow-hidden bg-[#050505] text-white">
       <section className="relative min-h-[88vh] px-4 pb-16 pt-32 sm:px-6 md:pt-40 lg:px-8">
         <Image src="/images/show-07.jpg" alt="Rock Steady performing live on a Phoenix stage" fill loading="eager" fetchPriority="high" sizes="100vw" className="object-cover object-center" />

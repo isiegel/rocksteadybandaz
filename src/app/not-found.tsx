@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ShrinkingHeader } from './components/ShrinkingHeader';
 
 export const metadata: Metadata = {
   title: 'Page Not Found',
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-      <ShrinkingHeader />
+
       <main className="flex min-h-[75vh] items-center bg-[#050505] px-4 pb-20 pt-36 text-white sm:px-6 lg:px-8">
         <section className="mx-auto w-full max-w-4xl text-center">
           <p className="text-sm font-black uppercase text-(--rock-steady-red)">

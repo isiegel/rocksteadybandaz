@@ -13,7 +13,6 @@ import {
 } from '../booking';
 import { BookerFaq } from '../components/BookerFaq';
 import { BookingForm } from '../components/BookingForm';
-import { ShrinkingHeader } from '../components/ShrinkingHeader';
 import {
   FacebookIcon,
   InstagramIcon,
@@ -113,7 +112,7 @@ const eventFit = [
 export default function BookPage() {
   return (
     <>
-      <ShrinkingHeader />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

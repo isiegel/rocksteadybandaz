@@ -93,6 +93,23 @@ input[type="date"]::-webkit-date-and-time-value {
   animation: fade-in 400ms ease-out both;
 }
 
+/* Match the Siegelcraft navigation handoff: the persistent header stays put
+   while each destination eases upward into view. */
+@keyframes route-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.route-reveal {
+  animation: route-reveal 240ms ease both;
+}
+
 @keyframes toast-fade-in {
   from {
     opacity: 0;
