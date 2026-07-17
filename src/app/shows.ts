@@ -31,7 +31,7 @@ export const shows: Show[] = [
   { date: '2026-10-16', venue: '4Fridays Music Series', city: 'Glendale', start: '18:00', end: '20:00', url: 'https://www.facebook.com/events/3384649248379839/' },
   { date: '2026-10-31', venue: 'Azool Grill', city: 'Phoenix', start: '20:00', end: '23:00', url: 'https://www.facebook.com/events/1207228650958528/' },
   { date: '2026-11-06', venue: 'American Legion Post 35 - Mathew B Juan', city: 'Chandler', start: '19:00', end: '22:00', url: 'https://www.facebook.com/events/1757762025654843/' },
-  { date: '2026-11-07', venue: 'Private event', start: '19:00' },
+  { date: '2026-11-07', venue: 'Homeland Brew Co.', start: '19:00', note: 'Private event' },
   { date: '2026-11-13', venue: 'The Dubliner Irish Pub', city: 'Phoenix', start: '20:00', end: '24:00', url: 'https://www.facebook.com/events/2120244745573481/' },
   { date: '2026-11-20', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00', url: 'https://www.facebook.com/events/760187493460178/' },
   { date: '2026-11-21', venue: 'Tailgaters', city: 'Glendale', start: '20:00', end: '24:00', url: 'https://www.facebook.com/events/881127331732039/' },
