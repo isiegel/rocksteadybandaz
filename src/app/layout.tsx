@@ -2,11 +2,15 @@ import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { BackToTop } from "./components/BackToTop";
+import { DayOfShowBanner } from "./components/DayOfShowBanner";
 import { DownloadTracking } from "./components/DownloadTracking";
 import { FunnelTracking } from "./components/FunnelTracking";
 import { ShrinkingHeader } from "./components/ShrinkingHeader";
 import { SiteFooter } from "./components/SiteFooter";
 import { absoluteUrl, siteConfig } from "./seo";
+import { dayOfShowBannerShows } from "./shows";
+
+const dayOfShowBannerShowList = dayOfShowBannerShows();
 
 const title = {
   default: siteConfig.title,
@@ -102,6 +106,7 @@ export default function RootLayout({
         <ShrinkingHeader />
         {children}
         <SiteFooter />
+        <DayOfShowBanner shows={dayOfShowBannerShowList} />
         <BackToTop />
         <Analytics />
         <DownloadTracking />

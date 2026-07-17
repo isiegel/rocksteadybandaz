@@ -7,7 +7,18 @@ import {
   useSyncExternalStore,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { usePathname } from 'next/navigation';
 import { formatShowTime, type Show } from '../shows';
+
+const DISMISSED_DATE_STORAGE_KEY = 'rock-steady-day-of-show-dismissed-date';
+const DISMISSED_DATE_CHANGE_EVENT = 'rock-steady-day-of-show-dismissed';
+const BUSINESS_ROUTE_PREFIXES = [
+  '/book',
+  '/press',
+  '/bar-band-phoenix',
+  '/corporate-event-band-phoenix',
+  '/private-party-band-phoenix',
+];
 
 function getPhoenixToday(): string {
   const parts = new Intl.DateTimeFormat('en-US', {
@@ -35,6 +46,26 @@ function subscribeToPhoenixDateChange(callback: () => void): () => void {
   return () => window.clearInterval(interval);
 }
 
+function getDismissedDate(): string | null {
+  return window.localStorage.getItem(DISMISSED_DATE_STORAGE_KEY);
+}
+
+function subscribeToDismissedDateChange(callback: () => void): () => void {
+  window.addEventListener('storage', callback);
+  window.addEventListener(DISMISSED_DATE_CHANGE_EVENT, callback);
+
+  return () => {
+    window.removeEventListener('storage', callback);
+    window.removeEventListener(DISMISSED_DATE_CHANGE_EVENT, callback);
+  };
+}
+
+function isBusinessRoute(pathname: string): boolean {
+  return BUSINESS_ROUTE_PREFIXES.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
+  );
+}
+
 function formatShowMeta(show: Show): string {
   return [
     show.city ? `${show.city}, AZ` : null,
@@ -46,12 +77,17 @@ function formatShowMeta(show: Show): string {
 }
 
 export function DayOfShowBanner({ shows }: { shows: Show[] }) {
+  const pathname = usePathname();
   const today = useSyncExternalStore(
     subscribeToPhoenixDateChange,
     getPhoenixToday,
     getServerTodaySnapshot,
   );
-  const [dismissedDate, setDismissedDate] = useState<string | null>(null);
+  const dismissedDate = useSyncExternalStore(
+    subscribeToDismissedDateChange,
+    getDismissedDate,
+    getServerTodaySnapshot,
+  );
   const [isClosing, setIsClosing] = useState(false);
 
   const todaysShows = useMemo(
@@ -59,10 +95,16 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
     [shows, today],
   );
 
-  if (!today || dismissedDate === today || todaysShows.length === 0) {
+  if (
+    !today ||
+    isBusinessRoute(pathname) ||
+    dismissedDate === today ||
+    todaysShows.length === 0
+  ) {
     return null;
   }
 
+  const currentDate = today;
   const show = todaysShows[0];
   const meta = formatShowMeta(show);
   const detailsHref = show.toastDetailsUrl ?? '/shows';
@@ -74,7 +116,8 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
 
   function handleAnimationEnd(event: AnimationEvent<HTMLElement>) {
     if (isClosing && event.currentTarget === event.target) {
-      setDismissedDate(today);
+      window.localStorage.setItem(DISMISSED_DATE_STORAGE_KEY, currentDate);
+      window.dispatchEvent(new Event(DISMISSED_DATE_CHANGE_EVENT));
       setIsClosing(false);
     }
   }
