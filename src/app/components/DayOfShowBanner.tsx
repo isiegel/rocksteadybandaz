@@ -6,6 +6,7 @@ import {
   useState,
   useSyncExternalStore,
 } from 'react';
+import { createPortal } from 'react-dom';
 import { formatShowTime, type Show } from '../shows';
 
 function getPhoenixToday(): string {
@@ -78,7 +79,10 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
     }
   }
 
-  return (
+  // The page is rendered inside the route-reveal template, whose transform
+  // creates a containing block for fixed descendants. Portal the toast to the
+  // body so `position: fixed` remains relative to the viewport.
+  return createPortal(
     <aside
       role="status"
       aria-live="polite"
@@ -133,6 +137,7 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
           </button>
         </div>
       </div>
-    </aside>
+    </aside>,
+    document.body,
   );
 }
