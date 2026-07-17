@@ -107,8 +107,8 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
   const currentDate = today;
   const show = todaysShows[0];
   const meta = formatShowMeta(show);
-  const detailsHref = show.toastDetailsUrl ?? '/shows';
-  const isExternalDetailsLink = Boolean(show.toastDetailsUrl);
+  const detailsHref = show.url ?? '/shows';
+  const isExternalDetailsLink = Boolean(show.url);
 
   function handleDismiss() {
     if (!isClosing) setIsClosing(true);
@@ -136,8 +136,8 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
           : 'animate-toast-fade-in'
       }`}
     >
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="min-w-0">
+      <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0 pr-12 sm:pr-0">
           <p className="text-xs font-black uppercase text-(--rock-steady-yellow)">
             Today&apos;s show
           </p>
@@ -164,7 +164,7 @@ export function DayOfShowBanner({ shows }: { shows: Show[] }) {
             type="button"
             aria-label="Dismiss today's show notice"
             onClick={handleDismiss}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
+            className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white transition hover:border-(--rock-steady-red) hover:bg-(--rock-steady-red) focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow) sm:static"
           >
             <svg
               viewBox="0 0 24 24"

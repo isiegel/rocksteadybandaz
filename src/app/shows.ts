@@ -10,8 +10,6 @@ export type Show = {
   end?: string;
   /** Optional ticket or event link. */
   url?: string;
-  /** Optional link used only by the day-of-show banner Details button. */
-  toastDetailsUrl?: string;
   /** Optional short note, e.g. '21+' or 'Private event'. */
   note?: string;
 };
@@ -137,7 +135,7 @@ export function dayOfShowBannerShows(today: string = todayInPhoenix()): Show[] {
       city: 'Phoenix',
       start: '20:00',
       end: '24:00',
-      toastDetailsUrl: 'https://www.facebook.com/rocksteadybandaz/events',
+      url: 'https://www.facebook.com/events/1279436760329862/',
       note: 'Banner preview',
     },
   ];
