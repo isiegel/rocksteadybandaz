@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { connection } from 'next/server';
 import {
   absoluteBookingAssets,
   bookingAvailabilityCopy,
@@ -14,8 +15,6 @@ import { UpcomingShows } from './components/UpcomingShows';
 import { rockslide } from './fonts';
 import { absoluteUrl, siteConfig } from './seo';
 import { upcomingShows } from './shows';
-
-const upcoming = upcomingShows();
 
 const bandRef = { '@type': 'MusicGroup', '@id': `${siteConfig.url}/#band`, name: siteConfig.name };
 const areaServed = siteConfig.areaServed.map((name) => ({ '@type': 'City', name: `${name}, Arizona` }));
@@ -54,7 +53,10 @@ const destinations = [
   { href: '/photos', eyebrow: 'From the stage', title: 'See the live show', copy: 'Photos from Valley stages, patios, bars, and events.', color: 'text-[#37d67a]' },
 ];
 
-export default function Home() {
+export default async function Home() {
+  await connection();
+  const upcoming = upcomingShows();
+
   return <>
     {[structuredData, websiteData, bookingData].map((data, index) => <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }} />)}
 
@@ -68,7 +70,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]"><div><p className="text-sm font-black uppercase text-[#37d67a]">Next up</p><h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Catch Rock Steady around the Valley.</h2><p className="mt-5 text-lg leading-8 text-white/72">Public shows, familiar rooms, and a set made for singing along.</p><Link href="/shows" className="mt-7 inline-flex rounded-full border border-(--rock-steady-yellow) px-5 py-3 text-sm font-black uppercase text-(--rock-steady-yellow) hover:bg-(--rock-steady-yellow) hover:text-black">View all shows</Link></div><div className="border border-white/12 bg-white/[0.045] p-6">{upcoming.length ? <UpcomingShows shows={upcoming.slice(0, 3)} /> : <p className="text-xl font-black">More public dates coming soon.</p>}</div></div></section>
+      <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]"><div><p className="text-sm font-black uppercase text-[#37d67a]">Next up</p><h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Catch Rock Steady around the Valley.</h2><p className="mt-5 text-lg leading-8 text-white/72">Public shows, familiar rooms, and a set made for singing along.</p><Link href="/shows" className="mt-7 inline-flex rounded-full border border-(--rock-steady-yellow) px-5 py-3 text-sm font-black uppercase text-(--rock-steady-yellow) hover:bg-(--rock-steady-yellow) hover:text-black">View all shows</Link></div><div className="border border-white/12 bg-white/[0.045] p-6">{upcoming.length ? <UpcomingShows shows={upcoming.slice(0, 5)} /> : <p className="text-xl font-black">More public dates coming soon.</p>}</div></div></section>
 
       <section className="bg-[#101010] px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">

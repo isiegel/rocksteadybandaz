@@ -14,7 +14,7 @@ export type Show = {
   note?: string;
 };
 
-// Add upcoming shows here. Past dates drop off automatically on each deploy.
+// Add upcoming shows here. Past dates drop off automatically at request time.
 export const shows: Show[] = [
   { date: '2026-06-27', venue: 'The Dubliner Irish Pub', city: 'Phoenix', start: '20:00', end: '24:00' },
   { date: '2026-07-17', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00', url: 'https://www.facebook.com/events/1279436760329862/' },
