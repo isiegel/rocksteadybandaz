@@ -65,52 +65,69 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div
-          className="mx-auto mt-8 w-fit py-3 text-center md:mx-0 md:text-left"
-          aria-label="Rock Steady uses Gibson guitars and Ludwig drums because they want the best."
-        >
-          <p className="text-[0.65rem] font-black uppercase leading-tight tracking-[0.12em] text-white">
-            <RockSteadyFill
-              className={`${rockslide.className} normal-case tracking-normal inline-block mr-2`}
-            />
-            uses Gibson guitars
-            <br /> and Ludwig drums because
-            <br /> they want the best.
-          </p>
-          <div className="relative mt-2 h-7">
-            <a
-              href="https://www.gibson.com/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Gibson guitars"
-              className="absolute left-0 top-0 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
-            >
-              <Image
-                src="/images/gibson-logo.svg"
-                alt="Gibson"
-                width={63}
-                height={40}
-                unoptimized
-                className="h-7 w-auto"
+        <div className="mt-8 flex flex-col items-center gap-6 md:flex-row md:items-center md:justify-between">
+          <div
+            className="w-fit py-3 text-center md:text-left"
+            aria-label="Rock Steady uses Gibson guitars and Ludwig drums because they want the best."
+          >
+            <p className="text-[0.65rem] font-black uppercase leading-tight tracking-[0.12em] text-white">
+              <RockSteadyFill
+                className={`${rockslide.className} normal-case tracking-normal inline-block mr-2`}
               />
-            </a>
-            <a
-              href="https://www.ludwig-drums.com/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Ludwig drums"
-              className="absolute right-2 -top-2 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
-            >
-              <Image
-                src="/images/ludwig-logo.svg"
-                alt="Ludwig"
-                width={269}
-                height={87}
-                unoptimized
-                className="h-6 w-16 origin-top-right rotate-[-15deg] object-contain object-right"
-              />
-            </a>
+              uses Gibson guitars
+              <br /> and Ludwig drums because
+              <br /> they want the best.
+            </p>
+            <div className="relative mt-2 h-7">
+              <a
+                href="https://www.gibson.com/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Gibson guitars"
+                className="absolute left-0 top-0 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
+              >
+                <Image
+                  src="/images/gibson-logo.svg"
+                  alt="Gibson"
+                  width={63}
+                  height={40}
+                  unoptimized
+                  className="h-7 w-auto"
+                />
+              </a>
+              <a
+                href="https://www.ludwig-drums.com/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Ludwig drums"
+                className="absolute right-2 -top-2 block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
+              >
+                <Image
+                  src="/images/ludwig-logo.svg"
+                  alt="Ludwig"
+                  width={269}
+                  height={87}
+                  unoptimized
+                  className="h-6 w-16 origin-top-right rotate-[-15deg] object-contain object-right"
+                />
+              </a>
+            </div>
           </div>
+
+          <a
+            href="https://www.gigheaven.com/members/rocksteadybandaz.html"
+            target="_blank"
+            rel="noreferrer"
+            className="block transition hover:opacity-80 focus:outline-hidden focus:ring-2 focus:ring-(--rock-steady-yellow)"
+          >
+            <Image
+              src="https://www.gigheaven.com/images/v5/GH-White.svg"
+              height={80}
+              width={80}
+              alt="Rock Steady on Gig Heaven"
+              unoptimized
+            />
+          </a>
         </div>
 
         <div className="mt-8 flex flex-col items-center gap-4 border-t border-white/10 pt-6 sm:flex-row sm:justify-center">
