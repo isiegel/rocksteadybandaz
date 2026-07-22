@@ -35,7 +35,7 @@ export const bookerFaqs: BookerFaq[] = [
   {
     question: 'Do you bring your own sound system?',
     answer:
-      'Yes — we bring our own [professional PA](/press#production) and run it ourselves: full, clear, and loud without turning to mud. If your room has house production, we are happy to coordinate with your sound team instead. The stage plot and input list are available on this page.',
+      'Yes — we bring our own [professional PA](/press#production) and run it ourselves: full, clear, and dialed in to fit your room. If your room has house production, we are happy to coordinate with your sound team instead. The stage plot and input list are available on this page.',
     links: [stagePlotLink, inputListLink],
   },
   {
