@@ -18,7 +18,7 @@ export type Show = {
 export const shows: Show[] = [
   { date: '2026-06-27', venue: 'The Dubliner Irish Pub', city: 'Phoenix', start: '20:00', end: '24:00' },
   { date: '2026-07-17', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00', url: 'https://www.facebook.com/events/1279436760329862/' },
-  { date: '2026-07-24', venue: 'Azool Grill', city: 'Phoenix', start: '20:00', end: '23:00', url: 'https://www.facebook.com/events/1174604687991823/' },
+  { date: '2026-07-24', venue: 'Azool Grill', city: 'Phoenix', start: '19:00', end: '22:00', url: 'https://www.facebook.com/events/1174604687991823/' },
   { date: '2026-07-25', venue: 'El Dorado Bar & Grill', city: 'Scottsdale', start: '20:00', end: '24:00', url: 'https://www.facebook.com/events/1640574277373510/' },
   { date: '2026-08-07', venue: 'The Dubliner Irish Pub', city: 'Phoenix', start: '20:00', end: '24:00', url: 'https://www.facebook.com/events/25334178869501765/' },
   { date: '2026-08-21', venue: 'The Loft Again', city: 'Phoenix', start: '20:00', end: '24:00', url: 'https://www.facebook.com/events/1586865092726933/' },
